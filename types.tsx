@@ -51,3 +51,4 @@ export type User = {
 
 }
 export type FoodCategories = FoodCategory[];
+
