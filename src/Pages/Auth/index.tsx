@@ -1,10 +1,8 @@
 import "react-toastify/dist/ReactToastify.css";
 
 import { Cheff1 } from "../../components/Assets";
-import {
-  // GithubAuthProvider,
-  GoogleAuthProvider,
-} from "firebase/auth";
+// @ts-ignore
+// import {GoogleAuthProvider} from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { FcGoogle } from "react-icons/fc";
@@ -17,7 +15,8 @@ import { MdOutlineNotificationsActive } from "react-icons/md";
 import { fetchUserCartData } from "../../utils/functions";
 
 const ProviderAuth = () => {
-  const GOOGLE_PROVIDER = new GoogleAuthProvider();
+
+  // const GOOGLE_PROVIDER = new GoogleAuthProvider();
   // const GITHUB_PROVIDER = new GithubAuthProvider();
   const [{ user }, dispatch] = useStateValue();
   const navigate = useNavigate();
@@ -70,7 +69,7 @@ const ProviderAuth = () => {
       <motion.p
         whileHover={{ scale: 1.1 }}
         className="flex items-center w-36 h-10 bg-white justify-center rounded text-headingColor px-5 cursor-pointer shadow-sm hover:bg-slate-100"
-        onClick={() => AUTH({ provider: GOOGLE_PROVIDER })}
+        // onClick={() => AUTH({ provider: GOOGLE_PROVIDER })}
       >
         <FcGoogle className="text-xl w-5 mr-1" />
         <span>Google</span>

@@ -19,7 +19,7 @@ const Navigations = ({ direction }: { direction?: string }) => {
     });
   }
   return (
-    <div className="flex items-center gap-8">
+    <div className="flex items-center gap-8" >
       <motion.ul
         initial={{ opacity: 0, x: 200 }}
         animate={{ opacity: 1, x: 0 }}
@@ -30,32 +30,27 @@ const Navigations = ({ direction }: { direction?: string }) => {
           whileHover={{ scale: 1.1 }}
           className="md:text-sm lg:text-md text-base text-textColor cursor-pointer hover:text-headingColor duration-100 transition-all ease-in-out"
         >
-          <Link to={'/'}>Home</Link>
+          <Link to={'/'} style={{color:'#fff'}}>Главная</Link>
         </motion.li>
         <motion.li
           whileHover={{ scale: 1.1 }}
           className="md:text-sm lg:text-md text-base text-textColor cursor-pointer hover:text-headingColor duration-100 transition-all ease-in-out"
         >
-          <Link to={'/menu'}>Menu</Link>
+          <Link to={'/menu'} style={{color: '#fff'}}>Меню</Link>
         </motion.li>
         <motion.li
           whileHover={{ scale: 1.1 }}
           className="md:text-sm lg:text-md text-base text-textColor cursor-pointer hover:text-headingColor duration-100 transition-all ease-in-out"
         >
-          <Link to={'/services'}>Services</Link>
-        </motion.li>
-        <motion.li
-          whileHover={{ scale: 1.1 }}
-          className="md:text-sm lg:text-md text-base text-textColor cursor-pointer hover:text-headingColor duration-100 transition-all ease-in-out"
-        >
-          <Link to={'/about'}>About us</Link>
+          <Link to={'/services'} style={{color:'#fff'}}>О нас</Link>
         </motion.li>
         <motion.li
           whileHover={{ scale: 1.1 }}
           className="md:text-sm lg:text-md text-base text-textColor cursor-pointer hover:text-headingColor duration-100 transition-all ease-in-out"
           onClick={handleToggleContact}
+          style={{color:'#fff'}}
         >
-          Contact us
+          Контакты
         </motion.li>
       </motion.ul>
 

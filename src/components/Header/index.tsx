@@ -19,17 +19,17 @@ const Header = () => {
 
 
   return (
-    <header className="w-screen fixed z-50 bg-cardOverlay backdrop-blur-md md:p-3 md:px-4 lg:p-6 lg:px-16">
+    <header className="w-screen fixed z-50 bg-cardOverlay backdrop-blur-md md:p-3 md:px-4 lg:p-6 lg:px-16" style={{background: '#1F2122'}}>
       {/* Tablet and Desktop */}
-      <div className="hidden md:flex w-full justify-between itesm-center">
+      <div className="hidden md:flex w-full justify-between itesm-center" style={{background: '#1F2122'}}>
         <Link to={"/"}>
           <motion.div
             whileHover={{ scale: 1.1 }}
             className="flex items-center gap-2 cursor-pointer"
           >
             <img src={Logo} alt="Logo" className="md:w-6 lg:w-8 object-cover" />
-            <p className="text-headingColor md:text-lg lg:text-xl font-bold">
-              Bentilzone
+            <p className="text-headingColor md:text-lg lg:text-xl font-bold" style={{color:'#fff'}}>
+            diploma-food-app
             </p>
           </motion.div>
         </Link>
@@ -57,7 +57,7 @@ const Header = () => {
             <DropDown user={user} />
           </div>
         ) : (
-          <LoginAction text={"Login"} />
+          <LoginAction text={"Логин"} />
         )}
       </div>
 
@@ -86,7 +86,7 @@ const Header = () => {
               >
                 <img src={Logo} alt="Logo" className="w-8 object-cover" />
                 <p className="text-headingColor text-xl font-bold">
-                  Bentilzone
+                diploma-food-app
                 </p>
               </motion.div>
             </Link>

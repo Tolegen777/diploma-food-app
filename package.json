@@ -1,8 +1,10 @@
 {
-  "name": "bentilzone-restaurant",
+  "name": "diploma-food-app",
   "version": "1.0.0",
   "private": true,
   "dependencies": {
+    "@firebase/auth": "^0.21.5",
+    "@firebase/auth-types": "^0.12.0",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",

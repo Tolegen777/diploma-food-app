@@ -33,7 +33,7 @@ const Container = ({scrollOffset, col, items, className }: {scrollOffset:number,
         !items && (!col ? (<Loader progress = {"Fetching Food Items....."} />): (<NotFound text="Fetching Food Items..."  />))
       }
       {
-        items && items.length <= 0 &&  (<NotFound text="No Food Items Available "  />)
+        items && items.length <= 0 &&  (<NotFound text="Пока что данных нет! "  />)
       }
     </motion.div>
   );

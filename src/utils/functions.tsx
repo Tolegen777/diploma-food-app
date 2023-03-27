@@ -24,7 +24,7 @@ export const addToCart = async (
   dispatch: any
 ) => {
   if (!user) {
-    toast.error("Please login to add items to cart", {
+    toast.error("Нужна авторизация для добавления в корзину", {
       icon: <MdShoppingBasket className="text-2xl text-cartNumBg" />,
       toastId: "unauthorizedAddToCart",
     });

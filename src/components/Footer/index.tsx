@@ -12,7 +12,7 @@ import {
 import { motion } from "framer-motion";
 const Footer = () => {
   return (
-    <footer className="p-4 bg-primary sm:p-6 w-full">
+    <footer className="p-4 bg-primary sm:p-6 w-full" style={{background: '#272523'}}>
       <div className="flex justify-center md:justify-start items-center">
         <motion.div  whileHover={{ rotate: [0, -10, 10, -10, 0] }} className="mb-3 md:mb-0">
           <Link to="/" className="flex gap-8 items-center">
@@ -22,8 +22,8 @@ const Footer = () => {
               className="w-10 md:w-36 object-contain"
               alt="Logo"
             />
-            <span className="self-center text-2xl font-semibold whitespace-nowrap text-headingColor">
-              Bentilzone
+            <span className="self-center text-2xl font-semibold whitespace-nowrap text-headingColor" style={{color: '#fff'}}>
+            diploma-food-app
             </span>
           </Link>
         </motion.div>
@@ -31,14 +31,14 @@ const Footer = () => {
       <hr className="my-2 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
       <div className="flex flex-col items-center justify-center md:flex-row md:justify-between">
         <span className="text-sm text-gray-500 text-center dark:text-gray-400">
-          © 2022 Bentilzone™. All Rights Reserved.
+          © 2023 diploma-food-app. 
         </span>
         <div className="flex mt-4 space-x-6 sm:justify-center sm:mt-0 md:text-xl">
           <motion.a
             whileTap={{ scale: 1.1 }}
             target={"_blank"}
             rel="noreferrer"
-            href="https://qbentil.com"
+            href="#"
             className="text-textColor h-10 w-10 bg-primary rounded-full flex items-center justify-center"
           >
             <BsDribbble />
@@ -47,7 +47,7 @@ const Footer = () => {
             whileTap={{ scale: 1.1 }}
             target={"_blank"}
             rel="noreferrer"
-            href="https://github.com/qbentil"
+            href="#"
             className="text-textColor h-10 w-10 bg-primary rounded-full flex items-center justify-center"
           >
             <BsGithub />
@@ -56,7 +56,7 @@ const Footer = () => {
             whileTap={{ scale: 1.1 }}
             target={"_blank"}
             rel="noreferrer"
-            href="https://linkedin.com/in/bentil"
+            href="#"
             className="text-textColor h-10 w-10 bg-primary rounded-full flex items-center justify-center"
           >
             <BsLinkedin />
@@ -65,7 +65,7 @@ const Footer = () => {
             whileTap={{ scale: 1.1 }}
             target={"_blank"}
             rel="noreferrer"
-            href="https://twitter.com/themanbentil"
+            href="#"
             className="text-textColor h-10 w-10 bg-primary rounded-full flex items-center justify-center"
           >
             <BsTwitter />
@@ -74,7 +74,7 @@ const Footer = () => {
             whileTap={{ scale: 1.1 }}
             target={"_blank"}
             rel="noreferrer"
-            href="https://instagram.com/qbentil"
+            href="#"
             className="text-textColor h-10 w-10 bg-primary rounded-full flex items-center justify-center"
           >
             <BsInstagram />
@@ -83,7 +83,7 @@ const Footer = () => {
             whileTap={{ scale: 1.1 }}
             target={"_blank"}
             rel="noreferrer"
-            href="https://facebook.com/qbentil"
+            href="#"
             className="text-textColor h-10 w-10 bg-primary rounded-full flex items-center justify-center"
           >
             <BsFacebook />

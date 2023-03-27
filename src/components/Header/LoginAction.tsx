@@ -4,7 +4,7 @@ import { motion } from "framer-motion"
 
 const LoginAction = ({text,  mobile}:{text?:string, mobile?:boolean}) => {
   return (
-    <Link to="/login">
+    <Link to="/login" style={{color:'#fff'}}>
         <motion.div
           className={` flex items-center gap-3 border border-slate-200 px-3 py-1 rounded-lg cursor-pointer`}
           whileTap={{ scale: 0.8 }}
@@ -12,7 +12,7 @@ const LoginAction = ({text,  mobile}:{text?:string, mobile?:boolean}) => {
           
         >
           <MdLogin className={` ${mobile && 'text-2xl text-headingColor'}`} />
-          {text && <p className="text-headingColor ">{text}</p>}
+          {text && <p className="text-headingColor " style={{color:'#fff'}}>{text}</p>}
         </motion.div>
     </Link>
   )

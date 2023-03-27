@@ -4,30 +4,44 @@ export const data = [
 
     {
         id: 2,
-        title: 'Strawberries',
-        desc: "Fresh Strawberries",
+        title: 'Клубника',
+        desc: "Свежая клубника",
         price: '7.25',
         imgSrc: Strawberry
     },
     {   
         id: 3,
-        title: 'Chicken',
-        desc: "Mixed Kebab",
+        title: 'Курица',
+        desc: "Смешанный кебаб",
         price: '15.65',
         imgSrc: Chicken
     },
     {
         id: 4,
-        title: 'Tilapia',
-        desc: "Roasted Tilapia",
+        title: 'Тилапия',
+        desc: "Жареная тилапия",
         price: '10.25',
         imgSrc: Fish
     },{
         id: 1,
-        title: 'Icream',
-        desc: "Chocolate & Vanila",
+        title: 'мороженое',
+        desc: "Шоколад и ваниль",
         price: '5.25',
         imgSrc: Icecream
+    },
+    {   
+        id: 3,
+        title: 'Курица',
+        desc: "Смешанный кебаб",
+        price: '15.65',
+        imgSrc: Chicken
+    },
+    {
+        id: 6,
+        title: 'Тилапия',
+        desc: "Жареная тилапия",
+        price: '10.25',
+        imgSrc: Fish
     },
 
 ]

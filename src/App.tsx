@@ -44,7 +44,7 @@ function App() {
   return (
     <AnimatePresence exitBeforeEnter>
       <ToastContainer />
-      <div className="w-screen h-auto min-h-[100vh] flex flex-col bg-primary">
+      <div className="w-screen h-auto min-h-[100vh] flex flex-col bg-primary" style={{background: '#1F2122'}}>
         {showCart && <Cart />}
         {showContactForm && <Contact />}
         {!(adminMode && isAdmin(user)) && <Header />}

@@ -24,7 +24,7 @@ const Form = () => {
           <input
             type="text"
             className="form-control block w-full px-4 py-2  text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-orange-600 focus:outline-none"
-            placeholder="Your Name"
+            placeholder="Имя"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
@@ -33,7 +33,7 @@ const Form = () => {
           <input
             type="text"
             className="form-control block w-full px-4 py-2  text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-orange-600 focus:outline-none"
-            placeholder="Email ID"
+            placeholder="Почта"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -42,7 +42,7 @@ const Form = () => {
           <input
             type="text"
             className="form-control block w-full px-4 py-2  text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-orange-600 focus:outline-none"
-            placeholder="Subject"
+            placeholder="Название"
             value={subject}
             onChange={(e) => setSubject(e.target.value)}
           />
@@ -50,7 +50,7 @@ const Form = () => {
         <div className="mb-6">
           <textarea
             className="form-control block w-full min-h-[25vh] px-4 py-2  text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-orange-600 focus:outline-none"
-            placeholder="Message"
+            placeholder="Сообщение"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
           />
@@ -60,17 +60,17 @@ const Form = () => {
           className="text-white bg-orange-600 hover:bg-orange-700 w-full focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-orange-600 dark:hover:bg-orange-700 focus:outline-none dark:focus:ring-orange-800 block"
             onClick={submitForm}
         >
-          Send Message
+          Отправить сообщение
         </button>
       </form>
       <p className="mb-2 cursor-pointer text-sm text-gray-500 dark:text-gray-400">
-        <a href="mailto:bentilshadrack72@gmail.com" className="hover:underline">
-          bentilshadrack72@gmail.com
+        <a href="user@gmail.com" className="hover:underline">
+          user@gmail.com
         </a>
       </p>
       <p className="text-sm cursor-pointer text-gray-500 dark:text-gray-400">
         <a href="tel:+233556844331" className="hover:underline">
-          +233 55 684 4331
+          +7077077070
         </a>
       </p>
     </div>

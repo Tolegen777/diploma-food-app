@@ -39,7 +39,7 @@ const SidenavMenu = ({
     <NavItem
       activePage={activePage}
       svgIcon={<MdAddModerator />}
-      title="Add Food"
+      title="Добавить еду"
       setActivePage={setActivePage}
       setPageContent={setPageContent}
       pageContent={<AddFood />}
@@ -47,7 +47,7 @@ const SidenavMenu = ({
     <NavItem
       activePage={activePage}
       svgIcon={<MdRestaurantMenu />}
-      title="Menu"
+      title="Меню"
       setActivePage={setActivePage}
       setPageContent={setPageContent}
       pageContent={<Menu />}
@@ -55,7 +55,7 @@ const SidenavMenu = ({
     <NavItem
       activePage={activePage}
       svgIcon={<MdOutlineFavoriteBorder />}
-      title="Orders"
+      title="Заказаы"
       setActivePage={setActivePage}
       setPageContent={setPageContent}
       pageContent={
@@ -65,7 +65,7 @@ const SidenavMenu = ({
     <NavItem
       activePage={activePage}
       svgIcon={<FiUsers />}
-      title="Users"
+      title="Пользователи"
       setActivePage={setActivePage}
       setPageContent={setPageContent}
       pageContent={<Users />}
@@ -73,7 +73,7 @@ const SidenavMenu = ({
     <NavItem
       activePage={activePage}
       svgIcon={<FaCogs />}
-      title="Settings"
+      title="Настройки"
       setActivePage={setActivePage}
       setPageContent={setPageContent}
       pageContent={
