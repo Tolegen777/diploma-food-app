@@ -1,3 +1,4 @@
+// FIXME first done
 import { BiRefresh } from "react-icons/bi";
 import { MdLogin, MdOutlineKeyboardBackspace } from "react-icons/md";
 import { motion } from "framer-motion";
@@ -26,7 +27,7 @@ const CartHeader = () => {
           onClick={() => emptyCart(cartItems, foodItems, dispatch)}
           className="flex items-center justify-center gap-2 p-1 px-2 my-2 bg-cardOverlay rounded-md hover:shadow-sm text-textColor text-base"
         >
-          clear <BiRefresh className="text-cartNumBg" />
+          очистить <BiRefresh className="text-cartNumBg" />
         </motion.p>
       ) : (
         <Link to={`/login`} onClick={() => hideCart(dispatch)}>
@@ -35,7 +36,7 @@ const CartHeader = () => {
             whileHover={{ scale: 0.9 }}
             className="flex items-center justify-center gap-2 p-1 px-2 my-2 bg-cardOverlay rounded-md hover:shadow-sm text-textColor text-base"
           >
-            <MdLogin className="text-cartNumBg" /> 
+            логин<MdLogin className="text-cartNumBg" />
           </motion.p>
         </Link>
       )}

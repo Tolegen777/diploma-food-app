@@ -1,3 +1,4 @@
+// FIXME first done
 import { FruitsSection, MenuSection, ShowcaseBanner, } from "../../components"
 
 const Home = () => {
@@ -6,7 +7,6 @@ const Home = () => {
       <ShowcaseBanner />
       <FruitsSection />
       <MenuSection />
-
     </div>
 
   )

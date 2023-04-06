@@ -1,3 +1,4 @@
+// FIXME first done
 import CartItem from './Item'
 import CartTotal from './CartTotal'
 import { useStateValue } from '../../context/StateProvider';

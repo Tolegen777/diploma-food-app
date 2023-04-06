@@ -1,4 +1,4 @@
-import { FoodItem, cartItem } from "../../types";
+import { IFoodItem, ICartItem } from "../../types";
 import {
   firebaseAddToCart,
   firebaseDeleteCartItem,
@@ -17,25 +17,29 @@ import { MdShoppingBasket } from "react-icons/md";
 import { toast } from "react-toastify";
 
 export const addToCart = async (
-  cartItems: cartItem[],
-  foodItems: FoodItem[],
+  cartItems: ICartItem[],
+  foodItems: IFoodItem[],
   user: any,
   fid: number,
   dispatch: any
 ) => {
+  console.log(cartItems)
+  console.log(foodItems)
+  console.log(user)
+  console.log(fid)
   if (!user) {
     toast.error("Нужна авторизация для добавления в корзину", {
       icon: <MdShoppingBasket className="text-2xl text-cartNumBg" />,
       toastId: "unauthorizedAddToCart",
     });
   } else {
-    if (cartItems.some((item: cartItem) => item["fid"] === fid)) {
+    if (cartItems.some((item: ICartItem) => item["fid"] === fid)) {
       toast.error("Item already in cart", {
         icon: <MdShoppingBasket className="text-2xl text-cartNumBg" />,
         toastId: "itemAlreadyInCart",
       });
     } else {
-      const data: cartItem = {
+      const data: ICartItem = {
         id: Date.now(),
         fid: fid,
         uid: user.uid,
@@ -46,16 +50,16 @@ export const addToCart = async (
         cartItems: [...cartItems, data],
       });
       calculateCartTotal(cartItems, foodItems, dispatch);
-      await firebaseAddToCart(data);
+      // await firebaseAddToCart(data);
     }
   }
 };
 export const dispatchtUserCartItems = (
   uid: string,
-  items: cartItem[],
+  items: ICartItem[],
   dispatch: any
 ) => {
-  const cartItems = items.filter((item: cartItem) => item.uid === uid);
+  const cartItems = items.filter((item: ICartItem) => item.uid === uid);
   dispatch({
     type: "SET_CARTITEMS",
     cartItems: cartItems,
@@ -94,18 +98,18 @@ export const fetchFoodData = async (dispatch: any) => {
     });
 };
 
-export const getFoodyById = (menu: FoodItem[], fid: number) => {
-  return menu.find((item: FoodItem) => item.id === fid);
+export const getFoodyById = (menu: IFoodItem[], fid: number) => {
+  return menu.find((item: IFoodItem) => item.id === fid);
 };
 
 //  Update cart item State
 export const updateCartItemState = async (
-  cartItems: cartItem[],
-  item: cartItem,
+  cartItems: ICartItem[],
+  item: ICartItem,
   dispatch: any
 ) => {
   const index = cartItems.findIndex(
-    (cartItem: cartItem) => cartItem.id === item.id
+    (cartItem: ICartItem) => cartItem.id === item.id
   );
   if (index !== -1) {
     cartItems[index] = item;
@@ -123,14 +127,14 @@ export const updateCartItemState = async (
 
 // Update Cart Item Quantity
 export const updateCartItemQty = async (
-  cartItems: cartItem[],
-  foodItems: FoodItem[],
-  item: cartItem,
+  cartItems: ICartItem[],
+  foodItems: IFoodItem[],
+  item: ICartItem,
   dispatch: any,
   val: number
 ) => {
   const index = cartItems.findIndex(
-    (cartItem: cartItem) => cartItem.id === item.id
+    (cartItem: ICartItem) => cartItem.id === item.id
   );
   if (index !== -1) {
     cartItems[index].qty += val;
@@ -149,13 +153,13 @@ export const updateCartItemQty = async (
 
 //  Delete Cart Item
 export const deleteCartItem = async (
-  cartItems: cartItem[],
-  foodItems: FoodItem[],
-  item: cartItem,
+  cartItems: ICartItem[],
+  foodItems: IFoodItem[],
+  item: ICartItem,
   dispatch: any
 ) => {
   const index = cartItems.findIndex(
-    (cartItem: cartItem) => cartItem.id === item.id
+    (cartItem: ICartItem) => cartItem.id === item.id
   );
   if (index !== -1) {
     cartItems.splice(index, 1);
@@ -164,22 +168,22 @@ export const deleteCartItem = async (
       cartItems: cartItems,
     });
     calculateCartTotal(cartItems, foodItems, dispatch);
-    await firebaseDeleteCartItem(item)
-      .then(() => {})
-      .catch((e) => {
-        console.log(e);
-      });
+    // await firebaseDeleteCartItem(item)
+    //   .then(() => {})
+    //   .catch((e) => {
+    //     console.log(e);
+    //   });
   }
 };
 
 // Calculate Total Price Round to 2 decimal places
 export const calculateCartTotal = (
-  cartItems: cartItem[],
-  foodItems: FoodItem[],
+  cartItems: ICartItem[],
+  foodItems: IFoodItem[],
   dispatch: any
 ) => {
   let total = 0;
-  cartItems.forEach((item: cartItem) => {
+  cartItems.forEach((item: ICartItem) => {
     const foodItem = getFoodyById(foodItems, item.fid);
     total += item.qty * parseFloat(foodItem?.price || "0");
   });
@@ -191,8 +195,8 @@ export const calculateCartTotal = (
 
 // Empty Cart
 export const emptyCart = async (
-  cartItems: cartItem[],
-  foodItems: FoodItem[],
+  cartItems: ICartItem[],
+  foodItems: IFoodItem[],
   dispatch: any
 ) => {
   if (cartItems.length > 0) {
@@ -200,12 +204,12 @@ export const emptyCart = async (
       type: "SET_CARTITEMS",
       cartItems: [],
     });
-    calculateCartTotal(cartItems, foodItems, dispatch);
-    await firebaseEmptyUserCart(cartItems)
-      .then(() => {})
-      .catch((e) => {
-        console.log(e);
-      });
+    // calculateCartTotal(cartItems, foodItems, dispatch);
+    // await firebaseEmptyUserCart(cartItems)
+    //   .then(() => {})
+    //   .catch((e) => {
+    //     console.log(e);
+    //   });
   } else {
     toast.warn("Cart is already empty");
   }
@@ -249,30 +253,36 @@ export const shuffleItems = (items: any) => {
 
 export const logout = async (user: any, dispatch: any, navigate: any) => {
   if (user) {
-    await firebaseLogout()
-      .then(() => {
-        dispatch({
-          type: "SET_USER",
-          user: null,
-        });
-        dispatch({
-          type: "SET_CARTITEMS",
-          cartItems: [],
-        });
-        // turn off adminMode
-        dispatch({
-          type: "SET_ADMIN_MODE",
-          adminMode: false,
-        });
-
-        localStorage.setItem("user", "undefined");
-        localStorage.setItem("adminMode", "undefined");
-        localStorage.removeItem("cartItems");
-        navigate("/");
-      })
-      .catch((e: any) => {
-        console.log(e);
-      });
+    // await firebaseLogout()
+    //   .then(() => {
+    //     dispatch({
+    //       type: "SET_USER",
+    //       user: null,
+    //     });
+    //     dispatch({
+    //       type: "SET_CARTITEMS",
+    //       cartItems: [],
+    //     });
+    //     // turn off adminMode
+    //     dispatch({
+    //       type: "SET_ADMIN_MODE",
+    //       adminMode: false,
+    //     });
+    //
+    //     localStorage.setItem("user", "undefined");
+    //     localStorage.setItem("adminMode", "undefined");
+    //     localStorage.removeItem("cartItems");
+    //     navigate("/");
+    //   })
+    //   .catch((e: any) => {
+    //     console.log(e);
+    //   });
+//FIXME
+    localStorage.setItem("user", "undefined");
+    localStorage.setItem("adminMode", "undefined");
+    localStorage.removeItem("cartItems");
+    navigate("/");
+    window.location.reload()
   } else {
     console.log("You are not logged in");
   }
@@ -288,7 +298,7 @@ export const ToggleAdminMode = (dispatch: any, state: boolean) => {
 };
 
 export const isAdmin = (user: any) => {
-  let isAdmin =user?.email == "bentilshadrack72@gmail.com" || user?.email == "admin@test.com"
+  let isAdmin =user?.email == "admin@test.com" || user?.email == "admin@gmail.com"
   return isAdmin
 };
 
@@ -341,11 +351,11 @@ export const getAllUser = async() => {
 }
 // delete food
 export const deleteFood = async (
-  food: FoodItem,
-  foodItems: FoodItem[],
+  food: IFoodItem,
+  foodItems: IFoodItem[],
   dispatch: any
 ) => {
-  await firebaseDeleteFood(food.id);
+  // await firebaseDeleteFood(food.id);
   // remove food from foodItems
   const foodIndex = foodItems.indexOf(food);
   if(foodIndex !== -1)

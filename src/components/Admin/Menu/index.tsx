@@ -1,5 +1,5 @@
 import { FaSearch } from "react-icons/fa";
-import { FoodItem } from "../../../../types";
+import { IFoodItem } from "../../../../types";
 import { SingleFoodItem } from "../../FoodItem";
 import React, { useState } from "react";
 import { useStateValue } from "../../../context/StateProvider";
@@ -7,13 +7,13 @@ import { useStateValue } from "../../../context/StateProvider";
 const Menu = () => {
     const [{ foodItems }, dispatch] = useStateValue();
     const [query, setQuery] = useState("");
-    const [filteredFoodItems, setFilteredFoodItems] = useState<FoodItem[]>(foodItems);
+    const [filteredFoodItems, setFilteredFoodItems] = useState<IFoodItem[]>(foodItems);
     
     const filterFood = () => {
         if(query.length === 0) {
             setFilteredFoodItems(foodItems);
         }else{
-          const filteredFoodItems = foodItems.filter((foodItem:FoodItem) => foodItem.title.toLowerCase().includes(query.toLowerCase()));
+          const filteredFoodItems = foodItems.filter((foodItem:IFoodItem) => foodItem.title.toLowerCase().includes(query.toLowerCase()));
           setFilteredFoodItems(filteredFoodItems);
         }
     }
@@ -39,7 +39,7 @@ const Menu = () => {
       </div>
       <div className="w-full flex items-center justify-center gap-3 overflow-x-hidden flex-wrap">
         {
-            filteredFoodItems.map((item: FoodItem) => (
+            filteredFoodItems.map((item: IFoodItem) => (
                 <SingleFoodItem key={item.id} item={item} col admin />
             ))
         }

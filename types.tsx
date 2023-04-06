@@ -1,14 +1,14 @@
-export type foodItemStatic = {
+export type IFoodItemStatic = {
   id: number;
   title: string;
   desc: string;
   price: string;
   imgSrc: string;
 }
-export type foodItemsStatic = {
-  items: foodItemStatic[];
+export type IFoodItemsStatic = {
+  items: IFoodItemStatic[];
 }
-export type FoodItem = {
+export type IFoodItem = {
     id: number;
     title: string;
     description?: string;
@@ -19,29 +19,29 @@ export type FoodItem = {
     category: string;
 };
 
-export type FoodItems = {
-  items: FoodItem[];
+export type IFoodItems = {
+  items: IFoodItem[];
 }
 
-export type FoodCategory = {
+export type IFoodCategory = {
   id: number;
   name: string;
   urlParam: string;
   icon?: JSX.Element
 }
 
-export type cartItem = {
+export type ICartItem = {
   id: number;
   fid: number;
   uid: string;
   qty: number;
 }
 
-export type cartItems = {
-  items: cartItem[]
+export type ICartItems = {
+  items: ICartItem[]
 }
 
-export type User = {
+export type IUser = {
   uid: string;
   email?: string;
   displayName?:string;
@@ -50,5 +50,17 @@ export type User = {
   photoURL?: string;
 
 }
-export type FoodCategories = FoodCategory[];
+export type FoodCategories = IFoodCategory[];
 
+export type IInitialStateType = {
+    user: string,
+    foodItems: IFoodItem[] | null,
+    showCart: boolean,
+    showContactForm: boolean,
+    cartItems: ICartItems | [],
+    cartTotal: number,
+    adminMode: string,
+    users: IUser[],
+    paymentMethod: string,
+    checkoutData: object,
+}

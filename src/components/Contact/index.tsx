@@ -1,5 +1,6 @@
-import ContactHeader from "./header";
-import Form from "./form";
+// FIXME first done
+import ContactHeader from "./ContactHeader";
+import Form from "./Form";
 import { motion } from "framer-motion";
 const Contact = () => {
   return (

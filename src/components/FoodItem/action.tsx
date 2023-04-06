@@ -4,8 +4,8 @@ import { motion } from "framer-motion";
 import { addToCart, deleteFood } from "../../utils/functions";
 import { MdAddShoppingCart, MdDeleteForever } from "react-icons/md";
 import { BiEditAlt } from "react-icons/bi";
-import { FoodItem } from "../../../types";
-const Action = ({ food, admin }: { food: FoodItem; admin?: boolean }) => {
+import { IFoodItem } from "../../../types";
+const Action = ({ food, admin }: { food: IFoodItem; admin?: boolean }) => {
   const [{ cartItems, foodItems, user }, dispatch] = useStateValue();
   return (
     <div className="flex flex-col gap-2">

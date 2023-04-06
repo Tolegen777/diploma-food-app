@@ -1,3 +1,4 @@
+// FIXME first done нужно написать логику для добавления елементтов в корзину
 import React from 'react'
 import { HeroBg } from '../Assets'
 import StaticsImages from './Statics'

@@ -1,6 +1,8 @@
+// FIXME first done
+
 import { useLayoutEffect, useRef } from "react";
 
-import { FoodItem } from "../../../types";
+import { IFoodItem } from "../../../types";
 import Loader from "../Loader";
 import { SingleFoodItem } from "../FoodItem";
 import { motion } from "framer-motion";
@@ -8,7 +10,7 @@ import NotFound from "../NotFound";
 import { isAdmin } from "../../utils/functions";
 import { useStateValue } from "../../context/StateProvider";
 
-const Container = ({scrollOffset, col, items, className }: {scrollOffset:number, col?: boolean; items: FoodItem[], className?:string }) => {
+const Container = ({scrollOffset, col, items, className }: {scrollOffset:number, col?: boolean; items: IFoodItem[], className?:string }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   useLayoutEffect(() => {
     if(null !== containerRef.current){
@@ -26,7 +28,7 @@ const Container = ({scrollOffset, col, items, className }: {scrollOffset:number,
         !col ? "overflow-x-scroll scrollbar-hidden scroll-smooth" : "overflow-x-hidden flex-wrap"
       }`}
     >
-      {items  && items.map((item: FoodItem) => (
+      {items  && items.map((item: IFoodItem) => (
         <SingleFoodItem key={item.id} item = {item} col = {col} admin = {isAdmin(user)}/>
       ))}
       {

@@ -1,3 +1,4 @@
+// FIXME first done
 import {EmptyCartImg} from '../Assets'
 import { toast } from 'react-toastify';
 import { useState } from 'react';
@@ -10,7 +11,7 @@ const Form = () => {
 
     const submitForm = (e:any) => {
         e.preventDefault()
-        return toast.info(`${name} Form handling is not implemented yet`, {
+        return toast.info(`${name} Еще не реализовано`, {
             position: 'top-left',
             autoClose: 3000,
             toastId: 'form'
@@ -63,16 +64,16 @@ const Form = () => {
           Отправить сообщение
         </button>
       </form>
-      <p className="mb-2 cursor-pointer text-sm text-gray-500 dark:text-gray-400">
-        <a href="user@gmail.com" className="hover:underline">
-          user@gmail.com
-        </a>
-      </p>
-      <p className="text-sm cursor-pointer text-gray-500 dark:text-gray-400">
-        <a href="tel:+233556844331" className="hover:underline">
-          +7077077070
-        </a>
-      </p>
+      {/*<p className="mb-2 cursor-pointer text-sm text-gray-500 dark:text-gray-400">*/}
+      {/*  <a href="user@gmail.com" className="hover:underline">*/}
+      {/*    test@gmail.com*/}
+      {/*  </a>*/}
+      {/*</p>*/}
+      {/*<p className="text-sm cursor-pointer text-gray-500 dark:text-gray-400">*/}
+      {/*  <a href="tel:+233556844331" className="hover:underline">*/}
+      {/*    +7077077070*/}
+      {/*  </a>*/}
+      {/*</p>*/}
     </div>
   );
 };

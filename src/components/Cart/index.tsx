@@ -1,6 +1,7 @@
+// FIXME first done
 import { useStateValue } from "../../context/StateProvider";
 import CartBody from "./Body";
-import CarttHeader from "./Header";
+import CarttHeader from "./CartHeader";
 import { motion } from "framer-motion";
 import EmptyCart from "../EmptyCart";
 import NotFound from "../NotFound";

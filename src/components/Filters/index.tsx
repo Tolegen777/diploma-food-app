@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
 import Button from "./Button";
+// FIXME first done нужно доставать категорий из бэка
 import { Categories } from "../../utils/categories";
-import {  FoodCategory } from "../../../types";
+import {  IFoodCategory } from "../../../types";
 import { BiRestaurant } from "react-icons/bi";
 
 const Filters = ({filter, setFilter}: {filter:string, setFilter: any}) => {
@@ -15,7 +16,7 @@ const Filters = ({filter, setFilter}: {filter:string, setFilter: any}) => {
     >
       <Button category={{id: 666, name: "Меню", urlParam: "all", icon: <BiRestaurant />}} filter = {filter} setFilter = {setFilter} />
         {
-            Categories.map((category: FoodCategory) =>{
+            Categories.map((category: IFoodCategory) =>{
                 return <Button key = {category.id} category = {category} filter = {filter} setFilter = {setFilter} />
             })
         }
