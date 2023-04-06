@@ -1,12 +1,13 @@
+// FIXME first done
 import { BiMinus, BiPlus } from "react-icons/bi";
 
 import { MdDelete } from "react-icons/md";
 import { motion } from "framer-motion";
-import { cartItem } from "../../../types";
+import { ICartItem } from "../../../types";
 import { deleteCartItem, getFoodyById, updateCartItemQty } from "../../utils/functions";
 import { useStateValue } from "../../context/StateProvider";
 
-const CartItem = ({ item }: { item: cartItem }) => {
+const CartItem = ({ item }: { item: ICartItem }) => {
   const [{ foodItems, cartItems }, dispatch] = useStateValue();
   const { id, fid, qty } = item;
   const foodItem = getFoodyById(foodItems, fid);

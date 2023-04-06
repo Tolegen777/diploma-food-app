@@ -1,8 +1,9 @@
+// FIXME first done нужно написать логику для добавления елементтов в корзину
 import React from "react";
 import { motion } from "framer-motion";
-import { foodItemsStatic } from "../../../types";
+import { IFoodItemsStatic } from "../../../types";
 
-const StaticsImages: React.FC<foodItemsStatic> = ({ items }) => {
+const StaticsImages: React.FC<IFoodItemsStatic> = ({ items }) => {
   return (
     <div className="w-full h-full absolute flex items-center justify-center top-6 left-0 lg:px-30 lg:py-4 gap-4 flex-wrap ">
       {items.map((item, index) => (

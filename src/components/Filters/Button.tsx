@@ -1,12 +1,12 @@
 import { motion } from "framer-motion";
 import { MdOutlineFastfood } from "react-icons/md";
-import { FoodCategory } from "../../../types";
+import { IFoodCategory } from "../../../types";
 const Button = ({
   category,
   filter,
   setFilter,
 }: {
-  category: FoodCategory;
+  category: IFoodCategory;
   filter: string;
   setFilter: any;
 }) => {

@@ -30,13 +30,15 @@ function App() {
   const [{ showCart,showContactForm, user, foodItems, cartItems, adminMode }, dispatch] =
     useStateValue();
 
-  useEffect(() => {
-    fetchFoodData(dispatch);
-    dispatchUsers(dispatch);
-    user && fetchUserCartData(user, dispatch);
-  }, []);
+  // useEffect(() => {
+  //   // FIXME Нужно сделать под бэк т/е изменить логику файрбэейз
+  //   fetchFoodData(dispatch);
+  //   dispatchUsers(dispatch);
+  //   user && fetchUserCartData(user, dispatch);
+  // }, []);
 
   useEffect(() => {
+    // FIXME нужно смотреть
     foodItems &&
       cartItems.length > 0 &&
       calculateCartTotal(cartItems, foodItems, dispatch);

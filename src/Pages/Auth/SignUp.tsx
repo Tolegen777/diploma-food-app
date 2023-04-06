@@ -1,4 +1,4 @@
-
+// FIXME first done
 import { Link, useNavigate } from "react-router-dom";
 import ProviderAuth, { ImageBox } from ".";
 import { toast } from "react-toastify";
@@ -10,7 +10,7 @@ import { EMAILSIGNUP, firebaseAddUser } from "../../Firebase";
 
 // toast.configure()
 
-const Login = () => {
+const SignUp = () => {
   const navigate = useNavigate();
   const [{ user }, dispatch] = useStateValue();
   const [email, setEmail] = useState('');
@@ -19,30 +19,51 @@ const Login = () => {
   const EmailAuth = () => {
     if (!user) {
       if (email.length > 0 && password.length > 0) {
-        toast.promise(
-          EMAILSIGNUP(email, password),
-          {
-            pending: "Creating Account...",
-            success: "Signup successful: WELCOME!",
-            error: "Error Creating account, Please try again🤗",
-          }
-        ).then((userCredential) => {
-          // Signed in
-          const user = userCredential.user.providerData[0];
-          firebaseAddUser(user);
-          dispatch({
-            type: "SET_USER",
-            user: user,
-          });
-          localStorage.setItem("user", JSON.stringify(user));
-          navigate("/");
-        }
-        ).catch((error) => {
-          // const errorCode = error.code;
-          const errorMessage = error.message;
-          toast.error(errorMessage, { autoClose: 15000 });
-        }
-        );
+        // toast.promise(
+        //   EMAILSIGNUP(email, password),
+        //   {
+        //     pending: "Creating Account...",
+        //     success: "Signup successful: WELCOME!",
+        //     error: "Error Creating account, Please try again🤗",
+        //   }
+        // ).then((userCredential) => {
+        //   // Signed in
+        //   const user = userCredential.user.providerData[0];
+        //   firebaseAddUser(user);
+        //   dispatch({
+        //     type: "SET_USER",
+        //     user: user,
+        //   });
+        //   localStorage.setItem("user", JSON.stringify(user));
+        //   navigate("/");
+        // }
+        // ).catch((error) => {
+        //   // const errorCode = error.code;
+        //   const errorMessage = error.message;
+        //   toast.error(errorMessage, { autoClose: 15000 });
+        // }
+        // );
+
+        dispatch({
+          type: "SET_USER",
+          user: {
+            displayName: null,
+            email: email,
+            phoneNumber: null,
+            photoURL: null,
+            providerId: password,
+            uid: email,
+          },
+        });
+        localStorage.setItem("user", JSON.stringify({
+          displayName: null,
+          email: email,
+          phoneNumber: null,
+          photoURL: null,
+          providerId: password,
+          uid: email,
+        }));
+        navigate("/");
 
       } else {
         toast.warn("Please fill all the fields", { autoClose: 15000 });
@@ -57,12 +78,12 @@ const Login = () => {
         <ImageBox />
           <div className="w-full md:w-[30rem]">
             <form className="p-2">
-            <ProviderAuth />
-              <div className="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
-                <p className="text-center text-textColor text-sm font-semibold mx-4 mb-0">
-                  OR
-                </p>
-              </div>
+            {/*<ProviderAuth />*/}
+            {/*  <div className="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">*/}
+            {/*    <p className="text-center text-textColor text-sm font-semibold mx-4 mb-0">*/}
+            {/*      OR*/}
+            {/*    </p>*/}
+            {/*  </div>*/}
               <div className="mb-6">
                 <input
                   type="text"
@@ -87,19 +108,19 @@ const Login = () => {
                 className="flex items-center justify-center px-7 py-3 bg-gradient-to-br from-orange-400 to-orange-500 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-orange-700 hover:shadow-lg focus:bg-orange-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-orange-800 active:shadow-lg transition duration-150 ease-in-out w-full cursor-pointer"
                 onClick={EmailAuth}
               >
-                Sign Up
+                Зарегестрироваться
               </p>
 
               <div className="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
                 <p className="text-center text-sm text-textColor font-semibold mx-4 mb-0">
-                  Already have an account?
+                  Уже есть аккаунт?
                 </p>
               </div>
               <Link
                 to={"/login"}
                 className="flex items-center justify-center px-7 py-3 bg-gradient-to-br from-orange-400 to-orange-500 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-orange-700 hover:shadow-lg focus:bg-orange-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-orange-800 active:shadow-lg transition duration-150 ease-in-out w-full"
               >
-                Login
+                Войти
               </Link>
             </form>
           </div>
@@ -109,4 +130,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUp;
