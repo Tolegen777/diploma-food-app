@@ -6,6 +6,12 @@ import {motion} from "framer-motion";
 import {useState} from "react";
 import {useStateValue} from "../../context/StateProvider";
 import {EMAILSIGNIN} from "../../Firebase";
+import {useMutation} from "react-query";
+import {authApi} from "../../api/authApi";
+import {IAuthResponse} from "../../types/authTypes";
+import {tokenService} from "../../components/services/tokenService";
+import {customNotification} from "../../utils/customNotification";
+import {Loader} from "../../components/Loader";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -13,54 +19,41 @@ const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    const { mutate: onSignIn, isLoading } = useMutation('signIn', authApi.signInUser, {
+        onSuccess: (data: IAuthResponse) => {
+            tokenService.updateLocalTokenData(data.access_token)
+            tokenService.setUserData(email, password)
+            dispatch({
+                type: "SET_USER",
+                user: {
+                    displayName: null,
+                    email: email,
+                    phoneNumber: null,
+                    photoURL: null,
+                    providerId: password,
+                    uid: email,
+                },
+            });
+            customNotification({type: 'success', message: 'Вы успешно авторизовались!'})
+        },
+        onError: () => {
+            customNotification({type: "error", message: "Неправильный логин или пароль!"})
+        }
+    })
+
 
     const EmailAuth = () => {
         if (!user) {
-            // if (email.length > 0 && password.length > 0) {
-            //   toast.promise(
-            //     EMAILSIGNIN(email, password),
-            //     {
-            //       pending: "Signing in...",
-            //       success: "Signin successful: WELCOME!",
-            //       error: "Error signing account, Please try again🤗",
-            //     }
-            //   ).then((userData) => {
-            //     // Signed in
-            //     const user = userData[0];
-            //     dispatch({
-            //       type: "SET_USER",
-            //       user: user,
-            //     });
-            //     localStorage.setItem("user", JSON.stringify(user));
-            //     navigate("/");
-            //   }
-            //   ).catch((error) => {
-            //     // const errorCode = error.code;
-            //     const errorMessage = error.message;
-            //     toast.error(errorMessage, { autoClose: 15000 });
-            //   }
-            //   );
-            //
-            // } else {
-            //   toast.warn("Please fill all the fields", { autoClose: 15000 });
-            // }
+            if (email.length > 0 && password.length > 0) {
+                onSignIn({
+                    email: email,
+                    password: password
+                })
+                navigate("/");
 
-            //FIXME need to realize
-            const user = {
-                displayName: null,
-                email: email,
-                phoneNumber: null,
-                photoURL: null,
-                providerId: password,
-                uid: email,
-        };
-            dispatch({
-                type: "SET_USER",
-                user: user,
-            });
-            localStorage.setItem("user", JSON.stringify(user));
-            navigate("/");
-
+            } else {
+                customNotification({type: 'error', message: 'Заполните все поля!'})
+            }
         }
     };
 
@@ -71,12 +64,6 @@ const Login = () => {
                     <ImageBox/>
                     <div className="w-full md:w-[30rem]">
                         <form className="p-2">
-                            {/* <ProviderAuth /> */}
-                            {/*<div className="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">*/}
-                            {/*  <p className="text-center text-textColor text-sm font-semibold mx-4 mb-0">*/}
-
-                            {/*  </p>*/}
-                            {/*</div>*/}
                             <div className="mb-6">
                                 <input
                                     type="text"
@@ -104,13 +91,13 @@ const Login = () => {
                                 </Link>
                             </div>
 
-                            <motion.p
+                            {isLoading ? <Loader/> : <motion.p
                                 className="cursor-pointer flex items-center justify-center px-7 py-3 bg-gradient-to-br from-orange-400 to-orange-500 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-orange-600 hover:shadow-lg focus:bg-orange-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full"
                                 onClick={EmailAuth}
                                 whileHover={{scale: 1.1}}
                             >
                                 Войти
-                            </motion.p>
+                            </motion.p> }
 
                             <div
                                 className="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
@@ -122,7 +109,6 @@ const Login = () => {
                                 to={"/register"}
                             >
                                 <motion.p
-                                    // whileHover={{ scale: 0.99 }}
                                     className="cursor-pointer flex items-center justify-center px-7 py-3 bg-gradient-to-br from-orange-400 to-orange-500 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-orange-600 hover:shadow-lg focus:bg-orange-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full"
                                 >
                                     Зарегестрироваться

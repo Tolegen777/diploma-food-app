@@ -9,7 +9,9 @@ export const actionTypes = {
     UPDATE_USER: 'UPDATE_USER',
     SET_PAYMENT_METHOD: 'SET_PAYMENT_METHOD',
     UPDATE_CHECKOUT_DATA: 'UPDATE_CHECKOUT_DATA',
-    TOGGLE_CONTACT_FORM: 'TOGGLE_CONTACT_FORM'
+    TOGGLE_CONTACT_FORM: 'TOGGLE_CONTACT_FORM',
+    SET_RESTAURANT_ID: 'SET_RESTAURANT_ID',
+    SET_ROLE: 'SET_ROLE'
 }
 
 const reducer = (state: any, action: any) => {
@@ -69,6 +71,16 @@ const reducer = (state: any, action: any) => {
             return {
                 ...state,
                 showContactForm: action.showContactForm
+            };
+        case actionTypes.SET_RESTAURANT_ID:
+            return {
+                ...state,
+                restaurant_id: action.restaurant_id
+            };
+        case actionTypes.SET_ROLE:
+            return {
+                ...state,
+                role: action.role
             };
         default:
             return state;

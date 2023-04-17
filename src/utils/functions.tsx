@@ -1,14 +1,8 @@
 import { IFoodItem, ICartItem } from "../../types";
 import {
-  firebaseAddToCart,
-  firebaseDeleteCartItem,
-  firebaseDeleteFood,
-  firebaseEmptyUserCart,
-  firebaseFetchAllCartItems,
   firebaseFetchFoodItems,
   firebaseGetAllUsers,
   firebaseGetUser,
-  firebaseLogout,
   firebaseUpdateCartItem,
   firebaseUpdateUser,
 } from "../Firebase";
@@ -20,30 +14,30 @@ export const addToCart = async (
   cartItems: ICartItem[],
   foodItems: IFoodItem[],
   user: any,
-  fid: number,
+  id: number,
+  price: number,
+  title: string,
+  image: string,
   dispatch: any
 ) => {
-  console.log(cartItems)
-  console.log(foodItems)
-  console.log(user)
-  console.log(fid)
   if (!user) {
     toast.error("Нужна авторизация для добавления в корзину", {
       icon: <MdShoppingBasket className="text-2xl text-cartNumBg" />,
       toastId: "unauthorizedAddToCart",
     });
   } else {
-    if (cartItems.some((item: ICartItem) => item["fid"] === fid)) {
-      toast.error("Item already in cart", {
+    if (cartItems.some((item: ICartItem) => item["id"] === id)) {
+      toast.error("Товар уже в корзине!", {
         icon: <MdShoppingBasket className="text-2xl text-cartNumBg" />,
         toastId: "itemAlreadyInCart",
       });
     } else {
       const data: ICartItem = {
-        id: Date.now(),
-        fid: fid,
-        uid: user.uid,
+        id: id,
         qty: 1,
+        price: price,
+        title: title,
+        image: image
       };
       dispatch({
         type: "SET_CARTITEMS",
@@ -52,35 +46,6 @@ export const addToCart = async (
       calculateCartTotal(cartItems, foodItems, dispatch);
       // await firebaseAddToCart(data);
     }
-  }
-};
-export const dispatchtUserCartItems = (
-  uid: string,
-  items: ICartItem[],
-  dispatch: any
-) => {
-  const cartItems = items.filter((item: ICartItem) => item.uid === uid);
-  dispatch({
-    type: "SET_CARTITEMS",
-    cartItems: cartItems,
-  });
-
-  return cartItems;
-};
-
-export const fetchUserCartData = async (user: any, dispatch: any) => {
-  if (user) {
-    await firebaseFetchAllCartItems()
-      .then((data) => {
-        const userCart = dispatchtUserCartItems(user.uid, data, dispatch);
-        localStorage.setItem("cartItems", JSON.stringify(userCart));
-      })
-      .then(() => {})
-      .catch((e) => {
-        console.log(e);
-      });
-  } else {
-    localStorage.setItem("cartItems", "undefined");
   }
 };
 
@@ -98,8 +63,8 @@ export const fetchFoodData = async (dispatch: any) => {
     });
 };
 
-export const getFoodyById = (menu: IFoodItem[], fid: number) => {
-  return menu.find((item: IFoodItem) => item.id === fid);
+export const getFoodyById = (menu: IFoodItem[], id: number) => {
+  return menu.find((item: IFoodItem) => item.id === id);
 };
 
 //  Update cart item State
@@ -184,8 +149,8 @@ export const calculateCartTotal = (
 ) => {
   let total = 0;
   cartItems.forEach((item: ICartItem) => {
-    const foodItem = getFoodyById(foodItems, item.fid);
-    total += item.qty * parseFloat(foodItem?.price || "0");
+    const foodItem = getFoodyById(foodItems, item.id);
+    total += item.qty * parseFloat(foodItem?.price.toString() || "0");
   });
   dispatch({
     type: "SET_CART_TOTAL",

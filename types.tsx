@@ -1,3 +1,5 @@
+
+
 export type IFoodItemStatic = {
   id: number;
   title: string;
@@ -6,18 +8,23 @@ export type IFoodItemStatic = {
   imgSrc: string;
 }
 export type IFoodItemsStatic = {
-  items: IFoodItemStatic[];
+  items: IFoodItem[];
 }
 export type IFoodItem = {
-    id: number;
-    title: string;
-    description?: string;
-    price: string;
-    imageURL: string;
-    calories: string;
-    qty: string;
-    category: string;
+    qty?: string;
+    calorie: number
+    description?: string
+    id: number
+    image: string
+    price: number
+    rating: string
+    title: string
 };
+
+export type IFoodItemContent = {
+    data: IFoodItem[],
+    count: number
+}
 
 export type IFoodItems = {
   items: IFoodItem[];
@@ -31,10 +38,11 @@ export type IFoodCategory = {
 }
 
 export type ICartItem = {
-  id: number;
-  fid: number;
-  uid: string;
-  qty: number;
+    id: number
+    image: string
+    price: number
+    title: string
+    qty: number;
 }
 
 export type ICartItems = {
@@ -63,4 +71,6 @@ export type IInitialStateType = {
     users: IUser[],
     paymentMethod: string,
     checkoutData: object,
+    restaurant_id?: number | string
+    role?: string
 }

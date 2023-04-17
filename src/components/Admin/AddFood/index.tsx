@@ -1,4 +1,4 @@
-import { AssetUploader, Loader } from "../..";
+import { AssetUploader } from "../..";
 import { BiCategory, BiFoodMenu } from "react-icons/bi";
 import {
   MdDeleteOutline,
@@ -21,6 +21,7 @@ import { toast } from "react-toastify";
 import { useState } from "react";
 import { useStateValue } from "../../../context/StateProvider";
 import { fetchFoodData } from "../../../utils/functions";
+import {Loader} from "../../Loader";
 
 const AddFood = () => {
   const [title, setTitle] = useState("");
@@ -139,7 +140,7 @@ const AddFood = () => {
         </div>
         <div className="group flex justify-center items-center flex-col border-2 border-dotted border-gray-300 w-full h-[225px]  md:h-[420px] round-lg">
           {loading ? (
-            <Loader progress={loaderMessage} />
+            <Loader />
           ) : (
             <>
               {image ? (

@@ -3,15 +3,16 @@
 import { useLayoutEffect, useRef } from "react";
 
 import { IFoodItem } from "../../../types";
-import Loader from "../Loader";
 import { SingleFoodItem } from "../FoodItem";
 import { motion } from "framer-motion";
 import NotFound from "../NotFound";
 import { isAdmin } from "../../utils/functions";
 import { useStateValue } from "../../context/StateProvider";
+import {Loader} from "../Loader";
 
 const Container = ({scrollOffset, col, items, className }: {scrollOffset:number, col?: boolean; items: IFoodItem[], className?:string }) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  console.log(items, 'ITEMS')
   useLayoutEffect(() => {
     if(null !== containerRef.current){
       containerRef.current.scrollLeft += scrollOffset
@@ -28,11 +29,11 @@ const Container = ({scrollOffset, col, items, className }: {scrollOffset:number,
         !col ? "overflow-x-scroll scrollbar-hidden scroll-smooth" : "overflow-x-hidden flex-wrap"
       }`}
     >
-      {items  && items.map((item: IFoodItem) => (
-        <SingleFoodItem key={item.id} item = {item} col = {col} admin = {isAdmin(user)}/>
+      {items.length > 0 && items?.map((item: IFoodItem) => (
+        <SingleFoodItem key={item?.id} item = {item} col = {col} admin = {isAdmin(user)}/>
       ))}
       {
-        !items && (!col ? (<Loader progress = {"Fetching Food Items....."} />): (<NotFound text="Fetching Food Items..."  />))
+        !items && (!col ? (<Loader />): (<NotFound text="Fetching Food Items..."  />))
       }
       {
         items && items.length <= 0 &&  (<NotFound text="Пока что данных нет! "  />)
