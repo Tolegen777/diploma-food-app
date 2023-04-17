@@ -9,9 +9,10 @@ import { motion } from "framer-motion";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import { useStateValue } from "../../context/StateProvider";
-import { AssetUploader, Loader } from "../../components";
+import { AssetUploader } from "../../components";
 import { updateUserData } from "../../utils/functions";
 import { firebaseRemoveUploadedImage } from "../../Firebase";
+import {Loader} from "../../components/Loader";
 
 
 const UpdateProfile = () => {
@@ -97,7 +98,7 @@ const UpdateProfile = () => {
         <div className="group flex justify-center items-center flex-col border-2 border-dotted border-gray-300 w-full h-[225px]  md:h-[420px] round-lg">
           {
             loading ? (
-              <Loader progress={loaderMessage} />
+              <Loader />
             ):(
               <>
              {photoURL ? (

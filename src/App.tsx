@@ -11,31 +11,78 @@ import {
   Signup,
 } from "./Pages";
 import { Cart, Footer, Header } from "./components";
-import { Route, Routes } from "react-router-dom";
+import {Route, Routes, useLocation} from "react-router-dom";
 import {
   calculateCartTotal,
-  dispatchUsers,
-  fetchFoodData,
-  fetchUserCartData,
   isAdmin,
 } from "./utils/functions";
 
 import { AnimatePresence } from "framer-motion";
 import Contact from "./components/Contact";
 import { ToastContainer } from "react-toastify";
-import { useEffect } from "react";
+import {useEffect, useState} from "react";
 import { useStateValue } from "./context/StateProvider";
+import {tokenService} from "./components/services/tokenService";
+import {useQuery} from "react-query";
+import {IRestaurantMyResponse} from "./types/restaurantTypes";
+import {restaurantApi} from "./api/restaurantApi";
+import {productApi} from "./api/productApi";
+import {IFoodItemContent} from "../types";
 
 function App() {
-  const [{ showCart,showContactForm, user, foodItems, cartItems, adminMode }, dispatch] =
+  const [{ showCart,showContactForm, user, foodItems, cartItems, adminMode, restaurant_id }, dispatch] =
     useStateValue();
 
-  // useEffect(() => {
-  //   // FIXME Нужно сделать под бэк т/е изменить логику файрбэейз
-  //   fetchFoodData(dispatch);
-  //   dispatchUsers(dispatch);
-  //   user && fetchUserCartData(user, dispatch);
-  // }, []);
+  const location = useLocation()
+
+  const [restaurantId, setRestaurantId] = useState(null)
+  const [categoryId, setCategoryId] = useState(null)
+  const [limit, setLimit] = useState(20)
+  const [page, setPage] = useState(1)
+  const [title, setTitle] = useState('')
+
+  const { data: restaurantMyData } = useQuery<IRestaurantMyResponse>(
+      ['restaurantMyDataList'],
+      () => restaurantApi.restaurantMy(), {
+        enabled: tokenService.getLocalAccessToken().length > 0,
+        onSuccess: () => {
+          dispatch({
+            type: "SET_ROLE",
+            role: 'restaurant',
+          });
+        }
+      }
+  );
+  const { data: productsData } = useQuery<IFoodItemContent>(
+      ['productsDataList', title, restaurantId, categoryId, page, limit],
+      () => productApi.getProducts({
+        title,
+        restaurantId,
+        categoryId,
+        page,
+        limit
+      }), {
+        onSuccess: () => {
+          dispatch({
+            type: "SET_FOOD_ITEMS",
+            foodItems: productsData?.data ?? [],
+          })
+        }
+      }
+  );
+
+  useEffect(() => {
+    if (location.pathname?.slice(1)?.length > 0) {
+      dispatch({
+        type: "SET_RESTAURANT_ID",
+        restaurant_id: location.pathname.slice(1),
+      });
+    }
+  }, [location.pathname])
+
+
+
+  console.log(restaurant_id, 'any')
 
   useEffect(() => {
     // FIXME нужно смотреть

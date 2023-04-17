@@ -11,7 +11,7 @@ export const SingleFoodItem = ({
   col?: boolean;
   admin?:boolean
 }) => {
-  const { id, title, price, calories, imageURL, description } = item;
+  const { id, title, price, calorie, image, description } = item;
 
   return (
     <motion.div
@@ -28,14 +28,14 @@ export const SingleFoodItem = ({
           whileTap={{ scale: 1.1 }}
           className="w-40 h-40 md:w-48 md:h-40 -mt-8 object-contain cursor-pointer"
           alt={description}
-          src={imageURL}
+          src={image}
         />
       <Action food={item} admin={admin} />
       </div>
       <div className="w-full flex items-end justify-end flex-col">
         <p className="text-textColor font-semi-bold text-lg">{title}</p>
         <p className="mt-1 text-sm text-gray-500">{description} </p>
-      {admin && (<p className="mt-1 text-sm text-gray-500">{calories} calories </p>)}
+      {admin && (<p className="mt-1 text-sm text-gray-500">{calorie} калорий </p>)}
         <div className="flex items-center justify-between gap-8 ">
           <p className="text-base text-headingColor font-semibold">
             <span className="text-sm text-red-600">₵</span> {price}

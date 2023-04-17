@@ -9,14 +9,14 @@ import { useStateValue } from "../../context/StateProvider";
 
 const CartItem = ({ item }: { item: ICartItem }) => {
   const [{ foodItems, cartItems }, dispatch] = useStateValue();
-  const { id, fid, qty } = item;
-  const foodItem = getFoodyById(foodItems, fid);
+  const { id, qty } = item;
+  const foodItem = getFoodyById(foodItems, id);
 
   return (
     <div className="w-full p-1 px-2 rounded-lg bg-cartItem hover:shadow-md flex items-center justify-between gap-2 cursor-pointer ">
       <div className=" flex items-center  gap-2">
         <img
-          src={foodItem?.imageURL}
+          src={foodItem?.image}
           alt=""
           className="w-20 h-20 max-w-[60px] rounded-full object-contain"
         />
