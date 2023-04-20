@@ -36,6 +36,7 @@ const SignUp = () => {
           uid: email,
         },
       });
+      navigate('/')
       customNotification({type: 'success', message: 'Вы успешно авторизовались!'})
     },
     onError: () => {
@@ -50,7 +51,7 @@ const SignUp = () => {
           email: email,
           password: password
         })
-        navigate("/");
+        // navigate("/");
 
       } else {
         customNotification({type: 'error', message: 'Заполните все поля!'})

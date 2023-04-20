@@ -5,13 +5,13 @@ import {toast} from "react-toastify";
 import {motion} from "framer-motion";
 import {useState} from "react";
 import {useStateValue} from "../../context/StateProvider";
-import {EMAILSIGNIN} from "../../Firebase";
 import {useMutation} from "react-query";
 import {authApi} from "../../api/authApi";
 import {IAuthResponse} from "../../types/authTypes";
 import {tokenService} from "../../components/services/tokenService";
 import {customNotification} from "../../utils/customNotification";
 import {Loader} from "../../components/Loader";
+import {Roles} from "../../const/roles";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -34,6 +34,13 @@ const Login = () => {
                     uid: email,
                 },
             });
+            if (email === 'super_admin@gmail.com') {
+                dispatch({
+                    type: "SET_ROLE",
+                    role: Roles.superAdmin,
+                })
+            }
+            navigate('/')
             customNotification({type: 'success', message: 'Вы успешно авторизовались!'})
         },
         onError: () => {
@@ -49,7 +56,7 @@ const Login = () => {
                     email: email,
                     password: password
                 })
-                navigate("/");
+                // navigate("/");
 
             } else {
                 customNotification({type: 'error', message: 'Заполните все поля!'})

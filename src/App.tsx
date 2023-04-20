@@ -14,7 +14,6 @@ import { Cart, Footer, Header } from "./components";
 import {Route, Routes, useLocation} from "react-router-dom";
 import {
   calculateCartTotal,
-  isAdmin,
 } from "./utils/functions";
 
 import { AnimatePresence } from "framer-motion";
@@ -28,9 +27,10 @@ import {IRestaurantMyResponse} from "./types/restaurantTypes";
 import {restaurantApi} from "./api/restaurantApi";
 import {productApi} from "./api/productApi";
 import {IFoodItemContent} from "../types";
+import {Roles} from "./const/roles";
 
 function App() {
-  const [{ showCart,showContactForm, user, foodItems, cartItems, adminMode, restaurant_id }, dispatch] =
+  const [{ showCart,showContactForm, user, foodItems, cartItems, adminMode, restaurant_id, role }, dispatch] =
     useStateValue();
 
   const location = useLocation()
@@ -48,11 +48,12 @@ function App() {
         onSuccess: () => {
           dispatch({
             type: "SET_ROLE",
-            role: 'restaurant',
+            role: Roles.restaurant,
           });
         }
       }
   );
+
   const { data: productsData } = useQuery<IFoodItemContent>(
       ['products', title, restaurantId, categoryId, page, limit],
       () => productApi.getProducts({
@@ -96,10 +97,10 @@ function App() {
       <div className="w-screen h-auto min-h-[100vh] flex flex-col bg-primary" style={{background: '#1F2122'}}>
         {showCart && <Cart />}
         {showContactForm && <Contact />}
-        {!(adminMode && isAdmin(user)) && <Header />}
+        {!(adminMode && role === Roles.restaurant) && <Header />}
         <main
           className={`${
-            !(adminMode && isAdmin(user)) &&
+            !(adminMode && role === Roles.restaurant) &&
             "mt-16 md:mt-16 px-3 md:px-8 md:py-6 py-4"
           } w-full h-auto`}
           onClick={() => {}}
@@ -116,7 +117,7 @@ function App() {
             <Route path="/services" element={<Services />} />
           </Routes>
 
-          {!(adminMode && isAdmin(user)) && <Footer />}
+          {!(adminMode && role === Roles.restaurant) && <Footer />}
         </main>
       </div>
     </AnimatePresence>

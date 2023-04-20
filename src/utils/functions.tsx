@@ -262,9 +262,8 @@ export const ToggleAdminMode = (dispatch: any, state: boolean) => {
   console.log(state);
 };
 
-export const isAdmin = (user: any) => {
-  let isAdmin =user?.email == "super_admin@gmail.com" || user?.email == "admin@gmail.com"
-  return isAdmin
+export const isSuperAdmin = (user: any) => {
+  return user?.email === "super_admin@gmail.com"
 };
 
 // get user

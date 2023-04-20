@@ -2,13 +2,13 @@ import AddFood  from "../../components/Admin/AddFood";
 import Dashboard from "./Dashboard";
 import Home from "../Home";
 import { useStateValue } from "../../context/StateProvider";
-import { isAdmin } from "../../utils/functions";
+import {Roles} from "../../const/roles";
 
 const Admin = () => {
-  const [{user}] = useStateValue()
+  const [{user, role}] = useStateValue()
   return (
      <>
-     {isAdmin(user) ? <Dashboard /> : <Home />}
+     {role === Roles.restaurant ? <Dashboard /> : <Home />}
      </>
   );
 };
