@@ -21,3 +21,18 @@ export interface ICategoriesResponse {
   title: string,
   icon: string
 }
+
+export interface IProductCreateBody {
+  title: string
+  description: string
+  categoryId: number
+  calorie: number
+  restaurantId: number
+  price: number
+  image: string
+}
+
+export interface IProductCreateBody {
+  title: string
+  icon: string
+}

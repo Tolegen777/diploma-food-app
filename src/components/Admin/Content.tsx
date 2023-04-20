@@ -14,7 +14,7 @@ const Content = ({ pageTitle, Element }: { pageTitle: string, Element:JSX.Elemen
         <Link to="/" onClick={() => ToggleAdminMode(dispatch, false)}>
           <button className=" flex items-center justify-center gap-3 text-orange-700 font-bold py-2 px-4 rounded-lg">
             <FaShopify />
-            store
+            На главную
           </button>
         </Link>
       </div>

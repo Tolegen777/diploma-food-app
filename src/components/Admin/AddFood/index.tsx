@@ -1,228 +1,176 @@
-import { AssetUploader } from "../..";
-import { BiCategory, BiFoodMenu } from "react-icons/bi";
-import {
-  MdDeleteOutline,
-  MdOutlineDataSaverOn,
-  MdOutlineFastfood,
-  MdOutlineFoodBank,
-  MdOutlineProductionQuantityLimits,
-} from "react-icons/md";
-import {
-  firebaseFetchFoodItems,
-  firebaseRemoveUploadedImage,
-  firebaseSaveProduct,
-} from "../../../Firebase";
-
-import { Categories } from "../../../utils/categories";
+import {BiCategory, BiFoodMenu} from "react-icons/bi";
+import {MdOutlineDataSaverOn, MdOutlineFastfood, MdOutlineFoodBank,} from "react-icons/md";
 import CategoriesSelector from "./CategoriesSelector";
-import { GiTakeMyMoney } from "react-icons/gi";
-import { motion } from "framer-motion";
-import { toast } from "react-toastify";
-import { useState } from "react";
-import { useStateValue } from "../../../context/StateProvider";
-import { fetchFoodData } from "../../../utils/functions";
+import {GiTakeMyMoney} from "react-icons/gi";
+import {motion} from "framer-motion";
+import {toast} from "react-toastify";
+import {useState} from "react";
+import {useStateValue} from "../../../context/StateProvider";
+import {useMutation, useQuery, useQueryClient} from "react-query";
+import {ICategoriesResponse} from "../../../types/productTypes";
+import {productApi} from "../../../api/productApi";
+import {UploadImageComponent} from "../../Common/UploadImageComponent/UploadImageComponent";
+import {customNotification} from "../../../utils/customNotification";
 import {Loader} from "../../Loader";
 
 const AddFood = () => {
-  const [title, setTitle] = useState("");
-  const [calories, setCalories] = useState("");
-  const [price, setPrice] = useState("");
-  const [image, setImage] = useState(null);
-  const [category, setCategory] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [quantity, setQuantity] = useState("");
-  const [description, setDescription] = useState("");
-  const [loaderMessage, setLoadermessage] = useState("");
-  const [{ foodItems }, dispatch] = useStateValue();
+    const [title, setTitle] = useState("");
+    const [calories, setCalories] = useState("");
+    const [price, setPrice] = useState("");
+    const [categoryId, setCategoryId] = useState("1");
+    const [description, setDescription] = useState("");
 
-  const deleteImage = () => {
-    setLoadermessage("Removing Photo......");
-    firebaseRemoveUploadedImage(image, setImage, setLoading);
-  };
-  const saveItem = () => {
-    setLoadermessage(`Saving Product ${title}.`);
-    setLoading(true);
-    try {
-      if (!title || !calories || !price || !image || !category) {
-        toast.error("Please fill all fields before saving product 🤗");
-        setLoading(false);
-        return;
-      } else {
-        const data = {
-          id: Date.now(),
-          title: title,
-          calories: calories,
-          category: category,
-          description: description,
-          price: price,
-          imageURL: image,
-          qty: quantity,
-        };
-        toast
-          .promise(firebaseSaveProduct(data), {
-            pending: "Saving Product...",
-            success: "Product saved successfully",
-            error: "Error saving product, Please try again🤗",
-          })
-          .then(() => {
-            clearForm();
-            setLoading(false);
-            fetchFoodData(dispatch);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-        setLoadermessage("");
-        setLoading(false);
-      }
-    } catch (error) {
-      console.log(error);
-      toast.error("Error whilesaving product");
-    }
-  };
-  const clearForm = () => {
-    setTitle("");
-    setCalories("");
-    setPrice("");
-    setImage(null);
-    // setCategory("");
-    setQuantity("");
-    setDescription("");
-  };
+    const [fileList, setFileList] = useState([]);
 
-  const validateNumber = (value: any) => {
-    if (isNaN(value)) {
-      toast.error("Please enter a valid number", { toastId: 123 });
-      return "";
-    }
-    return value;
-  };
+    const formData = new FormData();
+
+    const queryClient = useQueryClient();
+
+    const [{restaurant_id}] = useStateValue();
+
+    const {data: categoriesData} = useQuery<ICategoriesResponse[]>(
+        ['categories'],
+        () => productApi.getCategories(),
+    );
+
+    const {mutate: onCreateProduct, isLoading} = useMutation('productCreate', productApi.createProducts, {
+        onSuccess: () => {
+            queryClient.invalidateQueries('products');
+            customNotification({type: 'success', message: 'Операция успешно выполнено!'})
+            clearForm()
+        },
+        onError: () => {
+            customNotification({type: "error", message: "Возникла ощибка при созданий!"})
+        }
+    })
+
+    const saveItem = () => {
+        if (!title || !calories || !price || fileList.length < 1 || !categoryId) {
+            toast.error("Пожалуйста, заполните все поля перед сохранением продукта 🤗");
+            return;
+        } else {
+            formData.append('title', title)
+            formData.append('description', description)
+            formData.append('categoryId', categoryId)
+            formData.append('calorie', calories)
+            formData.append('restaurantId', restaurant_id)
+            formData.append('price', price)
+            fileList.forEach((file: any) => {
+                formData.append("images", file.originFileObj);
+                console.log(formData.get('categoryId'), 'WAW')
+            });
+
+            // @ts-ignore
+            onCreateProduct(formData)
+        }
+
+    };
+    const clearForm = () => {
+        setTitle("");
+        setCalories("");
+        setPrice("");
+        setCategoryId("");
+        setDescription("");
+        setFileList([])
+    };
+
+    const validateNumber = (value: any) => {
+        if (isNaN(value)) {
+            toast.error("Пожалуйста, введите корректное число", {toastId: 123});
+            return "";
+        }
+        return value;
+    };
 
 
+    return (
+        <>
+            {isLoading && <Loader/>}
+            <div className="w-full h-fullflex items-center justify-center">
+                <div
+                    className="border w-full  flex border-gray-300 items-center rounded-lg p-4 flex-col justify-center gap-4  ">
+                    <div className="w-full py-3 border-b border-gray-300 flex -tems-center gap-2">
+                        <MdOutlineFastfood className="text-xl text-gray-600"/>
+                        <input
+                            type="text"
+                            required
+                            placeholder="Введите название еды"
+                            autoFocus
+                            className="h-full w-full  bg-transparent pl-2 text-textColor outline-none border-none placeholder:text-gray-400"
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                        />
+                    </div>
 
-  return (
-    <div className="w-full h-fullflex items-center justify-center">
-      <div className="border w-full  flex border-gray-300 items-center rounded-lg p-4 flex-col justify-center gap-4  ">
-        <div className="w-full py-3 border-b border-gray-300 flex -tems-center gap-2">
-          <MdOutlineFastfood className="text-xl text-gray-600" />
-          <input
-            type="text"
-            required
-            placeholder="Enter food name"
-            autoFocus
-            className="h-full w-full  bg-transparent pl-2 text-textColor outline-none border-none placeholder:text-gray-400"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-        </div>
+                    <div className="w-full flex flex-col md:flex-row items-center gap-3">
+                        <div className="w-full py-2 border-b border-gray-300 flex items-center gap-2">
+                            <BiCategory className="text-xl text-gray-600"/>
+                            <CategoriesSelector
+                                categories={categoriesData ?? []}
+                                action={setCategoryId}
+                                selected={categoryId}
+                            />
+                        </div>
+                    </div>
+                    <div
+                        className="group flex justify-center items-center flex-col border-2 border-dotted border-gray-300 w-full h-[225px]  md:h-[420px] round-lg">
+                        <>
+                            <UploadImageComponent setFileList={setFileList} fileList={fileList}/>
+                        </>
+                    </div>
+                    <div className="w-full flex flex-col md:flex-row items-center gap-3">
+                        <div className="w-full py-2 border-b border-gray-300 flex items-center gap-2">
+                            <MdOutlineFoodBank className="text-gray-600 text-2xl"/>
+                            <input
+                                type="text"
+                                required
+                                placeholder="Калории"
+                                autoFocus
+                                className="h-full w-full  bg-transparent pl-2 text-textColor outline-none border-none placeholder:text-gray-400"
+                                value={calories}
+                                onChange={(e) => setCalories(e.target.value)}
+                            />
+                        </div>
+                        <div className="w-full py-2 border-b border-gray-300 flex items-center gap-2">
+                            <GiTakeMyMoney className="text-gray-600 text-2xl"/>
+                            <input
+                                type="text"
+                                required
+                                placeholder="Цена"
+                                autoFocus
+                                className="h-full w-full  bg-transparent pl-2 text-textColor outline-none border-none placeholder:text-gray-400"
+                                value={price}
+                                onChange={(e) => setPrice(validateNumber(e.target.value))}
+                            />
+                        </div>
+                    </div>
+                    <div className="w-full py-3 border-b border-gray-300 flex -tems-center gap-2">
+                        <BiFoodMenu className="text-xl text-gray-600"/>
+                        <input
+                            type="text"
+                            required
+                            placeholder="Описание"
+                            autoFocus
+                            className="h-full w-full  bg-transparent pl-2 text-textColor outline-none border-none placeholder:text-gray-400"
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                        />
+                    </div>
 
-        <div className="w-full flex flex-col md:flex-row items-center gap-3">
-          <div className="w-full py-2 border-b border-gray-300 flex items-center gap-2">
-            <BiCategory className="text-xl text-gray-600" />
-            <CategoriesSelector
-              categories={Categories}
-              action={setCategory}
-              selected={category}
-            />
-          </div>
-          <div className="w-full py-2 border-b border-gray-300 flex items-center gap-2">
-            <MdOutlineProductionQuantityLimits className="text-gray-600 text-2xl" />
-            <input
-              type="text"
-              required
-              placeholder="Quantity"
-              autoFocus
-              className="h-full w-full  bg-transparent pl-2 text-textColor outline-none border-none placeholder:text-gray-400"
-              value={quantity}
-              onChange={(e) => setQuantity(validateNumber(e.target.value))}
-            />
-          </div>
-        </div>
-        <div className="group flex justify-center items-center flex-col border-2 border-dotted border-gray-300 w-full h-[225px]  md:h-[420px] round-lg">
-          {loading ? (
-            <Loader />
-          ) : (
-            <>
-              {image ? (
-                <>
-                  <div className="relative h-full">
-                    <img
-                      src={image}
-                      alt="uploaded food"
-                      className="w-full h-full object-cover"
-                    />
-                    <motion.button
-                      whileTap={{ scale: 1.1 }}
-                      whileHover={{ scale: 1.2 }}
-                      title="Remove Photo"
-                      className="absolute bottom-3 right-3 rounded-full p-2 md:p-5 bg-red-500 text-xl cursor-pointer outline-none hover:shadow-md duration-500 transition-all ease-in-out"
-                      onClick={() => deleteImage()}
-                    >
-                      <MdDeleteOutline className="text-white" />
-                    </motion.button>
-                  </div>
-                </>
-              ) : (
-                <AssetUploader
-                  action={setImage}
-                  progressHandler={setLoadermessage}
-                  promise={setLoading}
-                />
-              )}
-            </>
-          )}
-        </div>
-        <div className="w-full flex flex-col md:flex-row items-center gap-3">
-          <div className="w-full py-2 border-b border-gray-300 flex items-center gap-2">
-            <MdOutlineFoodBank className="text-gray-600 text-2xl" />
-            <input
-              type="text"
-              required
-              placeholder="Calories"
-              autoFocus
-              className="h-full w-full  bg-transparent pl-2 text-textColor outline-none border-none placeholder:text-gray-400"
-              value={calories}
-              onChange={(e) => setCalories(e.target.value)}
-            />
-          </div>
-          <div className="w-full py-2 border-b border-gray-300 flex items-center gap-2">
-            <GiTakeMyMoney className="text-gray-600 text-2xl" />
-            <input
-              type="text"
-              required
-              placeholder="Price"
-              autoFocus
-              className="h-full w-full  bg-transparent pl-2 text-textColor outline-none border-none placeholder:text-gray-400"
-              value={price}
-              onChange={(e) => setPrice(validateNumber(e.target.value))}
-            />
-          </div>
-        </div>
-        <div className="w-full py-3 border-b border-gray-300 flex -tems-center gap-2">
-          <BiFoodMenu className="text-xl text-gray-600" />
-          <input
-            type="text"
-            required
-            placeholder="Short Description"
-            autoFocus
-            className="h-full w-full  bg-transparent pl-2 text-textColor outline-none border-none placeholder:text-gray-400"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-        </div>
+                    <div className="w-full flex items-center justify-center">
+                        <motion.button
+                            whileHover={{scale: 1.1}}
+                            className="ml-0 flex justify-center items-center gap-2 flex-row-reverse md:ml-auto w-full md:w-auto border-none outline-none rounded bg-orange-500 px-12 py-2 text-lg text-white"
+                            onClick={() => saveItem()}
+                        >
+                            <MdOutlineDataSaverOn/> Создать
+                        </motion.button>
+                    </div>
+                </div>
+            </div>
+        </>
 
-        <div className="w-full flex items-center justify-center">
-          <motion.button
-            whileHover={{ scale: 1.1 }}
-            className="ml-0 flex justify-center items-center gap-2 flex-row-reverse md:ml-auto w-full md:w-auto border-none outline-none rounded bg-orange-500 px-12 py-2 text-lg text-white"
-            onClick={() => saveItem()}
-          >
-            <MdOutlineDataSaverOn /> Save
-          </motion.button>
-        </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default AddFood;

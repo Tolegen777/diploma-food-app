@@ -12,6 +12,7 @@ import Dashboard from "./Dashboard";
 import Users from "./Users";
 import Menu from "./Menu";
 import { useStateValue } from "../../context/StateProvider";
+import AddCategory from "./AddCategory";
 
 const SidenavMenu = ({
   activePage,
@@ -31,7 +32,7 @@ const SidenavMenu = ({
     <NavItem
       activePage={activePage}
       svgIcon={<AiFillDashboard />}
-      title="Dashboard"
+      title="Админ панель"
       setActivePage={setActivePage}
       setPageContent={setPageContent}
       pageContent={<Dashboard />}
@@ -43,6 +44,14 @@ const SidenavMenu = ({
       setActivePage={setActivePage}
       setPageContent={setPageContent}
       pageContent={<AddFood />}
+    />
+    <NavItem
+        activePage={activePage}
+        svgIcon={<MdAddModerator />}
+        title="Добавить категорию"
+        setActivePage={setActivePage}
+        setPageContent={setPageContent}
+        pageContent={<AddCategory />}
     />
     <NavItem
       activePage={activePage}
@@ -65,7 +74,7 @@ const SidenavMenu = ({
     <NavItem
       activePage={activePage}
       svgIcon={<FiUsers />}
-      title="Пользователи"
+      title="Рестораны"
       setActivePage={setActivePage}
       setPageContent={setPageContent}
       pageContent={<Users />}
