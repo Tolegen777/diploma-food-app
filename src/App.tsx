@@ -42,7 +42,7 @@ function App() {
   const [title, setTitle] = useState('')
 
   const { data: restaurantMyData } = useQuery<IRestaurantMyResponse>(
-      ['restaurantMyDataList'],
+      ['restaurantMy'],
       () => restaurantApi.restaurantMy(), {
         enabled: tokenService.getLocalAccessToken().length > 0,
         onSuccess: () => {
@@ -54,7 +54,7 @@ function App() {
       }
   );
   const { data: productsData } = useQuery<IFoodItemContent>(
-      ['productsDataList', title, restaurantId, categoryId, page, limit],
+      ['products', title, restaurantId, categoryId, page, limit],
       () => productApi.getProducts({
         title,
         restaurantId,
