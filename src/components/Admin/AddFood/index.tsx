@@ -51,12 +51,12 @@ const AddFood = () => {
         } else {
             formData.append('title', title)
             formData.append('description', description)
-            formData.append('categoryId', categoryId)
-            formData.append('calorie', calories)
-            formData.append('restaurantId', restaurant_id)
-            formData.append('price', price)
+            formData.append('categoryId', String(+categoryId))
+            formData.append('calorie', String(+calories))
+            formData.append('restaurantId', String(8))
+            formData.append('price', String(+price))
             fileList.forEach((file: any) => {
-                formData.append("images", file.originFileObj);
+                formData.append("image", file.originFileObj);
                 console.log(formData.get('categoryId'), 'WAW')
             });
 
