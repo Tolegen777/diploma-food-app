@@ -1,8 +1,8 @@
 // FIXME first done
 import React from "react";
-import { BikeDelivery } from "../Assets";
 import { motion } from "framer-motion";
 import {useNavigate} from "react-router-dom";
+import {BASE_URL} from "../../api";
 const Left = () => {
 
     const navigate = useNavigate()
@@ -33,6 +33,7 @@ const Left = () => {
         onClick={() => navigate('/menu')}
       >
         Заказать сейчас тест
+          {BASE_URL}
       </motion.button>
     </div>
   );

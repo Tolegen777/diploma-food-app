@@ -28,6 +28,7 @@ import {restaurantApi} from "./api/restaurantApi";
 import {productApi} from "./api/productApi";
 import {IFoodItemContent} from "../types";
 import {Roles} from "./const/roles";
+import {customNotification} from "./utils/customNotification";
 
 function App() {
   const [{ showCart,showContactForm, user, foodItems, cartItems, adminMode, restaurant_id, role }, dispatch] =
@@ -54,7 +55,7 @@ function App() {
       }
   );
 
-  const { data: productsData } = useQuery<IFoodItemContent>(
+  const { data: productsData, error } = useQuery<IFoodItemContent>(
       ['products', title, restaurantId, categoryId, page, limit],
       () => productApi.getProducts({
         title,
@@ -84,6 +85,7 @@ function App() {
 
 
   console.log(restaurant_id, 'any')
+  console.log(error, 'rr')
 
   useEffect(() => {
     // FIXME нужно смотреть
@@ -91,10 +93,13 @@ function App() {
       cartItems.length > 0 &&
       calculateCartTotal(cartItems, foodItems, dispatch);
   }, [cartItems, foodItems, dispatch]);
+
   return (
     <AnimatePresence exitBeforeEnter>
       <ToastContainer />
       <div className="w-screen h-auto min-h-[100vh] flex flex-col bg-primary" style={{background: '#1F2122'}}>
+        {/*// @ts-ignore*/}
+        {error && customNotification({type: 'error', message: error?.message as string})}
         {showCart && <Cart />}
         {showContactForm && <Contact />}
         {!(adminMode && role === Roles.restaurant) && <Header />}
