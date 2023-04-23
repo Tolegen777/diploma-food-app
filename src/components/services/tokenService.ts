@@ -1,11 +1,11 @@
 
 export const tokenService = {
   getLocalAccessToken: (): string => {
-    return  JSON.parse(localStorage.getItem('FOOD_USER_TOKEN') ?? '{}');
+    return  localStorage.getItem('FOOD_USER_TOKEN') ?? '';
   },
 
   updateLocalTokenData: (token: string): void => {
-    localStorage.setItem('PROMO_USER_TOKEN', token);
+    localStorage.setItem('FOOD_USER_TOKEN', token);
   },
 
   setUserData: (email: string, password: string): void => {

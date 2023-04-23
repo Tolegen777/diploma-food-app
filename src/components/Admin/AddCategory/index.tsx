@@ -9,7 +9,7 @@ import {productApi} from "../../../api/productApi";
 import {UploadImageComponent} from "../../Common/UploadImageComponent/UploadImageComponent";
 import {customNotification} from "../../../utils/customNotification";
 
-const AddFood = () => {
+const AddCategory = () => {
     const [title, setTitle] = useState("");
 
     const [fileList, setFileList] = useState([]);
@@ -20,11 +20,20 @@ const AddFood = () => {
 
     const [{restaurant_id}] = useStateValue();
 
-    const {mutate: onCreateCategory, isLoading} = useMutation('categoryCreate', productApi.createCategory, {
+    const {mutate: onAddCategoryToRest} = useMutation('categoryToRest', productApi.addCategoryToRest, {
         onSuccess: () => {
-            queryClient.invalidateQueries('categories');
+            queryClient.invalidateQueries('restaurantMy');
+        },
+        onError: () => {
+            customNotification({type: "error", message: "Возникла ошибка при созданий!"})
+        }
+    })
+
+    const {mutate: onCreateCategory, isLoading} = useMutation('categoryCreate', productApi.createCategory, {
+        onSuccess: (data) => {
             customNotification({type: 'success', message: 'Операция успешно выполнено!'})
             clearForm()
+            onAddCategoryToRest(data?.id)
         },
         onError: () => {
             customNotification({type: "error", message: "Возникла ощибка при созданий!"})
@@ -62,7 +71,7 @@ const AddFood = () => {
                         <input
                             type="text"
                             required
-                            placeholder="Введите название еды"
+                            placeholder="Введите название категорий"
                             autoFocus
                             className="h-full w-full  bg-transparent pl-2 text-textColor outline-none border-none placeholder:text-gray-400"
                             value={title}
@@ -72,7 +81,7 @@ const AddFood = () => {
 
 
                     <div
-                        className="group flex justify-center items-center flex-col border-2 border-dotted border-gray-300 w-full h-[225px]  md:h-[420px] round-lg">
+                        className="group flex justify-center items-center flex-col border-2 border-dotted border-gray-300 w-full h-[225px]  md:h-[220px] round-lg">
                         <>
                             <UploadImageComponent setFileList={setFileList} fileList={fileList}/>
                         </>
@@ -94,4 +103,4 @@ const AddFood = () => {
     );
 };
 
-export default AddFood;
+export default AddCategory;

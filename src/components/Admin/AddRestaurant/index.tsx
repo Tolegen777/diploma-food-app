@@ -15,18 +15,9 @@ const AddRestaurant = () => {
 
     const formData = new FormData();
 
-    const queryClient = useQueryClient();
 
-    const {mutate: onCreateRestaurant, isLoading} = useMutation('restaurantCreate', restaurantApi.createRestaurant, {
-        onSuccess: () => {
-            queryClient.invalidateQueries('restaurants');
-            customNotification({type: 'success', message: 'Операция успешно выполнено!'})
-            clearForm()
-        },
-        onError: () => {
-            customNotification({type: "error", message: "Возникла ощибка при созданий!"})
-        }
-    })
+
+
 
     const saveItem = () => {
         if (!title) {
@@ -46,7 +37,7 @@ const AddRestaurant = () => {
 
     return (
         <>
-            {isLoading && <Loader/>}
+            {/*{isLoading && <Loader/>}*/}
             <div className="w-full h-fullflex items-center justify-center">
                 <div
                     className="border w-full  flex border-gray-300 items-center rounded-lg p-4 flex-col justify-center gap-4  ">

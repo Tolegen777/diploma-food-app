@@ -12,12 +12,16 @@ import {productApi} from "../../../api/productApi";
 import {UploadImageComponent} from "../../Common/UploadImageComponent/UploadImageComponent";
 import {customNotification} from "../../../utils/customNotification";
 import {Loader} from "../../Loader";
+import {IRestaurantMyResponse} from "../../../types/restaurantTypes";
+import {restaurantApi} from "../../../api/restaurantApi";
+import {tokenService} from "../../services/tokenService";
+import {Roles} from "../../../const/roles";
 
 const AddFood = () => {
     const [title, setTitle] = useState("");
     const [calories, setCalories] = useState("");
     const [price, setPrice] = useState("");
-    const [categoryId, setCategoryId] = useState("1");
+    const [categoryId, setCategoryId] = useState("");
     const [description, setDescription] = useState("");
 
     const [fileList, setFileList] = useState([]);
@@ -28,9 +32,11 @@ const AddFood = () => {
 
     const [{restaurant_id}] = useStateValue();
 
-    const {data: categoriesData} = useQuery<ICategoriesResponse[]>(
-        ['categories'],
-        () => productApi.getCategories(),
+    const { data: restaurantMyData } = useQuery<IRestaurantMyResponse>(
+        ['restaurantMy'],
+        () => restaurantApi.restaurantMy(), {
+            enabled: tokenService.getLocalAccessToken().length > 0,
+        }
     );
 
     const {mutate: onCreateProduct, isLoading} = useMutation('productCreate', productApi.createProducts, {
@@ -106,14 +112,14 @@ const AddFood = () => {
                         <div className="w-full py-2 border-b border-gray-300 flex items-center gap-2">
                             <BiCategory className="text-xl text-gray-600"/>
                             <CategoriesSelector
-                                categories={categoriesData ?? []}
+                                categories={restaurantMyData?.categories ?? []}
                                 action={setCategoryId}
                                 selected={categoryId}
                             />
                         </div>
                     </div>
                     <div
-                        className="group flex justify-center items-center flex-col border-2 border-dotted border-gray-300 w-full h-[225px]  md:h-[420px] round-lg">
+                        className="group flex justify-center items-center flex-col border-2 border-dotted border-gray-300 w-full h-[225px]  md:h-[220px] round-lg">
                         <>
                             <UploadImageComponent setFileList={setFileList} fileList={fileList}/>
                         </>
@@ -122,7 +128,7 @@ const AddFood = () => {
                         <div className="w-full py-2 border-b border-gray-300 flex items-center gap-2">
                             <MdOutlineFoodBank className="text-gray-600 text-2xl"/>
                             <input
-                                type="text"
+                                type="number"
                                 required
                                 placeholder="Калории"
                                 autoFocus
@@ -134,7 +140,7 @@ const AddFood = () => {
                         <div className="w-full py-2 border-b border-gray-300 flex items-center gap-2">
                             <GiTakeMyMoney className="text-gray-600 text-2xl"/>
                             <input
-                                type="text"
+                                type="number"
                                 required
                                 placeholder="Цена"
                                 autoFocus

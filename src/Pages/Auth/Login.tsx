@@ -34,12 +34,6 @@ const Login = () => {
                     uid: email,
                 },
             });
-            if (email === 'super_admin@gmail.com') {
-                dispatch({
-                    type: "SET_ROLE",
-                    role: Roles.superAdmin,
-                })
-            }
             navigate('/')
             customNotification({type: 'success', message: 'Вы успешно авторизовались!'})
         },

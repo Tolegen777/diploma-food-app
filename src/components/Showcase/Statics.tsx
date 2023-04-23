@@ -2,9 +2,10 @@
 import React from "react";
 import { motion } from "framer-motion";
 import {IFoodItem, IFoodItemsStatic} from "../../../types";
+import {BASE_URL} from "../../api";
 
 const StaticsImages: React.FC<{items: IFoodItem[] }> = ({items}) => {
-  console.log(items, 'ITEM STAT')
+
   return (
     <div className="w-full h-full absolute flex items-center justify-center top-6 left-0 lg:px-30 lg:py-4 gap-4 flex-wrap ">
       {items && items.map((item, index) => (
@@ -15,7 +16,7 @@ const StaticsImages: React.FC<{items: IFoodItem[] }> = ({items}) => {
           <motion.img
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 1.1 }}
-            src={item.image}
+            src={BASE_URL + item.image}
             alt="icecream"
             className="w-24 lg:w-40 -mt-10 lg:-mt-20"
           />

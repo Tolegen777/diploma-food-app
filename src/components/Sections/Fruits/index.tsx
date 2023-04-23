@@ -5,17 +5,20 @@ import { PrevNext as PrevNextButtons, Title } from ".."
 import Container from "../../Container"
 import {useEffect, useState} from "react"
 import {useQuery} from "react-query";
-import {IFoodItem} from "../../../../types";
+import {IFoodItem, IFoodItemContent} from "../../../../types";
 import {productApi} from "../../../api/productApi";
 import {ICategoriesResponse} from "../../../types/productTypes";
+import {useStateValue} from "../../../context/StateProvider";
 
 const Fruits = () => {
   const [scrollValue, setScrollValue] = useState(0)
   const [categoryId, setCategoryId] = useState(1)
   const [categoryTitle, setCategoryTitle] = useState('"Наши свежие и полезные фрукты"')
 
+    const [{ restaurant_id }] = useStateValue();
+
     const { data: categoriesData } = useQuery<ICategoriesResponse[]>(
-        ['categoriesDataList'],
+        ['categories'],
         () => productApi.getCategories(),
     );
 
@@ -30,13 +33,18 @@ const Fruits = () => {
      }
   }, [categoriesData])
 
-    const { data: productsFruitsData } = useQuery<IFoodItem[]>(
-        ['productsDataList'],
+    const { data: productsFruitsData } = useQuery<IFoodItemContent>(
+        ['products'],
         () => productApi.getProducts({
             categoryId: categoryId,
+            restaurantId: restaurant_id,
             page: 1,
             limit: 10
-        }),
+        }
+        ),
+        {
+          enabled: restaurant_id.length > 0 && categoriesData && categoriesData.length > 0
+        },
     );
 
 
@@ -46,7 +54,7 @@ const Fruits = () => {
           <Title title={categoryTitle}/>
           <PrevNextButtons onNext={() => setScrollValue(10000)} onPrev = {() => setScrollValue(-10000)} />
         </div>
-        <Container className="bg-containerbg" scrollOffset = {scrollValue} items = {productsFruitsData ?? []} />
+        <Container className="bg-containerbg" scrollOffset = {scrollValue} items = {productsFruitsData?.data ?? []} />
     </section>
   )
 }

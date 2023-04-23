@@ -4,9 +4,21 @@ import { Link } from "react-router-dom";
 import { MdShoppingBasket } from "react-icons/md";
 import { motion } from "framer-motion";
 import { useStateValue } from "../../context/StateProvider";
+import {useQuery} from "react-query";
+import {IFoodItemContent} from "../../../types";
+import {productApi} from "../../api/productApi";
+import {cartApi} from "../../api/cartApi";
+import {ICartResponse} from "../../types/cartTypes";
 
 const Navigations = ({ direction }: { direction?: string }) => {
-  const [{ showContactForm, cartItems }, dispatch] = useStateValue();
+  const [{ showContactForm }, dispatch] = useStateValue();
+
+  const { data: cartData } = useQuery<ICartResponse[]>(
+      ['cart'],
+      () => cartApi.getCart()
+  );
+
+  console.log(cartData, 'DDDD')
   const handleToggleCart = () => {
     dispatch({
       type: "TOGGLE_CART",
@@ -62,10 +74,10 @@ const Navigations = ({ direction }: { direction?: string }) => {
         onClick={handleToggleCart}
       >
         <MdShoppingBasket className="text-2xl cursor-pointer" />
-        {cartItems && (
+        {cartData && (
           <div className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-cartNumBg flex items-center justify-center cursor-pointer">
             <p className="text-sm text-white font-semibold">
-              {cartItems.length}
+              {cartData.length}
             </p>
           </div>
         )}

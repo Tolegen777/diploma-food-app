@@ -5,14 +5,31 @@ import Container from "../../Container";
 import Filters from "../../Filters";
 import { Title } from "..";
 import { useStateValue } from "../../../context/StateProvider";
+import {useQuery} from "react-query";
+import {IFoodItemContent} from "../../../../types";
+import {productApi} from "../../../api/productApi";
 
 const Menu = ({title}:{title?:string}) => {
 
   const [scrollValue, setScrollValue] = useState(0);
-  const [{ foodItems }, dispatch] = useStateValue();
-  const [filter, setFilter] = useState<string>("all");
-  console.log(filter)
-  console.log(foodItems, 'ffoods')
+
+    const [filter, setFilter] = useState<string>("55555");
+
+  const [{ restaurant_id }, dispatch] = useStateValue();
+
+    const { data: productsData } = useQuery<IFoodItemContent>(
+        ['products', restaurant_id, filter],
+        () => productApi.getProducts({
+            restaurantId: restaurant_id,
+            categoryId: +filter,
+            page: 1,
+            limit: 100
+        }), {
+            enabled: restaurant_id.length > 0
+        }
+    );
+
+
   return (
     <section className="w-full my-5" id="menu">
       <div className="w-full flex items-center justify-center">
@@ -23,7 +40,7 @@ const Menu = ({title}:{title?:string}) => {
         className="bg-containerbg"
         col
         scrollOffset={scrollValue}
-        items={foodItems ?? []}
+        items={productsData?.data ?? []}
       />
     </section>
   );

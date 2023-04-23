@@ -12,7 +12,7 @@ import {Roles} from "../../const/roles";
 
 const Container = ({scrollOffset, col, items, className }: {scrollOffset:number, col?: boolean; items: IFoodItem[], className?:string }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  console.log(items, 'ITEMS')
+
   useLayoutEffect(() => {
     if(null !== containerRef.current){
       containerRef.current.scrollLeft += scrollOffset

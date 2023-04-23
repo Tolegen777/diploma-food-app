@@ -9,22 +9,19 @@ import {restaurantApi} from "../../../api/restaurantApi";
 import {tokenService} from "../../services/tokenService";
 import {ICategoriesResponse} from "../../../types/productTypes";
 import {SingleFoodItemCategory} from "../../FoodItemCategory";
+import {SingleFoodItemProduct} from "../../FoodItemProduct";
 
-const CategoryList = () => {
+const ProductList = () => {
 
-    const { data: restaurantMyData } = useQuery<IRestaurantMyResponse>(
-        ['restaurantMy'],
-        () => restaurantApi.restaurantMy(), {
-            enabled: tokenService.getLocalAccessToken().length > 0,
-        }
-    );
+    const [{ foodItems }] =
+        useStateValue();
 
   return (
     <div className="w-full flex flex-col justify-center">
       <div className="w-full flex items-center justify-center gap-3 overflow-x-hidden flex-wrap">
         {
-            restaurantMyData?.categories?.map((item:  ICategoriesResponse) => (
-                <SingleFoodItemCategory key={item.id} item={item} col admin />
+            foodItems?.map((item: IFoodItem) => (
+                <SingleFoodItemProduct key={item.id} item={item} col admin />
             ))
         }
       </div>
@@ -32,4 +29,4 @@ const CategoryList = () => {
   );
 };
 
-export default CategoryList;
+export default ProductList;
