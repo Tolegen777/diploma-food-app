@@ -3,7 +3,7 @@ import { Content, Sidenav, Stats } from '../../components';
 
 
 const Dashboard = () => {
-  const [activePage, setActivePage] = useState("Dashboard");
+  const [activePage, setActivePage] = useState("Админ панель");
   const [element, setElement] = useState<JSX.Element>(<Stats />);
   return (
     <div className="h-screen flex w-full gap-2 items-start">

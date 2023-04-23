@@ -6,6 +6,9 @@ import { Link } from "react-router-dom";
 import { Logo } from "../Assets";
 import { motion } from "framer-motion";
 import { useStateValue } from "../../context/StateProvider";
+import {useQuery} from "react-query";
+import {ICartResponse} from "../../types/cartTypes";
+import {cartApi} from "../../api/cartApi";
 
 const MobileNav = ({
   isOpen,
@@ -14,7 +17,12 @@ const MobileNav = ({
   isOpen: boolean;
   setIsOpen: any;
 }) => {
-  const [{ showContactForm, showCart, cartItems }, dispatch] = useStateValue();
+  const [{ showContactForm, showCart }, dispatch] = useStateValue();
+
+  const { data: cartData } = useQuery<ICartResponse[]>(
+      ['cart'],
+      () => cartApi.getCart()
+  );
   const handleToggleCart = () => {
     dispatch({
       type: "TOGGLE_CART",
@@ -40,10 +48,10 @@ const MobileNav = ({
           onClick={handleToggleCart}
         >
           <MdShoppingBasket className="text-4xl cursor-pointer" />
-          {cartItems && (
+          {cartData && (
             <div className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-cartNumBg flex items-center justify-center">
               <p className="text-sm text-white font-semibold">
-                {cartItems.length}
+                {cartData.length}
               </p>
             </div>
           )}

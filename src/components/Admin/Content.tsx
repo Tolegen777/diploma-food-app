@@ -6,8 +6,8 @@ import { ToggleAdminMode } from "../../utils/functions";
 const Content = ({ pageTitle, Element }: { pageTitle: string, Element:JSX.Element }) => {
   const [{}, dispatch] = useStateValue();
   return (
-    <div className="flex flex-col w-[80%] h-screen px-2">
-      <div className="flex justify-between w-full text-xl font-bold text-gray-600 border-b-2 border-orange-200 pt-6 pb-2 px-6">
+    <div className="flex flex-col w-[80%] h-screen px-2 bg-gray-100">
+      <div className="flex justify-between w-full text-xl font-bold text-gray-400 border-b-2 border-orange-200 pt-6 pb-2 px-6">
         {pageTitle}
 
         {/* home button */}

@@ -36,9 +36,9 @@ function App() {
 
   const location = useLocation()
 
-  const [restaurantId, setRestaurantId] = useState(null)
+  const [restaurantId, setRestaurantId] = useState('')
   const [categoryId, setCategoryId] = useState(null)
-  const [limit, setLimit] = useState(20)
+  const [limit, setLimit] = useState(100)
   const [page, setPage] = useState(1)
   const [title, setTitle] = useState('')
 
@@ -46,7 +46,9 @@ function App() {
       ['restaurantMy'],
       () => restaurantApi.restaurantMy(), {
         enabled: tokenService.getLocalAccessToken().length > 0,
-        onSuccess: () => {
+        onSuccess: (data) => {
+          console.log(data, 'DATA')
+          setRestaurantId(data?.id.toString())
           dispatch({
             type: "SET_ROLE",
             role: Roles.restaurant,
@@ -69,23 +71,21 @@ function App() {
             type: "SET_FOOD_ITEMS",
             foodItems: productsData?.data ?? [],
           })
-        }
+        },
+        enabled: restaurantId.length > 0
       }
   );
 
   useEffect(() => {
-    if (location.pathname?.slice(1)?.length > 0) {
+    if (location.pathname?.includes('rest_id:')) {
+      console.log()
+      setRestaurantId(location.pathname.slice(9))
       dispatch({
         type: "SET_RESTAURANT_ID",
-        restaurant_id: location.pathname.slice(1),
+        restaurant_id: location.pathname.slice(9),
       });
     }
   }, [location.pathname])
-
-
-
-  console.log(restaurant_id, 'any')
-  console.log(error, 'rr')
 
   useEffect(() => {
     // FIXME нужно смотреть

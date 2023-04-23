@@ -36,18 +36,18 @@ export const UploadImageComponent:React.FC<Props> = ({fileList, setFileList}) =>
     const uploadButton = (
         <div>
             <PlusOutlined />
-            <div className="ant-upload-text">Upload</div>
+            <div className="ant-upload-text">Загрузить</div>
         </div>
     );
 
     return (
-        <div className="clearfix" style={{width: '600px'}}>
+        <div className="clearfix">
             <Upload
                 listType="picture-card"
                 fileList={fileList}
                 onPreview={handlePreview}
                 onChange={handleChange}
-                style={{width: '500px'}}
+                accept="image/png,image/svg+xml,image/jpeg,application/pdf"
             >
                 {fileList.length > 0 ? null : uploadButton}
             </Upload>
@@ -55,7 +55,6 @@ export const UploadImageComponent:React.FC<Props> = ({fileList, setFileList}) =>
                 visible={previewVisible}
                 footer={null}
                 onCancel={handleCancel}
-                style={{width: '600px'}}
             >
                 <img alt="example" style={{ width: "100%" }} src={previewImage} />
             </Modal>

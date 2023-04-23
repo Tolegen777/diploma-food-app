@@ -15,7 +15,7 @@ const Sidenav = ({
   setPageContent: any;
 }) => {
   return (
-    <div className="flex md:flex-col w-full md:w-[20%] bg-orange-600 text-orange-50 px-3 py-4 justify-center items-center h-full">
+    <div className="flex md:flex-col w-full md:w-[20%] bg-gradient-to-br from-orange-400 to-orange-500 text-orange-50 px-3 py-4 justify-center items-center h-full">
       <SidenavHeader />
       <SidenavMenu
         activePage={activePage}
@@ -64,7 +64,7 @@ const SidenavFooter = () => {
       className="flex items-center justify-center mt-auto px-3 gap-3  text-orange-50 cursor-pointer opacity-70 hover:opacity-100"
     >
       <AiFillLock className="font-bold text-xl text-orange-50" />
-      <div className="">Logout</div>
+      <div className="">Выйти</div>
     </motion.div>
   );
 };

@@ -27,7 +27,7 @@ const DropDown = ({ user }: { user: any;}) => {
         to={"/admin"}
         onClick={() => ToggleAdminMode(dispatch, true)}
         >
-          Админ
+          Панель управления
           <RiAdminLine />
         </Link>
       )}

@@ -1,16 +1,24 @@
 import CategoryCards from "./CategoryCards";
+import {useQuery} from "react-query";
+import {ICartResponse} from "../../../types/cartTypes";
+import {cartApi} from "../../../api/cartApi";
+import {IOrderResponse} from "../../../types/orderTypes";
+import {orderApi} from "../../../api/orderApi";
 
-const Dashboard = () => {
+const OrdersComponent = () => {
+
+    const { data: orderData } = useQuery<IOrderResponse>(
+        ['order'],
+        () => orderApi.getRestOrder()
+    );
+
   return (
     <div className="w-full">
         <div className="grid grid-cols-3 gap-4 p-2">
-            <CategoryCards />
-            <CategoryCards />
-            <CategoryCards />
-            <CategoryCards />
+            {orderData?.data?.map(item => <CategoryCards item = {item} />)}
         </div>
     </div>
   );
 };
 
-export default Dashboard;
+export default OrdersComponent;

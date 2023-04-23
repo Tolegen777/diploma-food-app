@@ -8,11 +8,13 @@ import {
 import { motion } from "framer-motion";
 import { FaCogs } from "react-icons/fa";
 import AddFood from "./AddFood";
-import Dashboard from "./Dashboard";
+import OrdersComponent from "./Dashboard";
 import Users from "./Users";
-import Menu from "./Menu";
+import CategoryList from "./Menu";
 import { useStateValue } from "../../context/StateProvider";
 import AddCategory from "./AddCategory";
+import React from "react";
+import ProductList from "./ProductList";
 
 const SidenavMenu = ({
   activePage,
@@ -31,19 +33,11 @@ const SidenavMenu = ({
   >
     <NavItem
       activePage={activePage}
-      svgIcon={<AiFillDashboard />}
-      title="Админ панель"
+      svgIcon={<MdOutlineFavoriteBorder />}
+      title="Заказы"
       setActivePage={setActivePage}
       setPageContent={setPageContent}
-      pageContent={<Dashboard />}
-    />
-    <NavItem
-      activePage={activePage}
-      svgIcon={<MdAddModerator />}
-      title="Добавить еду"
-      setActivePage={setActivePage}
-      setPageContent={setPageContent}
-      pageContent={<AddFood />}
+      pageContent={<OrdersComponent />}
     />
     <NavItem
         activePage={activePage}
@@ -55,39 +49,27 @@ const SidenavMenu = ({
     />
     <NavItem
       activePage={activePage}
+      svgIcon={<MdAddModerator />}
+      title="Добавить подукт"
+      setActivePage={setActivePage}
+      setPageContent={setPageContent}
+      pageContent={<AddFood />}
+    />
+    <NavItem
+      activePage={activePage}
       svgIcon={<MdRestaurantMenu />}
-      title="Меню"
+      title="Список категорий"
       setActivePage={setActivePage}
       setPageContent={setPageContent}
-      pageContent={<Menu />}
+      pageContent={<CategoryList />}
     />
     <NavItem
-      activePage={activePage}
-      svgIcon={<MdOutlineFavoriteBorder />}
-      title="Заказаы"
-      setActivePage={setActivePage}
-      setPageContent={setPageContent}
-      pageContent={
-        <div className="w-full flex tems-center justify-center">Orders</div>
-      }
-    />
-    <NavItem
-      activePage={activePage}
-      svgIcon={<FiUsers />}
-      title="Рестораны"
-      setActivePage={setActivePage}
-      setPageContent={setPageContent}
-      pageContent={<Users />}
-    />
-    <NavItem
-      activePage={activePage}
-      svgIcon={<FaCogs />}
-      title="Настройки"
-      setActivePage={setActivePage}
-      setPageContent={setPageContent}
-      pageContent={
-        <div className="w-full flex tems-center justify-center">Settings</div>
-      }
+        activePage={activePage}
+        svgIcon={<MdRestaurantMenu />}
+        title="Список продуктов"
+        setActivePage={setActivePage}
+        setPageContent={setPageContent}
+        pageContent={<ProductList />}
     />
   </motion.nav>
 );

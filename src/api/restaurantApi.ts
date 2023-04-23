@@ -13,8 +13,11 @@ export const restaurantApi = {
     return response.data
   },
 
-  createRestaurant: async (body: {title: string}) => {
-    const response = await axios.post(BASE_URL + 'restaurant', body);
+  createRestaurant: async (body: {title: string, categoryId: number}) => {
+    const token = tokenService.getLocalAccessToken()
+    const response = await axios.post(BASE_URL + 'restaurant', body, {headers: {
+        Authorization: `Bearer ${token}`
+      }});
     return response.data
   },
 

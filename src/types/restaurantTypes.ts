@@ -1,6 +1,9 @@
+import {ICategoriesResponse} from "./productTypes";
+
 export interface IRestaurantMyResponse {
   id: number,
   title: string,
-  uuid: string
+  uuid: string,
+  categories?: ICategoriesResponse[]
 }
 
