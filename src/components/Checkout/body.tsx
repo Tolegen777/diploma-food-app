@@ -17,7 +17,7 @@ import {orderApi} from "../../api/orderApi";
 import {useNavigate} from "react-router-dom";
 
 const Body = ({ action }: { action: any }) => {
-  const [{ paymentMethod, }] = useStateValue();
+  const [{ paymentMethod, user }] = useStateValue();
 
   const [number, setNumber] = useState('')
 
@@ -27,7 +27,9 @@ const Body = ({ action }: { action: any }) => {
 
     const { data: cartData } = useQuery<ICartResponse[]>(
         ['cart'],
-        () => cartApi.getCart()
+        () => cartApi.getCart(), {
+        enabled: !!user
+    }
     );
 
     const {mutate: onCreateOrder, isLoading} = useMutation('cartCreate', orderApi.createOrder, {

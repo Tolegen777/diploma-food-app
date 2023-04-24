@@ -17,11 +17,13 @@ const MobileNav = ({
   isOpen: boolean;
   setIsOpen: any;
 }) => {
-  const [{ showContactForm, showCart }, dispatch] = useStateValue();
+  const [{ showContactForm, showCart, user }, dispatch] = useStateValue();
 
   const { data: cartData } = useQuery<ICartResponse[]>(
       ['cart'],
-      () => cartApi.getCart()
+      () => cartApi.getCart(), {
+        enabled: !!user
+      }
   );
   const handleToggleCart = () => {
     dispatch({

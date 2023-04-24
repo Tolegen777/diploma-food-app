@@ -13,9 +13,13 @@ import {cartApi} from "../../api/cartApi";
 const Cart = () => {
   const [checkoutOpen, setCheckoutOpen] = useState(false);
 
+  const [{ user }] = useStateValue();
+
   const { data: cartData } = useQuery<ICartResponse[]>(
       ['cart'],
-      () => cartApi.getCart()
+      () => cartApi.getCart(), {
+        enabled: !!user
+      }
   );
 
   return (
