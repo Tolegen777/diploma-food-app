@@ -1,0 +1,34 @@
+{
+  "files": {
+    "main.css": "/diploma-food-app/static/css/main.757b548a.css",
+    "main.js": "/diploma-food-app/static/js/main.c024dec9.js",
+    "static/js/498.820c409a.chunk.js": "/diploma-food-app/static/js/498.820c409a.chunk.js",
+    "static/js/703.9b652a62.chunk.js": "/diploma-food-app/static/js/703.9b652a62.chunk.js",
+    "static/js/513.137bdfd3.chunk.js": "/diploma-food-app/static/js/513.137bdfd3.chunk.js",
+    "static/js/787.0d835042.chunk.js": "/diploma-food-app/static/js/787.0d835042.chunk.js",
+    "static/media/cheff.png": "/diploma-food-app/static/media/cheff.73e7742969533f1c7820.png",
+    "static/media/c3.png": "/diploma-food-app/static/media/c3.55f83414f33f66456b35.png",
+    "static/media/f5.png": "/diploma-food-app/static/media/f5.1929b818c42f7c556b01.png",
+    "static/media/fi3.png": "/diploma-food-app/static/media/fi3.80deaafbc1e0520c58e6.png",
+    "static/media/i1.png": "/diploma-food-app/static/media/i1.3d9b129d2c5432c6f1fb.png",
+    "static/media/chef1.png": "/diploma-food-app/static/media/chef1.66f7a16f41d8494c9180.png",
+    "static/media/momo.png": "/diploma-food-app/static/media/momo.cf7b932168254bf4ac68.png",
+    "static/media/hero-bg.png": "/diploma-food-app/static/media/hero-bg.c43c4862422e70d88698.png",
+    "static/media/delivery.png": "/diploma-food-app/static/media/delivery.bf9130a0962fbe091abc.png",
+    "static/media/avatar.png": "/diploma-food-app/static/media/avatar.68cdc4513e601d28a382.png",
+    "static/media/visa.png": "/diploma-food-app/static/media/visa.16199123cab9531932f3.png",
+    "static/media/emptyCart.svg": "/diploma-food-app/static/media/emptyCart.71ad17e692d71caa77c6c9351f84756b.svg",
+    "static/media/NotFound.svg": "/diploma-food-app/static/media/NotFound.4e90bb93460bfd8d9e2c86b42ef91a4a.svg",
+    "index.html": "/diploma-food-app/index.html",
+    "main.757b548a.css.map": "/diploma-food-app/static/css/main.757b548a.css.map",
+    "main.c024dec9.js.map": "/diploma-food-app/static/js/main.c024dec9.js.map",
+    "498.820c409a.chunk.js.map": "/diploma-food-app/static/js/498.820c409a.chunk.js.map",
+    "703.9b652a62.chunk.js.map": "/diploma-food-app/static/js/703.9b652a62.chunk.js.map",
+    "513.137bdfd3.chunk.js.map": "/diploma-food-app/static/js/513.137bdfd3.chunk.js.map",
+    "787.0d835042.chunk.js.map": "/diploma-food-app/static/js/787.0d835042.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.757b548a.css",
+    "static/js/main.c024dec9.js"
+  ]
+}
