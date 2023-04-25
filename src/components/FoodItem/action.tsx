@@ -32,7 +32,7 @@ const Action = ({ food, admin }: { food: IFoodItem; admin?: boolean }) => {
         toastId: "unauthorizedAddToCart",
       });
     } else {
-      if (role === Roles.restaurant)
+      if (role !== Roles.restaurant)
       onCreateCart({productId: food?.id, qty: 1})
     }
 
