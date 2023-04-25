@@ -10,8 +10,9 @@ import {productApi} from "../../api/productApi";
 import {customNotification} from "../../utils/customNotification";
 import {cartApi} from "../../api/cartApi";
 import {toast} from "react-toastify";
+import {Roles} from "../../const/roles";
 const Action = ({ food, admin }: { food: IFoodItem; admin?: boolean }) => {
-  const [{ cartItems, foodItems, user }, dispatch] = useStateValue();
+  const [{ role, user }] = useStateValue();
 
   const queryClient = useQueryClient();
 
@@ -31,6 +32,7 @@ const Action = ({ food, admin }: { food: IFoodItem; admin?: boolean }) => {
         toastId: "unauthorizedAddToCart",
       });
     } else {
+      if (role === Roles.restaurant)
       onCreateCart({productId: food?.id, qty: 1})
     }
 

@@ -13,7 +13,7 @@ const Menu = ({title}:{title?:string}) => {
 
   const [scrollValue, setScrollValue] = useState(0);
 
-    const [filter, setFilter] = useState<string>("55555");
+    const [filter, setFilter] = useState<string>("");
 
   const [{ restaurant_id }, dispatch] = useStateValue();
 
@@ -21,11 +21,11 @@ const Menu = ({title}:{title?:string}) => {
         ['products', restaurant_id, filter],
         () => productApi.getProducts({
             restaurantId: restaurant_id,
-            categoryId: +filter,
+            categoryId: (filter && +filter !== 55555) ?  +filter  : undefined,
             page: 1,
             limit: 100
         }), {
-            enabled: restaurant_id.length > 0
+            enabled: !!restaurant_id
         }
     );
 

@@ -9,6 +9,7 @@ import { useStateValue } from "../../context/StateProvider";
 import {useQuery} from "react-query";
 import {ICartResponse} from "../../types/cartTypes";
 import {cartApi} from "../../api/cartApi";
+import {Roles} from "../../const/roles";
 
 const MobileNav = ({
   isOpen,
@@ -17,7 +18,7 @@ const MobileNav = ({
   isOpen: boolean;
   setIsOpen: any;
 }) => {
-  const [{ showContactForm, showCart, user }, dispatch] = useStateValue();
+  const [{ showContactForm, showCart, user, role }, dispatch] = useStateValue();
 
   const { data: cartData } = useQuery<ICartResponse[]>(
       ['cart'],
@@ -50,7 +51,7 @@ const MobileNav = ({
           onClick={handleToggleCart}
         >
           <MdShoppingBasket className="text-4xl cursor-pointer" />
-          {cartData && (
+          {role !== Roles.restaurant && cartData && (
             <div className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-cartNumBg flex items-center justify-center">
               <p className="text-sm text-white font-semibold">
                 {cartData.length}
@@ -74,9 +75,6 @@ const MobileNav = ({
       >
         <Link onClick={() => setIsOpen(!isOpen)} to={'/menu'} className="text-base text-textColor cursor-pointer hover:text-headingColor duration-100 transition-all ease-in-out px-10">
           Меню
-        </Link>
-        <Link onClick={() => setIsOpen(!isOpen)} to={'services'} className="text-base text-textColor cursor-pointer hover:text-headingColor duration-100 transition-all ease-in-out px-10">
-          О нас
         </Link>
         <Link onClick={() => setIsOpen(!isOpen)} to={'/about'} className="text-base text-textColor cursor-pointer hover:text-headingColor duration-100 transition-all ease-in-out px-10">
           О нас

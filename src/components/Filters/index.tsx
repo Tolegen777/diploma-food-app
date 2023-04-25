@@ -10,12 +10,16 @@ import {restaurantApi} from "../../api/restaurantApi";
 import {tokenService} from "../services/tokenService";
 import {ICategoriesResponse} from "../../types/productTypes";
 import {productApi} from "../../api/productApi";
+import {useStateValue} from "../../context/StateProvider";
 
 const Filters = ({filter, setFilter}: {filter:string, setFilter: any}) => {
+
+        const [{restaurant_id}] = useStateValue()
+
 // FIXME потом Алмас жасап быткен сон кайттан жасау керек категорияларды айди бойынша тартып!
     const { data: categoriesData } = useQuery<ICategoriesResponse[]>(
         ['categories'],
-        () => productApi.getCategories(),
+        () => productApi.getCategories(restaurant_id),
     );
 
   return (

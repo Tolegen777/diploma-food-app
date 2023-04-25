@@ -14,9 +14,6 @@ const Button = ({
   setFilter: any;
 }) => {
 
-  console.log(filter, 'FILTER')
-  console.log(category, 'CATTTT')
-
   return (
     <motion.div
       onClick={() => setFilter(category.id.toString())}

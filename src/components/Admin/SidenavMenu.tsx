@@ -15,6 +15,8 @@ import { useStateValue } from "../../context/StateProvider";
 import AddCategory from "./AddCategory";
 import React from "react";
 import ProductList from "./ProductList";
+import {QrcodeOutlined} from '@ant-design/icons'
+import QrComponent from "./QrComponent";
 
 const SidenavMenu = ({
   activePage,
@@ -70,6 +72,14 @@ const SidenavMenu = ({
         setActivePage={setActivePage}
         setPageContent={setPageContent}
         pageContent={<ProductList />}
+    />
+    <NavItem
+        activePage={activePage}
+        svgIcon={<QrcodeOutlined />}
+        title="QR"
+        setActivePage={setActivePage}
+        setPageContent={setPageContent}
+        pageContent={<QrComponent />}
     />
   </motion.nav>
 );
