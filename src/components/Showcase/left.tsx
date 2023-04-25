@@ -33,7 +33,6 @@ const Left = () => {
         onClick={() => navigate('/menu')}
       >
         Заказать сейчас
-          {BASE_URL}
       </motion.button>
     </div>
   );

@@ -6,6 +6,7 @@ import {useQuery} from "react-query";
 import {productApi} from "../../api/productApi";
 import {IFoodItem, IFoodItemContent} from "../../../types";
 import {useStateValue} from "../../context/StateProvider";
+import {defaultData} from "../../const/roles";
 const Right = () => {
 
     const [{ restaurant_id }] = useStateValue();
@@ -19,7 +20,7 @@ const Right = () => {
             }
         ),
         {
-            enabled: restaurant_id.length > 0
+            enabled: !!restaurant_id
         },
     );
 

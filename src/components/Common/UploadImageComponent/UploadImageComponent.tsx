@@ -47,7 +47,6 @@ export const UploadImageComponent:React.FC<Props> = ({fileList, setFileList}) =>
                 fileList={fileList}
                 onPreview={handlePreview}
                 onChange={handleChange}
-                accept="image/png,image/svg+xml,image/jpeg,application/pdf"
             >
                 {fileList.length > 0 ? null : uploadButton}
             </Upload>

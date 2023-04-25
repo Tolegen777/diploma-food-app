@@ -9,9 +9,10 @@ import {IFoodItemContent} from "../../../types";
 import {productApi} from "../../api/productApi";
 import {cartApi} from "../../api/cartApi";
 import {ICartResponse} from "../../types/cartTypes";
+import {Roles} from "../../const/roles";
 
 const Navigations = ({ direction }: { direction?: string }) => {
-  const [{ showContactForm, user }, dispatch] = useStateValue();
+  const [{ showContactForm, user, role }, dispatch] = useStateValue();
 
   const { data: cartData } = useQuery<ICartResponse[]>(
       ['cart'],
@@ -76,7 +77,7 @@ const Navigations = ({ direction }: { direction?: string }) => {
         onClick={handleToggleCart}
       >
         <MdShoppingBasket className="text-2xl cursor-pointer" />
-        {cartData && (
+        {role !== Roles.restaurant && cartData && (
           <div className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-cartNumBg flex items-center justify-center cursor-pointer">
             <p className="text-sm text-white font-semibold">
               {cartData.length}

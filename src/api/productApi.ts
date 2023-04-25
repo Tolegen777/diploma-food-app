@@ -17,8 +17,8 @@ export const productApi = {
     return response.data
   },
 
-  getCategories: async () => {
-    const response = await axios.get(BASE_URL + 'category?');
+  getCategories: async (restId: number | string) => {
+    const response = await axios.get(BASE_URL + `category?shopId=${restId}`);
     return response.data
   },
 

@@ -19,7 +19,7 @@ const Fruits = () => {
 
     const { data: categoriesData } = useQuery<ICategoriesResponse[]>(
         ['categories'],
-        () => productApi.getCategories(),
+        () => productApi.getCategories(restaurant_id),
     );
 
   useEffect(() => {
@@ -43,7 +43,7 @@ const Fruits = () => {
         }
         ),
         {
-          enabled: restaurant_id.length > 0 && categoriesData && categoriesData.length > 0
+          enabled: !!restaurant_id && !!categoriesData && categoriesData.length > 0
         },
     );
 

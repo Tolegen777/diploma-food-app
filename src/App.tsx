@@ -57,6 +57,15 @@ function App() {
       }
   );
 
+  useEffect(() => {
+    if (restaurantMyData?.id) {
+      dispatch({
+        type: "SET_RESTAURANT_ID",
+        restaurant_id: restaurantMyData?.id,
+      });
+    }
+  }, [restaurantMyData?.id])
+
   const { data: productsData, error } = useQuery<IFoodItemContent>(
       ['products', title, restaurantId, categoryId, page, limit],
       () => productApi.getProducts({
@@ -72,7 +81,7 @@ function App() {
             foodItems: productsData?.data ?? [],
           })
         },
-        enabled: restaurantId.length > 0
+        enabled: restaurantId.length > 0 ?? !!restaurant_id
       }
   );
 
