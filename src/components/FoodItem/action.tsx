@@ -19,6 +19,7 @@ const Action = ({ food, admin }: { food: IFoodItem; admin?: boolean }) => {
   const {mutate: onCreateCart, error} = useMutation('cartCreate', cartApi.createCart, {
     onSuccess: () => {
       queryClient.invalidateQueries('cart');
+      customNotification({type: "success", message: "Еда была успешно добавлена в корзину!"})
     },
     onError: () => {
       customNotification({type: "error", message: "Возникла ощибка при добавлений в корзину!"})

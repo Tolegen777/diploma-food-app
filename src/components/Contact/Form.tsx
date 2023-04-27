@@ -2,6 +2,14 @@
 import {EmptyCartImg} from '../Assets'
 import { toast } from 'react-toastify';
 import { useState } from 'react';
+import {useMutation} from "react-query";
+import {cartApi} from "../../api/cartApi";
+import {customNotification} from "../../utils/customNotification";
+import {comment} from "postcss";
+import contact from "./index";
+import {contactApi} from "../../api/contactApi";
+import {ICommentBody} from "../../types/commentsTypes";
+import {useStateValue} from "../../context/StateProvider";
 
 const Form = () => {
     const [name, setName] = useState('')
@@ -9,13 +17,26 @@ const Form = () => {
     const [message, setMessage] = useState('')
     const [subject, setSubject] = useState('')
 
+    const [{ restaurant_id }] = useStateValue();
+
+    const {mutate: onCreateComment} = useMutation('cartComment', contactApi.createContact, {
+        onSuccess: () => {
+            customNotification({type: "success", message: "Ваше сообщение успешно отправлено!"})
+        },
+    })
+
     const submitForm = (e:any) => {
         e.preventDefault()
-        return toast.info(`${name} Еще не реализовано`, {
-            position: 'top-left',
-            autoClose: 3000,
-            toastId: 'form'
-        })
+        const data: ICommentBody = {
+            title: subject,
+            email: email,
+            name: name,
+            description: message,
+            star:0,
+            productId: 3,
+            restaurantId: restaurant_id
+        }
+        onCreateComment(data)
     }
   return (
     <div className="h-full w-full flex items-center flex-col justify-center px-4 bg-primary">
