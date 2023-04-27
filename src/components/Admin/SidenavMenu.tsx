@@ -2,7 +2,7 @@ import { AiFillDashboard } from "react-icons/ai";
 import { FiUsers } from "react-icons/fi";
 import {
   MdAddModerator,
-  MdOutlineFavoriteBorder,
+  MdOutlineFavoriteBorder, MdOutlineMessage,
   MdRestaurantMenu,
 } from "react-icons/md";
 import { motion } from "framer-motion";
@@ -17,6 +17,7 @@ import React from "react";
 import ProductList from "./ProductList";
 import {QrcodeOutlined} from '@ant-design/icons'
 import QrComponent from "./QrComponent";
+import MessageList from "./MessageList";
 
 const SidenavMenu = ({
   activePage,
@@ -72,6 +73,14 @@ const SidenavMenu = ({
         setActivePage={setActivePage}
         setPageContent={setPageContent}
         pageContent={<ProductList />}
+    />
+    <NavItem
+        activePage={activePage}
+        svgIcon={<MdOutlineMessage />}
+        title="Сообщения"
+        setActivePage={setActivePage}
+        setPageContent={setPageContent}
+        pageContent={<MessageList />}
     />
     <NavItem
         activePage={activePage}

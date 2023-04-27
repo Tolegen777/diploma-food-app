@@ -95,7 +95,7 @@ const MobileNav = ({
           className="flex items-center gap-2 cursor-pointer"
         >
           <img src={Logo} alt="Logo" className="w-16 object-cover" />
-          <p className="text-headingColor text-3xl font-bold">diploma-food-app</p>
+          <p className="text-headingColor text-3xl font-bold">Saffy</p>
         </motion.div>
       </Link>
     </div>

@@ -40,7 +40,7 @@ export const cartApi = {
   },
   minusCart: async (id: number) => {
     const token = tokenService.getLocalAccessToken()
-    const response = await axios.put(BASE_URL + 'cart/minus/' + id, null, {headers: {
+    const response = await axios.put(BASE_URL + 'cart/mince/' + id, null, {headers: {
         Authorization: `Bearer ${token}`
       }});
     return response.data
