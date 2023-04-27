@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import "./index.css";
-import { Upload, Modal } from "antd";
+import {Modal, Upload} from "antd";
 import {PlusOutlined} from '@ant-design/icons'
 
 function getBase64(file: File) {
@@ -16,7 +16,7 @@ type Props = {
     fileList: any[]
     setFileList: (image: any) => void
 }
-export const UploadImageComponent:React.FC<Props> = ({fileList, setFileList}) => {
+export const UploadImageComponent: React.FC<Props> = ({fileList, setFileList}) => {
     const [previewVisible, setPreviewVisible] = useState(false);
     const [previewImage, setPreviewImage] = useState("");
 
@@ -31,11 +31,11 @@ export const UploadImageComponent:React.FC<Props> = ({fileList, setFileList}) =>
         setPreviewVisible(true);
     };
 
-    const handleChange = ({ fileList }: any) => setFileList(fileList);
+    const handleChange = ({fileList}: any) => setFileList(fileList);
 
     const uploadButton = (
         <div>
-            <PlusOutlined />
+            <PlusOutlined/>
             <div className="ant-upload-text">Загрузить</div>
         </div>
     );
@@ -56,7 +56,7 @@ export const UploadImageComponent:React.FC<Props> = ({fileList, setFileList}) =>
                 footer={null}
                 onCancel={handleCancel}
             >
-                <img alt="example" style={{ width: "100%" }} src={previewImage} />
+                <img alt="example" style={{width: "100%"}} src={previewImage}/>
             </Modal>
         </div>
     );

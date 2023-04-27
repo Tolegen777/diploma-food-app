@@ -1,8 +1,8 @@
 export interface ILoginInput {
-  email: string;
-  password: string;
+    email: string;
+    password: string;
 }
 
 export interface IAuthResponse {
-  access_token: string;
+    access_token: string;
 }

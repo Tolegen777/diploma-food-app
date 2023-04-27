@@ -31,7 +31,13 @@ export const SingleFoodItem = ({
                     // className="w-40 h-40 md:w-48 md:h-40 -mt-8 object-contain cursor-pointer"
                     alt={description}
                     src={BASE_URL + image}
-                    style={{width: "150px", height: "100px", cursor: "pointer", border: "3px solid #FA8028", borderRadius: "20px"}}
+                    style={{
+                        width: "150px",
+                        height: "100px",
+                        cursor: "pointer",
+                        border: "3px solid #FA8028",
+                        borderRadius: "20px"
+                    }}
                 />
                 <Action food={item} admin={admin}/>
             </div>

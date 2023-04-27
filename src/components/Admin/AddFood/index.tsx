@@ -7,7 +7,6 @@ import {toast} from "react-toastify";
 import {useState} from "react";
 import {useStateValue} from "../../../context/StateProvider";
 import {useMutation, useQuery, useQueryClient} from "react-query";
-import {ICategoriesResponse} from "../../../types/productTypes";
 import {productApi} from "../../../api/productApi";
 import {UploadImageComponent} from "../../Common/UploadImageComponent/UploadImageComponent";
 import {customNotification} from "../../../utils/customNotification";
@@ -15,7 +14,6 @@ import {Loader} from "../../Loader";
 import {IRestaurantMyResponse} from "../../../types/restaurantTypes";
 import {restaurantApi} from "../../../api/restaurantApi";
 import {tokenService} from "../../services/tokenService";
-import {Roles} from "../../../const/roles";
 
 const AddFood = () => {
     const [title, setTitle] = useState("");
@@ -32,7 +30,7 @@ const AddFood = () => {
 
     const [{restaurant_id}] = useStateValue();
 
-    const { data: restaurantMyData } = useQuery<IRestaurantMyResponse>(
+    const {data: restaurantMyData} = useQuery<IRestaurantMyResponse>(
         ['restaurantMy'],
         () => restaurantApi.restaurantMy(), {
             enabled: tokenService.getLocalAccessToken().length > 0,

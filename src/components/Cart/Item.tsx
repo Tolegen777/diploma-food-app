@@ -3,9 +3,6 @@ import {BiMinus, BiPlus} from "react-icons/bi";
 
 import {MdDelete} from "react-icons/md";
 import {motion} from "framer-motion";
-import {ICartItem} from "../../../types";
-import {deleteCartItem, getFoodyById, updateCartItemQty} from "../../utils/functions";
-import {useStateValue} from "../../context/StateProvider";
 import {ICartResponse} from "../../types/cartTypes";
 import {BASE_URL} from "../../api";
 import {useMutation, useQueryClient} from "react-query";

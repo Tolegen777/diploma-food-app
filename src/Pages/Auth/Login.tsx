@@ -1,6 +1,5 @@
 import {Link, useNavigate} from "react-router-dom";
-import ProviderAuth, {ImageBox} from ".";
-import {toast} from "react-toastify";
+import {ImageBox} from ".";
 
 import {motion} from "framer-motion";
 import {useState} from "react";
@@ -11,7 +10,6 @@ import {IAuthResponse} from "../../types/authTypes";
 import {tokenService} from "../../components/services/tokenService";
 import {customNotification} from "../../utils/customNotification";
 import {Loader} from "../../components/Loader";
-import {Roles} from "../../const/roles";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -19,7 +17,7 @@ const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const { mutate: onSignIn, isLoading } = useMutation('signIn', authApi.signInUser, {
+    const {mutate: onSignIn, isLoading} = useMutation('signIn', authApi.signInUser, {
         onSuccess: (data: IAuthResponse) => {
             tokenService.updateLocalTokenData(data.access_token)
             tokenService.setUserData(email, password)
@@ -98,7 +96,7 @@ const Login = () => {
                                 whileHover={{scale: 1.1}}
                             >
                                 Войти
-                            </motion.p> }
+                            </motion.p>}
 
                             <div
                                 className="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">

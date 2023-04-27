@@ -1,17 +1,17 @@
 // FIXME first done нужно написать логику для добавления елементтов в корзину
 import React from 'react'
-import { HeroBg } from '../Assets'
+import {HeroBg} from '../Assets'
 import StaticsImages from './Statics'
 import {useQuery} from "react-query";
 import {productApi} from "../../api/productApi";
-import {IFoodItem, IFoodItemContent} from "../../../types";
+import {IFoodItemContent} from "../../../types";
 import {useStateValue} from "../../context/StateProvider";
-import {defaultData} from "../../const/roles";
+
 const Right = () => {
 
-    const [{ restaurant_id }] = useStateValue();
+    const [{restaurant_id}] = useStateValue();
 
-    const { data: productsData } = useQuery<IFoodItemContent>(
+    const {data: productsData} = useQuery<IFoodItemContent>(
         ['products'],
         () => productApi.getProducts({
                 restaurantId: restaurant_id,
@@ -26,8 +26,8 @@ const Right = () => {
 
     return (
         <div className="py-2 flex-1 flex items-center relative">
-            <img src={HeroBg} alt="" className='ml-auto lg:h-[550px] h-[420px] w-full lg:w-auto' />
-            <StaticsImages items = {productsData?.data ?? []} />
+            <img src={HeroBg} alt="" className='ml-auto lg:h-[550px] h-[420px] w-full lg:w-auto'/>
+            <StaticsImages items={productsData?.data ?? []}/>
         </div>
     )
 }

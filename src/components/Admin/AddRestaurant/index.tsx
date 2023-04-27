@@ -2,21 +2,11 @@ import {MdOutlineDataSaverOn, MdOutlineFastfood,} from "react-icons/md";
 import {motion} from "framer-motion";
 import {toast} from "react-toastify";
 import {useState} from "react";
-import {useStateValue} from "../../../context/StateProvider";
-import {Loader} from "../../Loader";
-import {useMutation, useQueryClient} from "react-query";
-import {productApi} from "../../../api/productApi";
-import {UploadImageComponent} from "../../Common/UploadImageComponent/UploadImageComponent";
-import {customNotification} from "../../../utils/customNotification";
-import {restaurantApi} from "../../../api/restaurantApi";
 
 const AddRestaurant = () => {
     const [title, setTitle] = useState("");
 
     const formData = new FormData();
-
-
-
 
 
     const saveItem = () => {

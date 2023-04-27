@@ -1,6 +1,5 @@
-import { fetchSessionUser, fetchSessionUserMode } from "../utils/fetchSessionData";
-import {IFoodItem, IInitialStateType} from "../../types";
-import foodImg from "../img/r3.png";
+import {fetchSessionUser, fetchSessionUserMode} from "../utils/fetchSessionData";
+import {IInitialStateType} from "../../types";
 
 const sessionUser = fetchSessionUser();
 const sessionUserMode = fetchSessionUserMode();

@@ -1,4 +1,4 @@
-import { Spin } from 'antd';
+import {Spin} from 'antd';
 
 import styled from 'styled-components';
 

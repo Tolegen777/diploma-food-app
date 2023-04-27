@@ -1,12 +1,12 @@
-import { MenuSection } from "../../components";
+import {MenuSection} from "../../components";
 
 const Menu = () => {
-  return (
-    <div className='flex w-full h-auto flex-col items-center justify-center'>
-      <MenuSection  />
+    return (
+        <div className='flex w-full h-auto flex-col items-center justify-center'>
+            <MenuSection/>
 
-    </div>
-  );
+        </div>
+    );
 }
 
 export default Menu;

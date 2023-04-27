@@ -15,7 +15,6 @@ import ChickenI from "../../img/c3.png";
 import FishI from "../../img/fi3.png";
 
 
-
 // Exports
 export const Logo = LogoI
 export const Avatar = AvatarI

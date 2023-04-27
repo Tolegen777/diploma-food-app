@@ -3,8 +3,3 @@ export const Roles = {
     superAdmin: 'SUPER_ADMIN',
     user: 'USER'
 }
-
-export const defaultData = {
-    data: [],
-    count: 1
-}

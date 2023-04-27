@@ -1,15 +1,15 @@
 // FIXME first done
-import { FruitsSection, MenuSection, ShowcaseBanner, } from "../../components"
+import {FruitsSection, MenuSection, ShowcaseBanner,} from "../../components"
 
 const Home = () => {
-  return (
-    <div className='flex w-full h-auto flex-col items-center justify-center'>
-      <ShowcaseBanner />
-      <FruitsSection />
-      <MenuSection />
-    </div>
+    return (
+        <div className='flex w-full h-auto flex-col items-center justify-center'>
+            <ShowcaseBanner/>
+            <FruitsSection/>
+            <MenuSection/>
+        </div>
 
-  )
+    )
 }
 
 export default Home

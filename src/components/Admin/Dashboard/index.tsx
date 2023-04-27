@@ -1,24 +1,22 @@
 import CategoryCards from "./CategoryCards";
 import {useQuery} from "react-query";
-import {ICartResponse} from "../../../types/cartTypes";
-import {cartApi} from "../../../api/cartApi";
 import {IOrderResponse} from "../../../types/orderTypes";
 import {orderApi} from "../../../api/orderApi";
 
 const OrdersComponent = () => {
 
-    const { data: orderData } = useQuery<IOrderResponse>(
+    const {data: orderData} = useQuery<IOrderResponse>(
         ['order'],
         () => orderApi.getRestOrder()
     );
 
-  return (
-    <div className="w-full">
-        <div className="grid grid-cols-3 gap-4 p-2">
-            {orderData?.data?.map(item => <CategoryCards item = {item} />)}
+    return (
+        <div className="w-full">
+            <div className="grid grid-cols-3 gap-4 p-2">
+                {orderData?.data?.map(item => <CategoryCards item={item}/>)}
+            </div>
         </div>
-    </div>
-  );
+    );
 };
 
 export default OrdersComponent;
