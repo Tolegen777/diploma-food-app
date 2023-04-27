@@ -41,8 +41,9 @@ const Button = ({
               ? "text-textColor group-hover:text-btnOverlay"
               : "group-hover:text-textColor text-btnOverlay"
           } text-lg`}
+          style={{display: "flex", alignItems: "center", justifyContent: "center"}}
         >
-          {category.icon !== '' ? <img src={BASE_URL + category.icon} alt=""/> || <MdOutlineFastfood /> :
+          {category.icon !== '' ? <img style={{width: "30px", height: "30px", borderRadius: "200px"}} src={BASE_URL + category.icon} alt=""/> || <MdOutlineFastfood /> :
               <BiRestaurant />}
         </span>
       </div>

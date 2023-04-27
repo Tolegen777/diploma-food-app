@@ -18,10 +18,11 @@ const StaticsImages: React.FC<{items: IFoodItem[] }> = ({items}) => {
             whileTap={{ scale: 1.1 }}
             src={BASE_URL + item.image}
             alt="icecream"
-            className="w-24 lg:w-40 -mt-10 lg:-mt-20"
+            // className="w-24 lg:w-40 -mt-10 lg:-mt-20"
+            style={{width: "150px", height: "100px", cursor: "pointer", border: "3px solid #FA8028", borderRadius: "20px"}}
           />
           <p className="text-base lg:text-lg font-semibold text-textColor">{item.title}</p>
-          <p className="text-[10px] lg:text-lg text-lightGray font-semibold my-2 lg:my-3">
+          <p className="text-[10px] lg:text-lg text-gray-600 font-semibold my-2 lg:my-3">
             {item.description}
           </p>
           <p className="text-sm font-semibold text-headingColor">

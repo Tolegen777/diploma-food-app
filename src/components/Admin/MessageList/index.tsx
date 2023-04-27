@@ -23,7 +23,7 @@ const MessageList = () => {
           {comments?.map((item) => <Card
               style={{ marginTop: 16 }}
               type="inner"
-              title={item.email}
+              title={"Автор: " + item.email}
           >
               {item.description}
           </Card>)}

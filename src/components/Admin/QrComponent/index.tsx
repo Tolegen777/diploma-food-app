@@ -9,7 +9,7 @@ const downloadQRCode = () => {
     if (canvas) {
         const url = canvas.toDataURL('image/png');
         const pdf = new jsPDF();
-        pdf.addImage(url, 'PNG', 10, 10, 50, 50);
+        pdf.addImage(url, 'PNG', 80, 50, 50, 50);
         pdf.save('QRCode.pdf');
     }
 };

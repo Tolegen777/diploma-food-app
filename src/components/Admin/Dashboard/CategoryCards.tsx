@@ -12,7 +12,8 @@ const CategoryCards = ({item}: {item: IOrderData}) => {
           <motion.img
               whileHover={{ scale: 1.2 }}
               whileTap={{ scale: 1.1 }}
-              className="w-40 h-40 md:w-48 md:h-40 -mt-8 object-contain cursor-pointer"
+              // className="w-40 h-40 md:w-48 md:h-40 -mt-8 object-contain cursor-pointer"
+              style={{width: "150px", height: "100px", cursor: "pointer", border: "3px solid #FA8028", borderRadius: "20px"}}
               alt={item.items[0]?.product.description}
               src={BASE_URL + item.items[0]?.product.image}
           />
@@ -20,11 +21,10 @@ const CategoryCards = ({item}: {item: IOrderData}) => {
         </div>
         <div className="w-full flex items-end justify-end flex-col">
           <p className="text-textColor font-semi-bold text-lg">{item.status === 'CREATED' ? 'Новый заказ' : 'В обработке'}</p>
-          <p className="mt-1 text-sm text-gray-500">{item.items[0]?.product.description} </p>
-          <p className="mt-1 text-sm text-gray-500">{item.items[0]?.product.description} </p>
+          <p className="mt-1 text-sm text-gray-500">{item.items[0]?.product.title} </p>
           <div className="flex items-center justify-between gap-8 ">
             <p className="text-base text-headingColor font-semibold">
-              <span className="text-sm text-red-600">₵</span> {item.totalPrice}
+               {item.totalPrice} <span className="text-sm text-red-600">тг</span>
             </p>
           </div>
         </div>

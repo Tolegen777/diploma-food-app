@@ -29,8 +29,9 @@ export const SingleFoodItemCategory = ({
         <motion.img
           whileHover={{ scale: 1.2 }}
           whileTap={{ scale: 1.1 }}
-          className="w-40 h-40 md:w-48 md:h-40 -mt-8 object-contain"
+          // className="w-40 h-40 md:w-48 md:h-40 -mt-8 object-contain"
           src={BASE_URL+icon}
+          style={{width: "150px", height: "100px", cursor: "pointer", border: "3px solid #FA8028", borderRadius: "20px"}}
         />
       <ActionCategory food={item} admin={admin} />
       </div>
