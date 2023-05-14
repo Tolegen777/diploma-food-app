@@ -2,6 +2,7 @@
 export interface ICartBody {
     qty: number,
     productId: number
+    token?: string
 }
 
 export interface ICartResponse {

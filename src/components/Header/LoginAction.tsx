@@ -11,7 +11,7 @@ const LoginAction = ({text, mobile}: { text?: string, mobile?: boolean }) => {
                 whileHover={{scale: 1.1}}
 
             >
-                <MdLogin className={` ${mobile && 'text-2xl text-headingColor'}`}/>
+                <MdLogin className={` ${mobile && 'text-2xl text-headingColor'}`} style={{color: "#fff"}}/>
                 {text && <p className="text-headingColor " style={{color: '#fff'}}>{text}</p>}
             </motion.div>
         </Link>

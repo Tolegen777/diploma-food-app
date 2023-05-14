@@ -18,11 +18,11 @@ const MobileNav = ({
     isOpen: boolean;
     setIsOpen: any;
 }) => {
-    const [{showContactForm, showCart, user, role}, dispatch] = useStateValue();
+    const [{showContactForm, showCart, user, role, token}, dispatch] = useStateValue();
 
     const {data: cartData} = useQuery<ICartResponse[]>(
         ['cart'],
-        () => cartApi.getCart(), {
+        () => cartApi.getCart(token), {
             enabled: !!user
         }
     );
@@ -100,7 +100,7 @@ const MobileNav = ({
                     className="flex items-center gap-2 cursor-pointer"
                 >
                     <img src={Logo} alt="Logo" className="w-16 object-cover"/>
-                    <p className="text-headingColor text-3xl font-bold">Saffy</p>
+                    <p className="text-headingColor text-3xl font-bold" style={{color: "#fff"}}>Saffy</p>
                 </motion.div>
             </Link>
         </div>

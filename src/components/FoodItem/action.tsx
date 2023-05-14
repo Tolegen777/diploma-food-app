@@ -10,7 +10,7 @@ import {toast} from "react-toastify";
 import {Roles} from "../../const/roles";
 
 const Action = ({food, admin}: { food: IFoodItem; admin?: boolean }) => {
-    const [{role, user}] = useStateValue();
+    const [{role, user, token}] = useStateValue();
 
     const queryClient = useQueryClient();
 
@@ -32,7 +32,7 @@ const Action = ({food, admin}: { food: IFoodItem; admin?: boolean }) => {
             });
         } else {
             if (role !== Roles.restaurant)
-                onCreateCart({productId: food?.id, qty: 1})
+                onCreateCart({productId: food?.id, qty: 1, token: token})
         }
 
 

@@ -45,7 +45,7 @@ const SidenavMenu = ({
         <NavItem
             activePage={activePage}
             svgIcon={<MdAddModerator/>}
-            title="Добавить подукт"
+            title="Добавить продукт"
             setActivePage={setActivePage}
             setPageContent={setPageContent}
             pageContent={<AddFood/>}

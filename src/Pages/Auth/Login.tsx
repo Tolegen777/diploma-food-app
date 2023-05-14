@@ -10,6 +10,7 @@ import {IAuthResponse} from "../../types/authTypes";
 import {tokenService} from "../../components/services/tokenService";
 import {customNotification} from "../../utils/customNotification";
 import {Loader} from "../../components/Loader";
+import {Roles} from "../../const/roles";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -19,7 +20,10 @@ const Login = () => {
 
     const {mutate: onSignIn, isLoading} = useMutation('signIn', authApi.signInUser, {
         onSuccess: (data: IAuthResponse) => {
-            tokenService.updateLocalTokenData(data.access_token)
+            dispatch({
+                type: "SET_TOKEN",
+                token: data.access_token,
+            });
             tokenService.setUserData(email, password)
             dispatch({
                 type: "SET_USER",
@@ -79,15 +83,6 @@ const Login = () => {
                                     placeholder="пароль"
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
-                            </div>
-
-                            <div className="flex justify-between items-center mb-6">
-                                <Link
-                                    to="/"
-                                    className="text-orange-600 hover:text-orange-700 focus:text-orange-700 active:text-orange-800 duration-200 transition ease-in-out"
-                                >
-                                    Забыли пароль?
-                                </Link>
                             </div>
 
                             {isLoading ? <Loader/> : <motion.p

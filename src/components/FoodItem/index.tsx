@@ -21,7 +21,7 @@ export const SingleFoodItem = ({
             className={`${
                 !col ? "w-[275px] min-w-[275px]" : "w-[320px] min-w-[320px]"
             } md:w-[300px] md:min-w-[300px] ${
-                col ? "my-12" : "my-2 md:my-5"
+                col ? "my-4" : "my-2 md:my-5"
             } h-auto bg-cardOverlay rounded-lg p-2 px-3 backdrop-blur-lg hover:drop-shadow-sm cursor-pointer`}
         >
             <div className="w-full flex items-center justify-between ">
@@ -47,7 +47,7 @@ export const SingleFoodItem = ({
                 <p className="mt-1 text-sm text-gray-700">{calorie} калорий </p>
                 <div className="flex items-center justify-between gap-8 ">
                     <p className="text-base text-headingColor font-semibold">
-                        <span className="text-sm text-red-600">₵</span> {price}
+                        {price} <span className="text-sm text-red-600">тг</span>
                     </p>
                 </div>
             </div>

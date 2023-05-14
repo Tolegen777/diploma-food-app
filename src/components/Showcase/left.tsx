@@ -2,10 +2,13 @@
 import React from "react";
 import {motion} from "framer-motion";
 import {useNavigate} from "react-router-dom";
+import {useTranslation} from "react-i18next";
 
 const Left = () => {
 
     const navigate = useNavigate()
+
+    const { t } = useTranslation();
 
     return (
         <div className="py-2 flex-1 flex flex-col items-start justify-center gap-3">
@@ -21,6 +24,7 @@ const Left = () => {
             </div>
             <p className="text-[2rem] lg:text-[4rem] font-bold tracking-wide text-headingColor" style={{color: '#fff'}}>
                 Платформа для ресторанов
+                {t("columns.password")}
                 <span className="text-orange-600 text-[2.5rem] lg:text-[4.6rem]"></span>
             </p>
             <p className="text-base text-textColor text-center md:text-left md:w-[80%]" style={{color: '#fff'}}>

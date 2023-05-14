@@ -66,7 +66,7 @@ const SidenavFooter = () => {
             className="flex items-center justify-center mt-auto px-3 gap-3  text-orange-50 cursor-pointer opacity-70 hover:opacity-100"
         >
             <AiFillLock className="font-bold text-xl text-orange-50"/>
-            <div className="">Выйти</div>
+            <div className="">Выйти1</div>
         </motion.div>
     );
 };

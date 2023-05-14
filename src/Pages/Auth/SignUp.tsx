@@ -19,7 +19,7 @@ import {Roles} from "../../const/roles";
 
 const SignUp = () => {
     const navigate = useNavigate();
-    const [{user}, dispatch] = useStateValue();
+    const [{user, token}, dispatch] = useStateValue();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [rest, setRest] = useState('');
@@ -39,7 +39,10 @@ const SignUp = () => {
 
     const {mutate: onSignUp, isLoading} = useMutation('signUp', authApi.signUpUser, {
         onSuccess: (data: IAuthResponse) => {
-            tokenService.updateLocalTokenData(data.access_token)
+            dispatch({
+                type: "SET_TOKEN",
+                token: data.access_token,
+            });
             tokenService.setUserData(email, password)
             dispatch({
                 type: "SET_USER",
@@ -55,7 +58,8 @@ const SignUp = () => {
             if (isRest) {
                 onCreateRestaurant({
                     title: rest,
-                    categoryId: 0
+                    categoryId: 0,
+                    token: token
                 })
             }
             navigate('/')

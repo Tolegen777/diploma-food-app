@@ -16,5 +16,6 @@ export const initialState: IInitialStateType = {
     paymentMethod: 'mobile_money',
     checkoutData: {},
     restaurant_id: '',
-    role: ''
+    role: '',
+    token: ''
 }

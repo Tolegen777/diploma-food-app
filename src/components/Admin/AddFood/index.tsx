@@ -28,12 +28,12 @@ const AddFood = () => {
 
     const queryClient = useQueryClient();
 
-    const [{restaurant_id}] = useStateValue();
+    const [{restaurant_id, token}] = useStateValue();
 
     const {data: restaurantMyData} = useQuery<IRestaurantMyResponse>(
         ['restaurantMy'],
-        () => restaurantApi.restaurantMy(), {
-            enabled: tokenService.getLocalAccessToken().length > 0,
+        () => restaurantApi.restaurantMy(token), {
+            enabled: token.length > 0,
         }
     );
 

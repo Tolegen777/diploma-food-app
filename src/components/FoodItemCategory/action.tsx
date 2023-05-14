@@ -5,10 +5,13 @@ import {ICategoriesResponse} from "../../types/productTypes";
 import {useMutation, useQueryClient} from "react-query";
 import {productApi} from "../../api/productApi";
 import {customNotification} from "../../utils/customNotification";
+import {useStateValue} from "../../context/StateProvider";
 
 const ActionCategory = ({food, admin}: { food: ICategoriesResponse; admin?: boolean }) => {
 
     const queryClient = useQueryClient();
+
+    const [{token}] = useStateValue();
 
     const {mutate: onDeleteCategoryToRest} = useMutation('deleteCategory', productApi.deleteCategoryToRest, {
         onSuccess: () => {
@@ -25,7 +28,7 @@ const ActionCategory = ({food, admin}: { food: ICategoriesResponse; admin?: bool
                     whileTap={{scale: 1.1}}
                     whileHover={{scale: 1.2}}
                     className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-red-600 flex items-center justify-center cursor-pointer"
-                    onClick={() => onDeleteCategoryToRest(food?.id)}
+                    onClick={() => onDeleteCategoryToRest({id: food?.id, token: token})}
                     title="Delete"
                 >
                     <MdDeleteForever className="text-white md:text-xl"/>

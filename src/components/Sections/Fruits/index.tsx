@@ -20,6 +20,9 @@ const Fruits = () => {
     const {data: categoriesData} = useQuery<ICategoriesResponse[]>(
         ['categories'],
         () => productApi.getCategories(restaurant_id),
+        {
+            enabled: !!restaurant_id
+        }
     );
 
     useEffect(() => {
@@ -50,7 +53,7 @@ const Fruits = () => {
 
     return (
         <section className="w-full my-5">
-            <div className="w-full flex items-center justify-between">
+            <div className="w-full flex items-center justify-between" style={{marginTop: "10px"}}>
                 <Title title={categoryTitle}/>
                 <PrevNextButtons onNext={() => setScrollValue(10000)} onPrev={() => setScrollValue(-10000)}/>
             </div>

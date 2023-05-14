@@ -80,19 +80,19 @@ const Header = () => {
                             className=" flex items-center justify-center"
                             onClick={() => setIsOpenMobileNav(!isOpenMobileNav)}
                         >
-                            <HiOutlineMenuAlt2 className="text-headingColor text-4xl"/>
+                            <HiOutlineMenuAlt2 className="text-headingColor text-4xl" style={{color: "#fff"}}/>
                         </motion.div>
-                        <Link to={"/"}>
-                            <motion.div
-                                whileHover={{scale: 1.1}}
-                                className="flex items-center gap-2 cursor-pointer"
-                            >
-                                <img src={Logo} alt="Logo" className="w-8 object-cover"/>
-                                <p className="text-headingColor text-xl font-bold">
-                                    Saffy
-                                </p>
-                            </motion.div>
-                        </Link>
+                        {/*<Link to={"/"}>*/}
+                        {/*    <motion.div*/}
+                        {/*        whileHover={{scale: 1.1}}*/}
+                        {/*        className="flex items-center gap-2 cursor-pointer"*/}
+                        {/*    >*/}
+                        {/*        <img src={Logo} alt="Logo" className="w-8 object-cover"/>*/}
+                        {/*        <p className="text-headingColor text-xl font-bold" style={{color: "#fff"}}>*/}
+                        {/*            Saffy*/}
+                        {/*        </p>*/}
+                        {/*    </motion.div>*/}
+                        {/*</Link>*/}
                         {user ? (
                             <div
                                 className={`flex items-center gap-3 px-3 py-1 rounded-lg relative`}
@@ -101,20 +101,20 @@ const Header = () => {
                                     whileHover={{scale: 1.1}}
                                     className="group flex items-center justify-center"
                                 >
-                                    <img
-                                        src={user?.photoURL ? user.photoURL : Avatar}
-                                        className="w-10 min-w-[40px] h-10 min-h-[40px] drop-shadow-2xl rounded-full cursor-pointer"
-                                        alt="user-profile"
-                                        onClick={() => setIsOpen(!isOpen)}
-                                    />
-                                    <p className="text-headingColor cursor-pointer flex items-center justify-center gap-2">
-                                        <RiArrowDropDownLine/>
-                                    </p>
-                                    {isOpen && <DropDown user={user}/>}
+                                    {/*<img*/}
+                                    {/*    src={user?.photoURL ? user.photoURL : Avatar}*/}
+                                    {/*    className="w-10 min-w-[40px] h-10 min-h-[40px] drop-shadow-2xl rounded-full cursor-pointer"*/}
+                                    {/*    alt="user-profile"*/}
+                                    {/*    onClick={() => setIsOpen(!isOpen)}*/}
+                                    {/*/>*/}
+                                    {/*<p className="text-headingColor cursor-pointer flex items-center justify-center gap-2">*/}
+                                    {/*    <RiArrowDropDownLine/>*/}
+                                    {/*</p>*/}
+                                    <DropDown user={user}/>
                                 </motion.div>
                             </div>
                         ) : (
-                            <LoginAction mobile/>
+                            <LoginAction mobile />
                         )}
                     </div>
                 )}

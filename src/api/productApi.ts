@@ -25,8 +25,7 @@ export const productApi = {
         const response = await axios.post(BASE_URL + 'category', body);
         return response.data
     },
-    addCategoryToRest: async (id: number) => {
-        const token = tokenService.getLocalAccessToken()
+    addCategoryToRest: async ({id, token}: {id: string | number, token: string}) => {
         const response = await axios.put(BASE_URL + 'restaurant/add-category/' + id, null, {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -34,8 +33,7 @@ export const productApi = {
         });
         return response.data
     },
-    deleteCategoryToRest: async (id: number) => {
-        const token = tokenService.getLocalAccessToken()
+    deleteCategoryToRest: async ({id, token}: {id: string | number, token: string}) => {
         const response = await axios.put(BASE_URL + 'restaurant/remove-category/' + id, null, {
             headers: {
                 Authorization: `Bearer ${token}`

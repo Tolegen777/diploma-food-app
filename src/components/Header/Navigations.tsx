@@ -10,11 +10,11 @@ import {ICartResponse} from "../../types/cartTypes";
 import {Roles} from "../../const/roles";
 
 const Navigations = ({direction}: { direction?: string }) => {
-    const [{showContactForm, user, role}, dispatch] = useStateValue();
+    const [{showContactForm, user, role, token}, dispatch] = useStateValue();
 
     const {data: cartData} = useQuery<ICartResponse[]>(
         ['cart'],
-        () => cartApi.getCart(), {
+        () => cartApi.getCart(token), {
             enabled: !!user
         }
     );

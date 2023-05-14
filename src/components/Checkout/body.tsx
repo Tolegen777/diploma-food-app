@@ -14,7 +14,7 @@ import {orderApi} from "../../api/orderApi";
 import {useNavigate} from "react-router-dom";
 
 const Body = ({action}: { action: any }) => {
-    const [{paymentMethod, user}] = useStateValue();
+    const [{paymentMethod, user, token}] = useStateValue();
 
     const [number, setNumber] = useState('')
 
@@ -24,7 +24,7 @@ const Body = ({action}: { action: any }) => {
 
     const {data: cartData} = useQuery<ICartResponse[]>(
         ['cart'],
-        () => cartApi.getCart(), {
+        () => cartApi.getCart(token), {
             enabled: !!user
         }
     );
@@ -67,7 +67,7 @@ const Body = ({action}: { action: any }) => {
 
                 <div className="w-full flex items-center justify-center mt-4">
                     <motion.button
-                        onClick={() => onCreateOrder()}
+                        onClick={() => onCreateOrder(token)}
                         whileTap={{scale: 0.95}}
                         className="flex items-center justify-center gap-2 w-[90%] p-2 rounded-full bg-gradient-to-tr from-orange-400 to-orange-600 hover:from-orange-600 hover:to-orange-400 transition-all duration-75 ease-in-out text-gray-50 text-lg my-2 hover:shadow-lg"
                     >

@@ -8,13 +8,15 @@ import {BASE_URL} from "../../api";
 import {useMutation, useQueryClient} from "react-query";
 import {cartApi} from "../../api/cartApi";
 import {customNotification} from "../../utils/customNotification";
+import {useStateValue} from "../../context/StateProvider";
 
 const CartItem = ({item}: { item: ICartResponse }) => {
     const {id, qty, product} = item;
+    const [{token}] = useStateValue();
 
     const queryClient = useQueryClient()
 
-    const {mutate: onDeleteCart, error} = useMutation('deleteCreate', cartApi.deleteCart, {
+    const {mutate: onDeleteCart} = useMutation('deleteCreate', cartApi.deleteCart, {
         onSuccess: () => {
             queryClient.invalidateQueries('cart');
         },
@@ -63,7 +65,7 @@ const CartItem = ({item}: { item: ICartResponse }) => {
                 <motion.div
                     className=""
                     whileTap={{scale: 0.75}}
-                    onClick={() => onMinus(id)}
+                    onClick={() => onMinus({id: id, token: token})}
                 >
                     <BiMinus className="text-gray-50"/>
                 </motion.div>
@@ -73,7 +75,7 @@ const CartItem = ({item}: { item: ICartResponse }) => {
                 <motion.div
                     className=""
                     whileTap={{scale: 0.75}}
-                    onClick={() => onPlus(id)}
+                    onClick={() => onPlus({id: id, token: token})}
                 >
                     <BiPlus className="text-gray-50"/>
                 </motion.div>
@@ -82,7 +84,7 @@ const CartItem = ({item}: { item: ICartResponse }) => {
             <motion.div
                 whileTap={{scale: 0.75}}
                 className="text-sm text-gray-50 w-6 h-6 rounded-lg bg-cartNumBg flex items-center justify-center"
-                onClick={() => onDeleteCart(id)}
+                onClick={() => onDeleteCart({id: id, token: token})}
             >
                 <MdDelete/>
             </motion.div>

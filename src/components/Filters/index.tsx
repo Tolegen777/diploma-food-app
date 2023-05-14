@@ -12,6 +12,9 @@ const Filters = ({filter, setFilter}: { filter: string, setFilter: any }) => {
     const {data: categoriesData} = useQuery<ICategoriesResponse[]>(
         ['categories'],
         () => productApi.getCategories(restaurant_id),
+        {
+            enabled: !!restaurant_id
+        }
     );
 
     return (

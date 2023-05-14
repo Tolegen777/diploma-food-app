@@ -4,8 +4,7 @@ import {tokenService} from "../components/services/tokenService";
 import {ICartBody} from "../types/cartTypes";
 
 export const cartApi = {
-    getCart: async () => {
-        const token = tokenService.getLocalAccessToken()
+    getCart: async (token: string) => {
         const response = await axios.get(BASE_URL + 'cart', {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -14,8 +13,7 @@ export const cartApi = {
         return response.data
     },
 
-    createCart: async (body: ICartBody) => {
-        const token = tokenService.getLocalAccessToken()
+    createCart: async ({token, ...body}: ICartBody) => {
         const response = await axios.post(BASE_URL + 'cart', body, {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -24,8 +22,7 @@ export const cartApi = {
         return response.data
     },
 
-    deleteCart: async (id: number | string) => {
-        const token = tokenService.getLocalAccessToken()
+    deleteCart: async ({id, token}: {id: string | number, token: string}) => {
         const response = await axios.delete(BASE_URL + 'cart/' + id, {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -34,8 +31,7 @@ export const cartApi = {
         return response.data
     },
 
-    plusCart: async (id: number) => {
-        const token = tokenService.getLocalAccessToken()
+    plusCart: async ({id, token}: {id: string | number, token: string}) => {
         const response = await axios.put(BASE_URL + 'cart/plus/' + id, null, {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -43,8 +39,7 @@ export const cartApi = {
         });
         return response.data
     },
-    minusCart: async (id: number) => {
-        const token = tokenService.getLocalAccessToken()
+    minusCart: async ({id, token}: {id: string | number, token: string}) => {
         const response = await axios.put(BASE_URL + 'cart/mince/' + id, null, {
             headers: {
                 Authorization: `Bearer ${token}`

@@ -10,7 +10,6 @@ import Contact from "./components/Contact";
 import {ToastContainer} from "react-toastify";
 import {useEffect, useState} from "react";
 import {useStateValue} from "./context/StateProvider";
-import {tokenService} from "./components/services/tokenService";
 import {useQuery} from "react-query";
 import {IRestaurantMyResponse} from "./types/restaurantTypes";
 import {restaurantApi} from "./api/restaurantApi";
@@ -18,9 +17,10 @@ import {productApi} from "./api/productApi";
 import {IFoodItemContent} from "../types";
 import {Roles} from "./const/roles";
 import {customNotification} from "./utils/customNotification";
+import "./language/i18n"
 
 function App() {
-    const [{showCart, showContactForm, user, foodItems, cartItems, adminMode, restaurant_id, role}, dispatch] =
+    const [{showCart, showContactForm, token, foodItems, cartItems, adminMode, restaurant_id, role}, dispatch] =
         useStateValue();
 
     const location = useLocation()
@@ -33,10 +33,9 @@ function App() {
 
     const {data: restaurantMyData} = useQuery<IRestaurantMyResponse>(
         ['restaurantMy'],
-        () => restaurantApi.restaurantMy(), {
-            enabled: tokenService.getLocalAccessToken().length > 0,
+        () => restaurantApi.restaurantMy(token), {
+            enabled: token.length > 0,
             onSuccess: (data) => {
-                console.log(data, 'DATA')
                 setRestaurantId(data?.id.toString())
                 dispatch({
                     type: "SET_ROLE",
@@ -76,7 +75,6 @@ function App() {
 
     useEffect(() => {
         if (location.pathname?.includes('rest_id:')) {
-            console.log()
             setRestaurantId(location.pathname.slice(9))
             dispatch({
                 type: "SET_RESTAURANT_ID",
@@ -115,7 +113,7 @@ function App() {
                         <Route path="/login" element={<Login/>}/>
                         <Route path="/register" element={<Signup/>}/>
                         <Route path="/admin" element={<Admin/>}/>
-                        <Route path="/about" element={<About/>}/>
+                        <Route path="/about" element={<Services/>}/>
                         <Route path="/menu" element={<Menu/>}/>
                         <Route path="/services" element={<Services/>}/>
                     </Routes>

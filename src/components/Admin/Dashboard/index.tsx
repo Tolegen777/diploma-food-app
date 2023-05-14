@@ -2,12 +2,15 @@ import CategoryCards from "./CategoryCards";
 import {useQuery} from "react-query";
 import {IOrderResponse} from "../../../types/orderTypes";
 import {orderApi} from "../../../api/orderApi";
+import {useStateValue} from "../../../context/StateProvider";
 
 const OrdersComponent = () => {
 
+    const [{token}] = useStateValue();
+
     const {data: orderData} = useQuery<IOrderResponse>(
         ['order'],
-        () => orderApi.getRestOrder()
+        () => orderApi.getRestOrder(token)
     );
 
     return (

@@ -8,13 +8,13 @@ import {cartApi} from "../../api/cartApi";
 
 const CartBody = ({action}: { action: any }) => {
 
-    const [{user}] = useStateValue();
+    const [{user, token}] = useStateValue();
 
     let totalSum = 0
 
     const {data: cartData} = useQuery<ICartResponse[]>(
         ['cart'],
-        () => cartApi.getCart(), {
+        () => cartApi.getCart(token), {
             enabled: !!user
         }
     );

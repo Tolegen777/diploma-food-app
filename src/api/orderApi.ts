@@ -3,8 +3,7 @@ import {BASE_URL} from "./index";
 import {tokenService} from "../components/services/tokenService";
 
 export const orderApi = {
-    getRestOrder: async () => {
-        const token = tokenService.getLocalAccessToken()
+    getRestOrder: async (token: string) => {
         const response = await axios.get(BASE_URL + 'order/market/?status=CREATED&page=1&limit=100', {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -13,8 +12,7 @@ export const orderApi = {
         return response.data
     },
 
-    createOrder: async () => {
-        const token = tokenService.getLocalAccessToken()
+    createOrder: async (token: string) => {
         const response = await axios.post(BASE_URL + 'order', {
             apartment: "",
             building: "",
@@ -28,8 +26,7 @@ export const orderApi = {
         return response.data
     },
 
-    changeOrder: async (id: number | string) => {
-        const token = tokenService.getLocalAccessToken()
+    changeOrder: async ({id, token}: {id: string | number, token: string}) => {
         const response = await axios.put(BASE_URL + 'order/market/item/' + id, {
             status: 'PAYMENT'
         }, {

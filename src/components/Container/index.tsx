@@ -10,7 +10,7 @@ import {useStateValue} from "../../context/StateProvider";
 import {Loader} from "../Loader";
 import {Roles} from "../../const/roles";
 
-const Container = ({scrollOffset, col, items, className}: {
+const   Container = ({scrollOffset, col, items, className}: {
     scrollOffset: number,
     col?: boolean;
     items: IFoodItem[],

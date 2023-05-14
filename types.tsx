@@ -73,4 +73,5 @@ export type IInitialStateType = {
     checkoutData: object,
     restaurant_id?: number | string
     role?: string
+    token: string
 }

@@ -18,7 +18,7 @@ const AddCategory = () => {
 
     const queryClient = useQueryClient();
 
-    const [{restaurant_id}] = useStateValue();
+    const [{token}] = useStateValue();
 
     const {mutate: onAddCategoryToRest} = useMutation('categoryToRest', productApi.addCategoryToRest, {
         onSuccess: () => {
@@ -33,7 +33,7 @@ const AddCategory = () => {
         onSuccess: (data) => {
             customNotification({type: 'success', message: 'Операция успешно выполнено!'})
             clearForm()
-            onAddCategoryToRest(data?.id)
+            onAddCategoryToRest({id: data?.id, token: token})
         },
         onError: () => {
             customNotification({type: "error", message: "Возникла ощибка при созданий!"})
