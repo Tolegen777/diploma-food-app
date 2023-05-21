@@ -7,12 +7,14 @@ import {useStateValue} from "../../context/StateProvider";
 import {useMutation} from "react-query";
 import {authApi} from "../../api/authApi";
 import {IAuthResponse} from "../../types/authTypes";
-import {tokenService} from "../../components/services/tokenService";
 import {customNotification} from "../../utils/customNotification";
 import {Loader} from "../../components/Loader";
-import {Roles} from "../../const/roles";
+import {useTranslation} from "react-i18next";
 
 const Login = () => {
+
+    const { t } = useTranslation();
+
     const navigate = useNavigate();
     const [{user}, dispatch] = useStateValue();
     const [email, setEmail] = useState("");
@@ -24,7 +26,6 @@ const Login = () => {
                 type: "SET_TOKEN",
                 token: data.access_token,
             });
-            tokenService.setUserData(email, password)
             dispatch({
                 type: "SET_USER",
                 user: {
@@ -71,7 +72,7 @@ const Login = () => {
                                 <input
                                     type="text"
                                     className="form-control block w-full px-4 py-2  text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-orange-600 focus:outline-none"
-                                    placeholder="почта"
+                                    placeholder={t("columns.email") ?? ''}
                                     onChange={(e) => setEmail(e.target.value)}
                                 />
                             </div>
@@ -80,7 +81,7 @@ const Login = () => {
                                 <input
                                     type="password"
                                     className="form-control block w-full px-4 py-2  text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-orange-600 focus:outline-none"
-                                    placeholder="пароль"
+                                    placeholder={t("columns.password") ?? ''}
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
                             </div>
@@ -90,13 +91,13 @@ const Login = () => {
                                 onClick={EmailAuth}
                                 whileHover={{scale: 1.1}}
                             >
-                                Войти
+                                {t("columns.login")}
                             </motion.p>}
 
                             <div
                                 className="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
                                 <p className="text-center text-sm text-textColor font-semibold mx-4 mb-0">
-                                    Нету аккаунта?
+                                    {t("columns.noAccount")}
                                 </p>
                             </div>
                             <Link
@@ -105,7 +106,7 @@ const Login = () => {
                                 <motion.p
                                     className="cursor-pointer flex items-center justify-center px-7 py-3 bg-gradient-to-br from-orange-400 to-orange-500 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-orange-600 hover:shadow-lg focus:bg-orange-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full"
                                 >
-                                    Зарегестрироваться
+                                    {t("columns.register")}
                                 </motion.p>
                             </Link>
                         </form>

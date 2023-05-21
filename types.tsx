@@ -74,4 +74,5 @@ export type IInitialStateType = {
     restaurant_id?: number | string
     role?: string
     token: string
+    lng: string
 }

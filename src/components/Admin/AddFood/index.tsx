@@ -13,7 +13,6 @@ import {customNotification} from "../../../utils/customNotification";
 import {Loader} from "../../Loader";
 import {IRestaurantMyResponse} from "../../../types/restaurantTypes";
 import {restaurantApi} from "../../../api/restaurantApi";
-import {tokenService} from "../../services/tokenService";
 
 const AddFood = () => {
     const [title, setTitle] = useState("");

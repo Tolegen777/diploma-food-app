@@ -12,7 +12,8 @@ export const actionTypes = {
     TOGGLE_CONTACT_FORM: 'TOGGLE_CONTACT_FORM',
     SET_RESTAURANT_ID: 'SET_RESTAURANT_ID',
     SET_ROLE: 'SET_ROLE',
-    SET_TOKEN: 'SET_TOKEN'
+    SET_TOKEN: 'SET_TOKEN',
+    SET_LNG: 'SET_LNG'
 }
 
 const reducer = (state: any, action: any) => {
@@ -87,6 +88,11 @@ const reducer = (state: any, action: any) => {
             return {
                 ...state,
                 token: action.token
+            };
+        case actionTypes.SET_LNG:
+            return {
+                ...state,
+                lng: action.lng
             };
         default:
             return state;

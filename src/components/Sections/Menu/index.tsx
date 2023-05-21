@@ -8,8 +8,11 @@ import {useStateValue} from "../../../context/StateProvider";
 import {useQuery} from "react-query";
 import {IFoodItemContent} from "../../../../types";
 import {productApi} from "../../../api/productApi";
+import {useTranslation} from "react-i18next";
 
 const Menu = ({title}: { title?: string }) => {
+
+    const { t } = useTranslation();
 
     const [scrollValue, setScrollValue] = useState(0);
 
@@ -33,7 +36,7 @@ const Menu = ({title}: { title?: string }) => {
     return (
         <section className="w-full my-5" id="menu">
             <div className="w-full flex items-center justify-center">
-                <Title title={title || "Наши блюда"} center/>
+                <Title title={title || t('columns.ourDishes')} center/>
             </div>
             <Filters filter={filter} setFilter={setFilter}/>
             <Container

@@ -9,6 +9,7 @@ import NotFound from "../NotFound";
 import {useStateValue} from "../../context/StateProvider";
 import {Loader} from "../Loader";
 import {Roles} from "../../const/roles";
+import {useTranslation} from "react-i18next";
 
 const   Container = ({scrollOffset, col, items, className}: {
     scrollOffset: number,
@@ -17,6 +18,8 @@ const   Container = ({scrollOffset, col, items, className}: {
     className?: string
 }) => {
     const containerRef = useRef<HTMLDivElement>(null);
+
+    const { t } = useTranslation();
 
     useLayoutEffect(() => {
         if (null !== containerRef.current) {
@@ -41,7 +44,7 @@ const   Container = ({scrollOffset, col, items, className}: {
                 !items && (!col ? (<Loader/>) : (<NotFound text="Fetching Food Items..."/>))
             }
             {
-                items && items.length <= 0 && (<NotFound text="Пока что данных нет! "/>)
+                items && items.length <= 0 && (<NotFound text={t('columns.noData')}/>)
             }
         </motion.div>
     );

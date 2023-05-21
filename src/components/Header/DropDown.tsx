@@ -118,7 +118,7 @@ const DropDown = ({user}: { user: any; }) => {
     };
 
     const [selectedFilterOption, setSelectedFilterOption] = useState<string>(
-        localStorage.getItem("language")?.toString() || ''
+        localStorage.getItem("language") || ''
     );
     const handleChangeLanguage = (value: any) => {
         typeof value?.value === "string" && setSelectedFilterOption(value.value);
@@ -170,7 +170,7 @@ const DropDown = ({user}: { user: any; }) => {
                   onClick={() => logout(user, dispatch, navigate)}
               >
                 <MdExitToApp/>
-                <span>{t("buttons.logOut")}</span>
+                <span>{t("columns.logout")}</span>
               </Button>
             </span>
                     </div>

@@ -12,8 +12,12 @@ import {customNotification} from "../../utils/customNotification";
 import {ICartResponse} from "../../types/cartTypes";
 import {orderApi} from "../../api/orderApi";
 import {useNavigate} from "react-router-dom";
+import {useTranslation} from "react-i18next";
 
 const Body = ({action}: { action: any }) => {
+
+    const { t } = useTranslation();
+
     const [{paymentMethod, user, token}] = useStateValue();
 
     const [number, setNumber] = useState('')
@@ -73,7 +77,7 @@ const Body = ({action}: { action: any }) => {
                     >
                         {!isLoading && <BiLock className=""/>}
                         {!isLoading ? (
-                            "Оплатить"
+                            t("columns.pay")
                         ) : (
                             <ImSpinner3 className="animate animate-spin"/>
                         )}

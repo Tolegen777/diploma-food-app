@@ -10,6 +10,7 @@ import {useQuery} from "react-query";
 import {ICartResponse} from "../../types/cartTypes";
 import {cartApi} from "../../api/cartApi";
 import {Roles} from "../../const/roles";
+import {useTranslation} from "react-i18next";
 
 const MobileNav = ({
                        isOpen,
@@ -18,6 +19,9 @@ const MobileNav = ({
     isOpen: boolean;
     setIsOpen: any;
 }) => {
+
+    const { t } = useTranslation();
+
     const [{showContactForm, showCart, user, role, token}, dispatch] = useStateValue();
 
     const {data: cartData} = useQuery<ICartResponse[]>(
@@ -77,7 +81,7 @@ const MobileNav = ({
             >
                 <Link onClick={() => setIsOpen(!isOpen)} to={'/menu'}
                       className="text-base text-textColor cursor-pointer hover:text-headingColor duration-100 transition-all ease-in-out px-10">
-                    Меню
+                    {t('columns.menu')}
                 </Link>
                 <Link onClick={() => setIsOpen(!isOpen)} to={'/about'}
                       className="text-base text-textColor cursor-pointer hover:text-headingColor duration-100 transition-all ease-in-out px-10">
@@ -85,7 +89,7 @@ const MobileNav = ({
                 </Link>
                 <p onClick={handleToggleContact}
                    className="text-base text-textColor cursor-pointer hover:text-headingColor duration-100 transition-all ease-in-out px-10">
-                    Контакты
+                    {t("columns.contacts")}
                 </p>
             </div>
 

@@ -116,7 +116,6 @@ export const shuffleItems = (items: any) => {
 
 export const logout = async (user: any, dispatch: any, navigate: any) => {
     if (user) {
-        localStorage.setItem("user", "undefined");
         localStorage.setItem("adminMode", "undefined");
         navigate("/");
         window.location.reload()

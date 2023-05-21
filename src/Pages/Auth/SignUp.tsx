@@ -8,16 +8,19 @@ import {useStateValue} from "../../context/StateProvider";
 import {useMutation, useQueryClient} from "react-query";
 import {authApi} from "../../api/authApi";
 import {IAuthResponse} from "../../types/authTypes";
-import {tokenService} from "../../components/services/tokenService";
 import {customNotification} from "../../utils/customNotification";
 import {Loader} from "../../components/Loader";
 import {Checkbox} from "antd";
 import {restaurantApi} from "../../api/restaurantApi";
 import {Roles} from "../../const/roles";
+import {useTranslation} from "react-i18next";
 
 // toast.configure()
 
 const SignUp = () => {
+
+    const { t } = useTranslation();
+
     const navigate = useNavigate();
     const [{user, token}, dispatch] = useStateValue();
     const [email, setEmail] = useState('');
@@ -43,7 +46,6 @@ const SignUp = () => {
                 type: "SET_TOKEN",
                 token: data.access_token,
             });
-            tokenService.setUserData(email, password)
             dispatch({
                 type: "SET_USER",
                 user: {
@@ -97,7 +99,7 @@ const SignUp = () => {
                                     <input
                                         type="email"
                                         className="form-control block w-full px-4 py-2  text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-orange-600 focus:outline-none"
-                                        placeholder="Почта"
+                                        placeholder={t("columns.email") ?? ''}
                                         onChange={(e) => setEmail(e.target.value)}
                                     />
                                 </div>
@@ -106,7 +108,7 @@ const SignUp = () => {
                                     <input
                                         type="password"
                                         className="form-control block w-full px-4 py-2  text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-orange-600 focus:outline-none"
-                                        placeholder="Пароль"
+                                        placeholder={t("columns.password") ?? ''}
                                         onChange={(e) => setPassword(e.target.value)}
                                     />
                                 </div>
@@ -132,7 +134,7 @@ const SignUp = () => {
                                     onClick={EmailAuth}
                                     aria-disabled={true}
                                 >
-                                    Зарегестрироваться
+                                    {t("columns.register")}
                                 </p>}
 
                                 <div
@@ -145,7 +147,7 @@ const SignUp = () => {
                                     to={"/login"}
                                     className="flex items-center justify-center px-7 py-3 bg-gradient-to-br from-orange-400 to-orange-500 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-orange-700 hover:shadow-lg focus:bg-orange-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-orange-800 active:shadow-lg transition duration-150 ease-in-out w-full"
                                 >
-                                    Войти
+                                    {t("columns.login")}
                                 </Link>
                             </form>
                         </div>

@@ -17,5 +17,6 @@ export const initialState: IInitialStateType = {
     checkoutData: {},
     restaurant_id: '',
     role: '',
-    token: ''
+    token: '',
+    lng: 'ru'
 }

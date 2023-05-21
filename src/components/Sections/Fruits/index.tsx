@@ -9,11 +9,15 @@ import {IFoodItemContent} from "../../../../types";
 import {productApi} from "../../../api/productApi";
 import {ICategoriesResponse} from "../../../types/productTypes";
 import {useStateValue} from "../../../context/StateProvider";
+import {useTranslation} from "react-i18next";
 
 const Fruits = () => {
+
+    const { t } = useTranslation();
+
     const [scrollValue, setScrollValue] = useState(0)
     const [categoryId, setCategoryId] = useState(1)
-    const [categoryTitle, setCategoryTitle] = useState('"Наши свежие и полезные фрукты"')
+    const [categoryTitle, setCategoryTitle] = useState(t('columns.freshFruits'))
 
     const [{restaurant_id}] = useStateValue();
 
@@ -31,7 +35,7 @@ const Fruits = () => {
             if (category?.id) {
                 setCategoryId(category?.id)
             } else {
-                setCategoryTitle(categoriesData[0]?.title ?? '')
+                setCategoryTitle(categoriesData[0]?.title ?? t('columns.freshFruits'))
             }
         }
     }, [categoriesData])
@@ -54,7 +58,7 @@ const Fruits = () => {
     return (
         <section className="w-full my-5">
             <div className="w-full flex items-center justify-between" style={{marginTop: "10px"}}>
-                <Title title={categoryTitle}/>
+                <Title title={categoryTitle ?? ''}/>
                 <PrevNextButtons onNext={() => setScrollValue(10000)} onPrev={() => setScrollValue(-10000)}/>
             </div>
             <Container className="bg-containerbg" scrollOffset={scrollValue} items={productsFruitsData?.data ?? []}/>

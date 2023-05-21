@@ -2,7 +2,6 @@ import React from "react";
 import {useQuery} from "react-query";
 import {IRestaurantMyResponse} from "../../../types/restaurantTypes";
 import {restaurantApi} from "../../../api/restaurantApi";
-import {tokenService} from "../../services/tokenService";
 import {ICategoriesResponse} from "../../../types/productTypes";
 import {SingleFoodItemCategory} from "../../FoodItemCategory";
 import {useStateValue} from "../../../context/StateProvider";

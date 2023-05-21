@@ -1,6 +1,5 @@
 import axios from "axios";
 import {BASE_URL} from "./index";
-import {tokenService} from "../components/services/tokenService";
 
 export const restaurantApi = {
     restaurantMy: async (token: string) => {

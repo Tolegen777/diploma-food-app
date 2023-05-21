@@ -37,7 +37,7 @@ const ProviderAuth = () => {
                         user: user,
                     });
                     // fetchUserCartData(user, dispatch);
-                    localStorage.setItem("user", JSON.stringify(user));
+                    // localStorage.setItem("user", JSON.stringify(user));
                     navigate("/");
                 })
                 .catch((error) => {

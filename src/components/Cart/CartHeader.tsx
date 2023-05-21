@@ -4,8 +4,12 @@ import {motion} from "framer-motion";
 import {useStateValue} from "../../context/StateProvider";
 import {hideCart} from "../../utils/functions";
 import {Link} from "react-router-dom";
+import {useTranslation} from "react-i18next";
 
 const CartHeader = () => {
+
+    const { t } = useTranslation();
+
     const [{user, foodItems}, dispatch] = useStateValue();
 
     return (
@@ -15,7 +19,7 @@ const CartHeader = () => {
             </motion.div>
 
             <div className="flex items-center justify-center gap-2">
-                Карта
+                {t("columns.card")}
                 <MdShoppingBasket className="text-xl cursor-pointer text-cartNumBg"/>
             </div>
 

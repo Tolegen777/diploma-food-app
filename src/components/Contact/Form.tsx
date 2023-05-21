@@ -6,8 +6,12 @@ import {customNotification} from "../../utils/customNotification";
 import {contactApi} from "../../api/contactApi";
 import {ICommentBody} from "../../types/commentsTypes";
 import {useStateValue} from "../../context/StateProvider";
+import {useTranslation} from "react-i18next";
 
 const Form = () => {
+
+    const { t } = useTranslation();
+
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [message, setMessage] = useState('')
@@ -42,7 +46,7 @@ const Form = () => {
                     <input
                         type="text"
                         className="form-control block w-full px-4 py-2  text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-orange-600 focus:outline-none"
-                        placeholder="Имя"
+                        placeholder={t("columns.name") ?? ''}
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                     />
@@ -51,7 +55,7 @@ const Form = () => {
                     <input
                         type="text"
                         className="form-control block w-full px-4 py-2  text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-orange-600 focus:outline-none"
-                        placeholder="Почта"
+                        placeholder={t("columns.email") ?? ''}
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                     />
@@ -60,7 +64,7 @@ const Form = () => {
                     <input
                         type="text"
                         className="form-control block w-full px-4 py-2  text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-orange-600 focus:outline-none"
-                        placeholder="Название"
+                        placeholder={t("columns.title") ?? ''}
                         value={subject}
                         onChange={(e) => setSubject(e.target.value)}
                     />
@@ -68,7 +72,7 @@ const Form = () => {
                 <div className="mb-6">
           <textarea
               className="form-control block w-full min-h-[25vh] px-4 py-2  text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-orange-600 focus:outline-none"
-              placeholder="Сообщение"
+              placeholder={t("columns.message") ?? ''}
               value={message}
               onChange={(e) => setMessage(e.target.value)}
           />
@@ -78,7 +82,7 @@ const Form = () => {
                     className="text-white bg-orange-600 hover:bg-orange-700 w-full focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-orange-600 dark:hover:bg-orange-700 focus:outline-none dark:focus:ring-orange-800 block"
                     onClick={submitForm}
                 >
-                    Отправить сообщение
+                    {t("columns.sendMessage")}
                 </button>
             </form>
             {/*<p className="mb-2 cursor-pointer text-sm text-gray-500 dark:text-gray-400">*/}

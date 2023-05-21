@@ -23,22 +23,18 @@ const Left = () => {
         </div> */}
             </div>
             <p className="text-[2rem] lg:text-[4rem] font-bold tracking-wide text-headingColor" style={{color: '#fff'}}>
-                Платформа для ресторанов
-                {t("columns.password")}
+                {t("columns.restaurantPlatform")}
                 <span className="text-orange-600 text-[2.5rem] lg:text-[4.6rem]"></span>
             </p>
             <p className="text-base text-textColor text-center md:text-left md:w-[80%]" style={{color: '#fff'}}>
-                Платформа для ресторанов - это программное обеспечение, разработанное специально для управления бизнесом
-                в сфере общепита.
-                Она позволяет ресторанам автоматизировать различные процессы, такие как управление меню, заказы,
-                поставки, финансы и другие бизнес-операции.
+                {t("columns.mainDescription")}
             </p>
             <motion.button
                 whileHover={{scale: 1.1}}
                 className="bg-gradient-to-br from-orange-400 to-orange-500 w-full md:w-auto px-4 py-2 rounded-lg hover:shadow-lg transition-all ease-in-out duration-100"
                 onClick={() => navigate('/menu')}
             >
-                Заказать сейчас
+                {t("columns.orderNow")}
             </motion.button>
         </div>
     );

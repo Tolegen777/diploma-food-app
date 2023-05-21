@@ -8,8 +8,12 @@ import {useQuery} from "react-query";
 import {cartApi} from "../../api/cartApi";
 import {ICartResponse} from "../../types/cartTypes";
 import {Roles} from "../../const/roles";
+import {useTranslation} from "react-i18next";
 
 const Navigations = ({direction}: { direction?: string }) => {
+
+    const { t } = useTranslation();
+
     const [{showContactForm, user, role, token}, dispatch] = useStateValue();
 
     const {data: cartData} = useQuery<ICartResponse[]>(
@@ -44,19 +48,19 @@ const Navigations = ({direction}: { direction?: string }) => {
                     whileHover={{scale: 1.1}}
                     className="md:text-sm lg:text-md text-base text-textColor cursor-pointer hover:text-headingColor duration-100 transition-all ease-in-out"
                 >
-                    <Link to={'/'} style={{color: '#fff'}}>Главная</Link>
+                    <Link to={'/'} style={{color: '#fff'}}>{t('columns.home')}</Link>
                 </motion.li>
                 <motion.li
                     whileHover={{scale: 1.1}}
                     className="md:text-sm lg:text-md text-base text-textColor cursor-pointer hover:text-headingColor duration-100 transition-all ease-in-out"
                 >
-                    <Link to={'/menu'} style={{color: '#fff'}}>Меню</Link>
+                    <Link to={'/menu'} style={{color: '#fff'}}>{t('columns.menu')}</Link>
                 </motion.li>
                 <motion.li
                     whileHover={{scale: 1.1}}
                     className="md:text-sm lg:text-md text-base text-textColor cursor-pointer hover:text-headingColor duration-100 transition-all ease-in-out"
                 >
-                    <Link to={'/services'} style={{color: '#fff'}}>О нас</Link>
+                    <Link to={'/services'} style={{color: '#fff'}}>{t('columns.about')}</Link>
                 </motion.li>
                 <motion.li
                     whileHover={{scale: 1.1}}
@@ -64,7 +68,7 @@ const Navigations = ({direction}: { direction?: string }) => {
                     onClick={handleToggleContact}
                     style={{color: '#fff'}}
                 >
-                    Контакты
+                    {t("columns.contacts")}
                 </motion.li>
             </motion.ul>
 
