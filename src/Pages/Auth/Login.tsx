@@ -10,6 +10,7 @@ import {IAuthResponse} from "../../types/authTypes";
 import {customNotification} from "../../utils/customNotification";
 import {Loader} from "../../components/Loader";
 import {useTranslation} from "react-i18next";
+import {tokenService} from "../../services/tokenService";
 
 const Login = () => {
 
@@ -23,10 +24,6 @@ const Login = () => {
     const {mutate: onSignIn, isLoading} = useMutation('signIn', authApi.signInUser, {
         onSuccess: (data: IAuthResponse) => {
             dispatch({
-                type: "SET_TOKEN",
-                token: data.access_token,
-            });
-            dispatch({
                 type: "SET_USER",
                 user: {
                     displayName: null,
@@ -37,6 +34,7 @@ const Login = () => {
                     uid: email,
                 },
             });
+            tokenService.updateLocalTokenData(data?.access_token ?? '')
             navigate('/')
             customNotification({type: 'success', message: 'Вы успешно авторизовались!'})
         },

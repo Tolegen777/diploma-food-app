@@ -8,9 +8,12 @@ import {customNotification} from "../../utils/customNotification";
 import {cartApi} from "../../api/cartApi";
 import {toast} from "react-toastify";
 import {Roles} from "../../const/roles";
+import {tokenService} from "../../services/tokenService";
 
-const Action = ({food, admin}: { food: IFoodItem; admin?: boolean }) => {
-    const [{role, user, token}] = useStateValue();
+const Action = ({food}: { food: IFoodItem; admin?: boolean }) => {
+    const [{role, user}] = useStateValue();
+
+    const token = tokenService.getLocalAccessToken()
 
     const queryClient = useQueryClient();
 

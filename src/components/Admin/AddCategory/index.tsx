@@ -2,12 +2,12 @@ import {MdOutlineDataSaverOn, MdOutlineFastfood,} from "react-icons/md";
 import {motion} from "framer-motion";
 import {toast} from "react-toastify";
 import {useState} from "react";
-import {useStateValue} from "../../../context/StateProvider";
 import {Loader} from "../../Loader";
 import {useMutation, useQueryClient} from "react-query";
 import {productApi} from "../../../api/productApi";
 import {UploadImageComponent} from "../../Common/UploadImageComponent/UploadImageComponent";
 import {customNotification} from "../../../utils/customNotification";
+import {tokenService} from "../../../services/tokenService";
 
 const AddCategory = () => {
     const [title, setTitle] = useState("");
@@ -18,7 +18,7 @@ const AddCategory = () => {
 
     const queryClient = useQueryClient();
 
-    const [{token}] = useStateValue();
+    const token = tokenService.getLocalAccessToken()
 
     const {mutate: onAddCategoryToRest} = useMutation('categoryToRest', productApi.addCategoryToRest, {
         onSuccess: () => {

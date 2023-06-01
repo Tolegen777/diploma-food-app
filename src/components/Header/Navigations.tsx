@@ -9,12 +9,15 @@ import {cartApi} from "../../api/cartApi";
 import {ICartResponse} from "../../types/cartTypes";
 import {Roles} from "../../const/roles";
 import {useTranslation} from "react-i18next";
+import {tokenService} from "../../services/tokenService";
 
 const Navigations = ({direction}: { direction?: string }) => {
 
     const { t } = useTranslation();
 
-    const [{showContactForm, user, role, token}, dispatch] = useStateValue();
+    const [{showContactForm, user, role}, dispatch] = useStateValue();
+
+    const token = tokenService.getLocalAccessToken()
 
     const {data: cartData} = useQuery<ICartResponse[]>(
         ['cart'],

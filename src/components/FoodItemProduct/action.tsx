@@ -5,13 +5,13 @@ import {ICategoriesResponse} from "../../types/productTypes";
 import {useMutation, useQueryClient} from "react-query";
 import {productApi} from "../../api/productApi";
 import {customNotification} from "../../utils/customNotification";
-import {useStateValue} from "../../context/StateProvider";
+import {tokenService} from "../../services/tokenService";
 
 const ActionProduct = ({food, admin}: { food: ICategoriesResponse; admin?: boolean }) => {
 
     const queryClient = useQueryClient();
 
-    const [{token}] = useStateValue();
+    const token = tokenService.getLocalAccessToken()
 
     const {mutate: onDeleteCategoryToRest} = useMutation('deleteCategory', productApi.deleteCategoryToRest, {
         onSuccess: () => {
