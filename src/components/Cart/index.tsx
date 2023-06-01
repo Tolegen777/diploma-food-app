@@ -1,5 +1,3 @@
-// FIXME first done
-import {useStateValue} from "../../context/StateProvider";
 import CartBody from "./Body";
 import CarttHeader from "./CartHeader";
 import {motion} from "framer-motion";
@@ -11,18 +9,23 @@ import {useQuery} from "react-query";
 import {ICartResponse} from "../../types/cartTypes";
 import {cartApi} from "../../api/cartApi";
 import {tokenService} from "../../services/tokenService";
+import {userService} from "../../services/userService";
+import {useTranslation} from "react-i18next";
 
 const Cart = () => {
+
+    const { t } = useTranslation();
+
     const [checkoutOpen, setCheckoutOpen] = useState(false);
 
-    const [{user}] = useStateValue();
+    const user = userService.getLocalUserEmail()
 
     const token = tokenService.getLocalAccessToken()
 
     const {data: cartData} = useQuery<ICartResponse[]>(
         ['cart'],
         () => cartApi.getCart(token), {
-            enabled: !!user
+            enabled: user?.length > 0
         }
     );
 
@@ -47,7 +50,7 @@ const Cart = () => {
                             </div>
                         )}
                     </motion.div>
-                    {!cartData && <NotFound text={"Товаров нет в наличии"}/>}
+                    {!cartData && <NotFound text={t("columns.noData")}/>}
                 </>
             )}
         </>

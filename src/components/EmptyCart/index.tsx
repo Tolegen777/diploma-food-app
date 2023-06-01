@@ -1,4 +1,3 @@
-// FIXME first done
 import React from 'react'
 import {EmptyCartImg} from '../Assets'
 import {useTranslation} from "react-i18next";

@@ -54,17 +54,14 @@ const Body = ({action}: { action: any }) => {
 
     return (
         <div className="w-full h-full rounded-t-[2rem]  bg-cartBg flex flex-col">
-            {/* Payment Selectors */}
-            {/*<Selector />*/}
-            {/* payment form  */}
             <div className="min-h-[50vh] mt-5">
                 {paymentMethod === "mobile_money" ?
                     <MomoForm number={number} setNumber={setNumber}/> :
                     <CardForm number={number} setNumber={setNumber}/>}
                 <div className="w-full flex items-center justify-center my-2">
                     <p className="text-gray-300">
-                        Сумма:{" "}
-                        <span className="font-bold text-white">{`${totalSum} тг`}</span>{" "}
+                        {t("columns.sum")}:{" "}
+                        <span className="font-bold text-white">{`${totalSum} ${t("columns.tg")}`}</span>{" "}
                     </p>
                 </div>
                 {/* pay now button */}

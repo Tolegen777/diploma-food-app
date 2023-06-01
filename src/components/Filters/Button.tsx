@@ -17,7 +17,6 @@ const Button = ({
     return (
         <motion.div
             onClick={() => setFilter(category.id.toString())}
-            //   whileHover={{ scale: 1.1 }}
             whileTap={{scale: 1.1}}
             className={`group ${
                 category.id.toString() === filter
@@ -32,9 +31,7 @@ const Button = ({
                         : "bg-cartNumBg group-hover:bg-btnOverlay"
                 }  flex items-center justify-center`}
             >
-                {/* <MdOutlineFastfood
 
-        /> */}
                 <span
                     className={`${
                         category.id.toString() === filter

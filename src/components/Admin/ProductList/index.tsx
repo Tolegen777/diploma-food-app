@@ -13,7 +13,7 @@ const ProductList = () => {
             <div className="w-full flex items-center justify-center gap-3 overflow-x-hidden flex-wrap">
                 {
                     foodItems?.map((item: IFoodItem) => (
-                        <SingleFoodItemProduct key={item.id} item={item} col admin/>
+                        <SingleFoodItemProduct key={item.id} item={item} col/>
                     ))
                 }
             </div>

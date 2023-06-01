@@ -9,7 +9,7 @@ const ContactHeader = () => {
 
     const { t } = useTranslation();
 
-    const [{}, dispatch] = useStateValue();
+    const [dispatch] = useStateValue();
     return (
         <div className="w-full flex flex-row-reverse items-center bg-white justify-between px-4 py-2">
             <motion.div
@@ -20,8 +20,6 @@ const ContactHeader = () => {
             </motion.div>
 
             <motion.div
-                // whileTap={{ scale: 0.9 }}
-                // whileHover={{ scale: 0.9 }}
                 className="flex items-center justify-center gap-x-2 px-2"
             >
                 <MdOutlineMessage className="text-xl text-orange-600"/>

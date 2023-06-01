@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import "./index.css";
 import {Modal, Upload} from "antd";
 import {PlusOutlined} from '@ant-design/icons'
+import {useTranslation} from "react-i18next";
 
 function getBase64(file: File) {
     return new Promise<string>((resolve, reject) => {
@@ -17,6 +18,9 @@ type Props = {
     setFileList: (image: any) => void
 }
 export const UploadImageComponent: React.FC<Props> = ({fileList, setFileList}) => {
+
+    const { t } = useTranslation();
+
     const [previewVisible, setPreviewVisible] = useState(false);
     const [previewImage, setPreviewImage] = useState("");
 
@@ -36,7 +40,7 @@ export const UploadImageComponent: React.FC<Props> = ({fileList, setFileList}) =
     const uploadButton = (
         <div>
             <PlusOutlined/>
-            <div className="ant-upload-text">Загрузить</div>
+            <div className="ant-upload-text">{t("columns.upload")}</div>
         </div>
     );
 

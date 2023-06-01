@@ -9,11 +9,17 @@ import {cartApi} from "../../api/cartApi";
 import {toast} from "react-toastify";
 import {Roles} from "../../const/roles";
 import {tokenService} from "../../services/tokenService";
+import {useTranslation} from "react-i18next";
+import {userService} from "../../services/userService";
 
 const Action = ({food}: { food: IFoodItem; admin?: boolean }) => {
-    const [{role, user}] = useStateValue();
+    const [{role}] = useStateValue();
+
+    const { t } = useTranslation();
 
     const token = tokenService.getLocalAccessToken()
+
+    const user = userService.getLocalUserEmail()
 
     const queryClient = useQueryClient();
 
@@ -48,7 +54,7 @@ const Action = ({food}: { food: IFoodItem; admin?: boolean }) => {
                 whileHover={{scale: 1.2}}
                 className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-red-600 flex items-center justify-center cursor-pointer"
                 onClick={handleClick}
-                title="Добавить в корзину"
+                title={t("columns.addToCard") ?? ''}
             >
                 <MdAddShoppingCart className="text-white md:text-xl"/>
             </motion.div>

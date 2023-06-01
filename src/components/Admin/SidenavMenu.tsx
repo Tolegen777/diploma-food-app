@@ -10,6 +10,7 @@ import ProductList from "./ProductList";
 import {QrcodeOutlined} from '@ant-design/icons'
 import QrComponent from "./QrComponent";
 import MessageList from "./MessageList";
+import {useTranslation} from "react-i18next";
 
 const SidenavMenu = ({
                          activePage,
@@ -19,8 +20,11 @@ const SidenavMenu = ({
     activePage: string;
     setActivePage: any;
     setPageContent: any;
-}) => (
-    <motion.nav
+}) => {
+
+    const { t } = useTranslation();
+
+    return <motion.nav
         initial={{opacity: 0, x: 200}}
         animate={{opacity: 1, x: 0}}
         exit={{opacity: 0, x: 200}}
@@ -29,7 +33,7 @@ const SidenavMenu = ({
         <NavItem
             activePage={activePage}
             svgIcon={<MdOutlineFavoriteBorder/>}
-            title="Заказы"
+            title={t("columns.orders")}
             setActivePage={setActivePage}
             setPageContent={setPageContent}
             pageContent={<OrdersComponent/>}
@@ -37,7 +41,7 @@ const SidenavMenu = ({
         <NavItem
             activePage={activePage}
             svgIcon={<MdAddModerator/>}
-            title="Добавить категорию"
+            title={t("columns.addCategory")}
             setActivePage={setActivePage}
             setPageContent={setPageContent}
             pageContent={<AddCategory/>}
@@ -45,7 +49,7 @@ const SidenavMenu = ({
         <NavItem
             activePage={activePage}
             svgIcon={<MdAddModerator/>}
-            title="Добавить продукт"
+            title={t("columns.addProduct")}
             setActivePage={setActivePage}
             setPageContent={setPageContent}
             pageContent={<AddFood/>}
@@ -53,7 +57,7 @@ const SidenavMenu = ({
         <NavItem
             activePage={activePage}
             svgIcon={<MdRestaurantMenu/>}
-            title="Список категорий"
+            title={t("columns.categoryList")}
             setActivePage={setActivePage}
             setPageContent={setPageContent}
             pageContent={<CategoryList/>}
@@ -61,7 +65,7 @@ const SidenavMenu = ({
         <NavItem
             activePage={activePage}
             svgIcon={<MdRestaurantMenu/>}
-            title="Список продуктов"
+            title={t("columns.productList")}
             setActivePage={setActivePage}
             setPageContent={setPageContent}
             pageContent={<ProductList/>}
@@ -69,7 +73,7 @@ const SidenavMenu = ({
         <NavItem
             activePage={activePage}
             svgIcon={<MdOutlineMessage/>}
-            title="Сообщения"
+            title={t("columns.messages")}
             setActivePage={setActivePage}
             setPageContent={setPageContent}
             pageContent={<MessageList/>}
@@ -83,7 +87,7 @@ const SidenavMenu = ({
             pageContent={<QrComponent/>}
         />
     </motion.nav>
-);
+};
 
 const NavItem = ({
                      activePage,
@@ -104,7 +108,7 @@ const NavItem = ({
         setActivePage(title);
         setPageContent(pageContent);
     };
-    const [{users, foodItems}, dispatch] = useStateValue()
+    const [{users, foodItems}] = useStateValue()
     return (
         <motion.div
             whileTap={{scale: 1.1}}
@@ -120,7 +124,7 @@ const NavItem = ({
                         <div className=" w-5 h-5 rounded-full bg-cartNumBg flex items-center justify-center cursor-pointer">
                             <p className="text-sm text-white font-semibold">
                                 {
-                                    title === "Menu" ? foodItems.length : users.length
+                                    title === "Menu" ? foodItems?.length : users?.length
                                 }
                             </p>
                         </div>

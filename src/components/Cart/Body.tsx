@@ -1,15 +1,14 @@
-// FIXME first done
 import CartItem from './Item'
 import CartTotal from './CartTotal'
-import {useStateValue} from '../../context/StateProvider';
 import {useQuery} from "react-query";
 import {ICartResponse} from "../../types/cartTypes";
 import {cartApi} from "../../api/cartApi";
 import {tokenService} from "../../services/tokenService";
+import {userService} from "../../services/userService";
 
 const CartBody = ({action}: { action: any }) => {
 
-    const [{user}] = useStateValue();
+    const user = userService.getLocalUserEmail()
 
     const token = tokenService.getLocalAccessToken()
 
@@ -18,7 +17,7 @@ const CartBody = ({action}: { action: any }) => {
     const {data: cartData} = useQuery<ICartResponse[]>(
         ['cart'],
         () => cartApi.getCart(token), {
-            enabled: !!user
+            enabled: user.length > 0
         }
     );
 

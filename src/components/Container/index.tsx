@@ -1,5 +1,3 @@
-// FIXME first done
-
 import {useLayoutEffect, useRef} from "react";
 
 import {IFoodItem} from "../../../types";
@@ -11,7 +9,7 @@ import {Loader} from "../Loader";
 import {Roles} from "../../const/roles";
 import {useTranslation} from "react-i18next";
 
-const   Container = ({scrollOffset, col, items, className}: {
+const Container = ({scrollOffset, col, items, className}: {
     scrollOffset: number,
     col?: boolean;
     items: IFoodItem[],
@@ -26,7 +24,9 @@ const   Container = ({scrollOffset, col, items, className}: {
             containerRef.current.scrollLeft += scrollOffset
         }
     }, [scrollOffset]);
+
     const [{role}] = useStateValue();
+
     return (
         <motion.div
             ref={containerRef}
@@ -37,14 +37,14 @@ const   Container = ({scrollOffset, col, items, className}: {
                 !col ? "overflow-x-scroll scrollbar-hidden scroll-smooth" : "overflow-x-hidden flex-wrap"
             }`}
         >
-            {items.length > 0 && items?.map((item: IFoodItem) => (
+            {items?.length > 0 && items?.map((item: IFoodItem) => (
                 <SingleFoodItem key={item?.id} item={item} col={col} admin={role === Roles.restaurant}/>
             ))}
             {
                 !items && (!col ? (<Loader/>) : (<NotFound text="Fetching Food Items..."/>))
             }
             {
-                items && items.length <= 0 && (<NotFound text={t('columns.noData')}/>)
+                items && items.length === 1 && (<NotFound text={t('columns.noData')}/>)
             }
         </motion.div>
     );

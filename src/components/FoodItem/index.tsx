@@ -1,8 +1,8 @@
-// FIXME first done
 import {IFoodItem} from "../../../types";
 import {motion} from "framer-motion";
 import Action from "./action";
 import {BASE_URL} from "../../api";
+import {useTranslation} from "react-i18next";
 
 export const SingleFoodItem = ({
                                    item,
@@ -13,7 +13,10 @@ export const SingleFoodItem = ({
     col?: boolean;
     admin?: boolean
 }) => {
-    const {id, title, price, calorie, image, description} = item;
+
+    const { t } = useTranslation();
+
+    const {title, price, calorie, image, description} = item;
 
     return (
         <motion.div
@@ -28,7 +31,6 @@ export const SingleFoodItem = ({
                 <motion.img
                     whileHover={{scale: 1.2}}
                     whileTap={{scale: 1.1}}
-                    // className="w-40 h-40 md:w-48 md:h-40 -mt-8 object-contain cursor-pointer"
                     alt={description}
                     src={BASE_URL + image}
                     style={{
@@ -44,10 +46,10 @@ export const SingleFoodItem = ({
             <div className="w-full flex items-end justify-end flex-col">
                 <p className="text-gray-900 font-semi-bold text-lg">{title}</p>
                 <p className="mt-1 text-sm text-gray-700">{description} </p>
-                <p className="mt-1 text-sm text-gray-700">{calorie} калорий </p>
+                <p className="mt-1 text-sm text-gray-700">{calorie} {t("columns.calorie")} </p>
                 <div className="flex items-center justify-between gap-8 ">
                     <p className="text-base text-headingColor font-semibold">
-                        {price} <span className="text-sm text-red-600">тг</span>
+                        {price} <span className="text-sm text-red-600">{t("columns.tg")}</span>
                     </p>
                 </div>
             </div>

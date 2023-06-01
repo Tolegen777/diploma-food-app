@@ -1,9 +1,13 @@
 import {useState} from 'react';
 import {Content, Sidenav, Stats} from '../../components';
+import {useTranslation} from "react-i18next";
 
 
 const Dashboard = () => {
-    const [activePage, setActivePage] = useState("Админ панель");
+
+    const { t } = useTranslation();
+
+    const [activePage, setActivePage] = useState(t("columns.adminPanel") ?? '');
     const [element, setElement] = useState<JSX.Element>(<Stats/>);
     return (
         <div className="h-screen flex w-full gap-2 items-start">

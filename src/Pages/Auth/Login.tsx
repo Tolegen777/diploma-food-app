@@ -3,7 +3,6 @@ import {ImageBox} from ".";
 
 import {motion} from "framer-motion";
 import {useState} from "react";
-import {useStateValue} from "../../context/StateProvider";
 import {useMutation} from "react-query";
 import {authApi} from "../../api/authApi";
 import {IAuthResponse} from "../../types/authTypes";
@@ -11,30 +10,23 @@ import {customNotification} from "../../utils/customNotification";
 import {Loader} from "../../components/Loader";
 import {useTranslation} from "react-i18next";
 import {tokenService} from "../../services/tokenService";
+import {userService} from "../../services/userService";
 
 const Login = () => {
 
     const { t } = useTranslation();
 
     const navigate = useNavigate();
-    const [{user}, dispatch] = useStateValue();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    const user = userService.getLocalUserEmail()
+
     const {mutate: onSignIn, isLoading} = useMutation('signIn', authApi.signInUser, {
         onSuccess: (data: IAuthResponse) => {
-            dispatch({
-                type: "SET_USER",
-                user: {
-                    displayName: null,
-                    email: email,
-                    phoneNumber: null,
-                    photoURL: null,
-                    providerId: password,
-                    uid: email,
-                },
-            });
             tokenService.updateLocalTokenData(data?.access_token ?? '')
+
+            userService.updateLocalUserEmail(email ?? '')
             navigate('/')
             customNotification({type: 'success', message: 'Вы успешно авторизовались!'})
         },
@@ -45,13 +37,12 @@ const Login = () => {
 
 
     const EmailAuth = () => {
-        if (!user) {
+        if (!user.length) {
             if (email.length > 0 && password.length > 0) {
                 onSignIn({
                     email: email,
                     password: password
                 })
-                // navigate("/");
 
             } else {
                 customNotification({type: 'error', message: 'Заполните все поля!'})

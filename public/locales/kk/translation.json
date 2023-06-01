@@ -28,6 +28,22 @@
     "register": "Тіркелу",
     "noAccount": "Есептік жазбаңыз жоқ па?",
     "adminPanel": "Басқару панелі",
-    "logout": "Шығу"
+    "logout": "Шығу",
+    "itsRest": "Бұл ресторан",
+    "haveAccount": "Жүйеде тіркелгенсізбе?",
+    "messages": "Хабарламалар",
+    "productList": "Тағамдар",
+    "categoryList": "Категориялар",
+    "addProduct": "Тағам қосу",
+    "addCategory": "Категория қосу",
+    "orders": "Тапсырыстар",
+    "toHome": "Басты бет",
+    "calorie": "Калория",
+    "tg": "тг",
+    "addToCard": "Корзинаға қосу",
+    "delete": "Жою",
+    "upload": "Жүктеу",
+    "secured": "Қорғалған",
+    "sum": "Барлығы"
   }
 }

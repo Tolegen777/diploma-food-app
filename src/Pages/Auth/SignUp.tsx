@@ -15,6 +15,7 @@ import {restaurantApi} from "../../api/restaurantApi";
 import {Roles} from "../../const/roles";
 import {useTranslation} from "react-i18next";
 import {tokenService} from "../../services/tokenService";
+import {userService} from "../../services/userService";
 
 // toast.configure()
 
@@ -23,13 +24,15 @@ const SignUp = () => {
     const { t } = useTranslation();
 
     const navigate = useNavigate();
-    const [{user}, dispatch] = useStateValue();
+    const [dispatch] = useStateValue();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [rest, setRest] = useState('');
     const [isRest, setIsRest] = useState(false);
 
     const token = tokenService.getLocalAccessToken()
+
+    const user = userService.getLocalUserEmail()
 
     const queryClient = useQueryClient();
 
@@ -45,19 +48,10 @@ const SignUp = () => {
 
     const {mutate: onSignUp, isLoading} = useMutation('signUp', authApi.signUpUser, {
         onSuccess: (data: IAuthResponse) => {
-            dispatch({
-                type: "SET_USER",
-                user: {
-                    displayName: null,
-                    email: email,
-                    phoneNumber: null,
-                    photoURL: null,
-                    providerId: password,
-                    uid: email,
-                },
-            });
 
             tokenService.updateLocalTokenData(data?.access_token ?? '')
+
+            userService.updateLocalUserEmail(email ?? '')
 
             if (isRest) {
                 onCreateRestaurant({
@@ -118,7 +112,7 @@ const SignUp = () => {
                                               onChange={() => setIsRest(!isRest)}
                                               value={isRest}
                                     >
-                                        <p className="text-white">Это ресторан</p>
+                                        <p className="text-white">{t("columns.itsRest")}</p>
                                     </Checkbox>
                                     {isRest && <input
                                         type="text"
@@ -141,7 +135,7 @@ const SignUp = () => {
                                 <div
                                     className="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
                                     <p className="text-center text-sm text-textColor font-semibold mx-4 mb-0">
-                                        Уже есть аккаунт?
+                                        {t("columns.haveAccount")}
                                     </p>
                                 </div>
                                 <Link

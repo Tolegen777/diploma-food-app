@@ -2,9 +2,13 @@ import {FaShopify} from "react-icons/fa";
 import {Link} from "react-router-dom";
 import {useStateValue} from "../../context/StateProvider";
 import {ToggleAdminMode} from "../../utils/functions";
+import {useTranslation} from "react-i18next";
 
 const Content = ({pageTitle, Element}: { pageTitle: string, Element: JSX.Element }) => {
-    const [{}, dispatch] = useStateValue();
+
+    const { t } = useTranslation();
+
+    const [dispatch] = useStateValue();
     return (
         <div className="flex flex-col w-[80%] h-screen px-2 bg-gray-100">
             <div
@@ -16,7 +20,7 @@ const Content = ({pageTitle, Element}: { pageTitle: string, Element: JSX.Element
                     <button
                         className=" flex items-center justify-center gap-3 text-orange-700 font-bold py-2 px-4 rounded-lg">
                         <FaShopify/>
-                        На главную
+                        {t("columns.toHome")}
                     </button>
                 </Link>
             </div>
