@@ -12,41 +12,6 @@ export const Title = ({title, center}: { title: string, center?: boolean }) => {
     );
 };
 
-export const Pagination = ({
-                               currentPage,
-                               totalPages,
-                               onPageChange,
-                           }: {
-    currentPage: number;
-    totalPages: number;
-    onPageChange: (page: number) => void;
-}) => {
-    const pages = [];
-    for (let i = 1; i <= totalPages; i++) {
-        pages.push(i);
-    }
-    return (
-        <div className="flex justify-center">
-            <ul className="flex justify-center">
-                {pages.map((page) => {
-                    return (
-                        <li
-                            key={page}
-                            className={`${
-                                currentPage === page ? "bg-orange-600" : "bg-transparent"
-                            }`}
-                        >
-                            <button className="px-2 py-1" onClick={() => onPageChange(page)}>
-                                {page}
-                            </button>
-                        </li>
-                    );
-                })}
-            </ul>
-        </div>
-    );
-};
-
 export const PrevNext = ({
                              onPrev,
                              onNext,

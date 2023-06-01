@@ -1,4 +1,3 @@
-// FIXME first done
 import {EmptyCartImg} from '../Assets'
 import {useState} from 'react';
 import {useMutation} from "react-query";
@@ -32,7 +31,7 @@ const Form = () => {
             email: email,
             name: name,
             description: message,
-            star: 0,
+            star: 5,
             productId: 3,
             restaurantId: restaurant_id
         }
@@ -85,16 +84,6 @@ const Form = () => {
                     {t("columns.sendMessage")}
                 </button>
             </form>
-            {/*<p className="mb-2 cursor-pointer text-sm text-gray-500 dark:text-gray-400">*/}
-            {/*  <a href="user@gmail.com" className="hover:underline">*/}
-            {/*    test@gmail.com*/}
-            {/*  </a>*/}
-            {/*</p>*/}
-            {/*<p className="text-sm cursor-pointer text-gray-500 dark:text-gray-400">*/}
-            {/*  <a href="tel:+233556844331" className="hover:underline">*/}
-            {/*    +7077077070*/}
-            {/*  </a>*/}
-            {/*</p>*/}
         </div>
     );
 };

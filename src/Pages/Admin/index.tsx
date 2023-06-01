@@ -4,7 +4,7 @@ import {useStateValue} from "../../context/StateProvider";
 import {Roles} from "../../const/roles";
 
 const Admin = () => {
-    const [{user, role}] = useStateValue()
+    const [{role}] = useStateValue()
     return (
         <>
             {role === Roles.restaurant ? <Dashboard/> : <Home/>}

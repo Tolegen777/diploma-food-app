@@ -23,7 +23,7 @@ const Header = ({action}: { action: any }) => {
             <motion.div
                 whileTap={{scale: 0.9}}
                 className="flex items-center justify-center gap-1"
-                title="защищен"
+                title={t("columns.secured") ?? ''}
             >
                 <BsShieldLock className="text-xl cursor-pointer text-cartNumBg"/>
                 <RiSecurePaymentLine className="text-xl cursor-pointer text-cartNumBg"/>

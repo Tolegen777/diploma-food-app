@@ -1,11 +1,9 @@
 export const actionTypes = {
-    SET_USER: 'SET_USER',
     SET_FOOD_ITEMS: 'SET_FOOD_ITEMS',
     TOGGLE_CART: 'TOGGLE_CART',
     SET_CARTITEMS: 'SET_CARTITEMS',
     SET_CART_TOTAL: 'SET_CART_TOTAL',
     SET_ADMIN_MODE: 'SET_ADMIN_MODE',
-    SET_USERS: 'SET_USERS',
     UPDATE_USER: 'UPDATE_USER',
     SET_PAYMENT_METHOD: 'SET_PAYMENT_METHOD',
     UPDATE_CHECKOUT_DATA: 'UPDATE_CHECKOUT_DATA',
@@ -18,11 +16,6 @@ export const actionTypes = {
 const reducer = (state: any, action: any) => {
     // console.log(action)
     switch (action.type) {
-        case actionTypes.SET_USER:
-            return {
-                ...state,
-                user: action.user,
-            };
         case actionTypes.SET_FOOD_ITEMS:
             return {
                 ...state,
@@ -47,11 +40,6 @@ const reducer = (state: any, action: any) => {
             return {
                 ...state,
                 adminMode: action.adminMode,
-            };
-        case actionTypes.SET_USERS:
-            return {
-                ...state,
-                users: action.users,
             };
         case actionTypes.UPDATE_USER:
             return {

@@ -7,7 +7,7 @@ import {productApi} from "../../api/productApi";
 import {customNotification} from "../../utils/customNotification";
 import {tokenService} from "../../services/tokenService";
 
-const ActionProduct = ({food, admin}: { food: ICategoriesResponse; admin?: boolean }) => {
+const ActionProduct = ({food}: { food: ICategoriesResponse; admin?: boolean }) => {
 
     const queryClient = useQueryClient();
 

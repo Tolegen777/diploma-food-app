@@ -66,7 +66,7 @@ function App() {
                     foodItems: productsData?.data ?? [],
                 })
             },
-            enabled: restaurantId.length > 0 ?? !!restaurant_id
+            enabled: restaurantId.length > 0 ? true : !!restaurant_id
         }
     );
 
@@ -85,7 +85,7 @@ function App() {
         foodItems &&
         cartItems.length > 0 &&
         calculateCartTotal(cartItems, foodItems, dispatch);
-    }, [cartItems, foodItems, dispatch]);
+    }, [cartItems, foodItems]);
 
     return (
         <AnimatePresence exitBeforeEnter>
@@ -95,7 +95,8 @@ function App() {
                 {error && customNotification({type: 'error', message: error?.message as string})}
                 {showCart && <Cart/>}
                 {showContactForm && <Contact/>}
-                {!(adminMode && role === Roles.restaurant) && <Header/>}
+                {/* FIXME разок надо посмотреть что делает adminmode */}
+                {!(adminMode) && <Header/>}
                 <main
                     className={`${
                         !(adminMode && role === Roles.restaurant) &&
@@ -104,7 +105,6 @@ function App() {
                     onClick={() => {
                     }}
                 >
-                    {/* Routes */}
                     <Routes>
                         <Route path="/*" element={<Home/>}/>
                         <Route path="/login" element={<Login/>}/>
@@ -115,7 +115,7 @@ function App() {
                         <Route path="/services" element={<Services/>}/>
                     </Routes>
 
-                    {!(adminMode && role === Roles.restaurant) && <Footer/>}
+                    {!(adminMode) && <Footer/>}
                 </main>
             </div>
         </AnimatePresence>

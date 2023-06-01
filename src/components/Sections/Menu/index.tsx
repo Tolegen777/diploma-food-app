@@ -1,4 +1,3 @@
-// FIXME first done
 import {useState} from "react";
 
 import Container from "../../Container";
@@ -18,7 +17,7 @@ const Menu = ({title}: { title?: string }) => {
 
     const [filter, setFilter] = useState<string>("");
 
-    const [{restaurant_id}, dispatch] = useStateValue();
+    const [{restaurant_id}] = useStateValue();
 
     const {data: productsData} = useQuery<IFoodItemContent>(
         ['products', restaurant_id, filter],

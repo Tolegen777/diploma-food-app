@@ -28,6 +28,24 @@
     "register": "Register",
     "noAccount": "Don't have an account?",
     "adminPanel": "Admin Panel",
-    "logout": "Logout"
+    "logout": "Logout",
+    "itsRest": "This is restaurant",
+    "haveAccount": "Already have account?",
+    "messages": "Messages",
+    "productList": "Product List",
+    "categoryList": "CategoryList",
+    "addProduct": "Add product",
+    "addCategory": "Add category",
+    "orders": "Orders",
+    "toHome": "Go home",
+    "calorie": "Calorie",
+    "tg": "tg",
+    "addToCard": "Add to card",
+    "delete": "Delete",
+    "upload": "Upload",
+    "secured": "Secured",
+    "sum": "Sum"
+
+
   }
 }

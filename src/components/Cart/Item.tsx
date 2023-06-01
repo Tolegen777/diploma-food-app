@@ -9,8 +9,12 @@ import {useMutation, useQueryClient} from "react-query";
 import {cartApi} from "../../api/cartApi";
 import {customNotification} from "../../utils/customNotification";
 import {tokenService} from "../../services/tokenService";
+import {useTranslation} from "react-i18next";
 
 const CartItem = ({item}: { item: ICartResponse }) => {
+
+    const { t } = useTranslation();
+
     const {id, qty, product} = item;
 
     const token = tokenService.getLocalAccessToken()
@@ -57,7 +61,7 @@ const CartItem = ({item}: { item: ICartResponse }) => {
                 <div className="flex flex-col gap-0 ">
                     <p className="text-base text-gray-50">{product?.title}</p>
                     <p className="text-sm block text-gray-300 font-semibold">
-                        <span className="text-xs text-red-600">₵</span> {product?.price}
+                        {product?.price} <span className="text-xs text-red-600">{t("columns.tg")}</span>
                     </p>
                 </div>
             </div>

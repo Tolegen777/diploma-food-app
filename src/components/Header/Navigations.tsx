@@ -1,5 +1,3 @@
-// FIXME first done
-// import React from 'react'
 import {Link} from "react-router-dom";
 import {MdShoppingBasket} from "react-icons/md";
 import {motion} from "framer-motion";
@@ -10,12 +8,15 @@ import {ICartResponse} from "../../types/cartTypes";
 import {Roles} from "../../const/roles";
 import {useTranslation} from "react-i18next";
 import {tokenService} from "../../services/tokenService";
+import {userService} from "../../services/userService";
 
 const Navigations = ({direction}: { direction?: string }) => {
 
     const { t } = useTranslation();
 
-    const [{showContactForm, user, role}, dispatch] = useStateValue();
+    const user = userService.getLocalUserEmail()
+
+    const [{showContactForm, role}, dispatch] = useStateValue();
 
     const token = tokenService.getLocalAccessToken()
 
@@ -25,8 +26,6 @@ const Navigations = ({direction}: { direction?: string }) => {
             enabled: !!user
         }
     );
-
-    console.log(cartData, 'DDDD')
     const handleToggleCart = () => {
         dispatch({
             type: "TOGGLE_CART",
@@ -45,7 +44,7 @@ const Navigations = ({direction}: { direction?: string }) => {
                 initial={{opacity: 0, x: 200}}
                 animate={{opacity: 1, x: 0}}
                 exit={{opacity: 0, x: 200}}
-                className={`flex items-center gap-8 ${direction && direction}`}
+                className={`flex items-center gap-8 ${direction ? direction : ''}`}
             >
                 <motion.li
                     whileHover={{scale: 1.1}}
@@ -86,7 +85,7 @@ const Navigations = ({direction}: { direction?: string }) => {
                     <div
                         className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-cartNumBg flex items-center justify-center cursor-pointer">
                         <p className="text-sm text-white font-semibold">
-                            {cartData.length}
+                            {cartData?.length}
                         </p>
                     </div>
                 )}

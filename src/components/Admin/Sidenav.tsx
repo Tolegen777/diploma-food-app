@@ -5,6 +5,7 @@ import {AiFillLock} from "react-icons/ai";
 import {useStateValue} from "../../context/StateProvider";
 import {logout, ToggleAdminMode} from "../../utils/functions";
 import {motion} from "framer-motion";
+import {useTranslation} from "react-i18next";
 
 const Sidenav = ({
                      activePage,
@@ -30,7 +31,7 @@ const Sidenav = ({
 };
 
 const SidenavHeader = () => {
-    const [{adminMode}, dispatch] = useStateValue();
+    const [dispatch] = useStateValue();
     return (
         <motion.div
             initial={{opacity: 0, x: 200}}
@@ -54,6 +55,9 @@ const SidenavHeader = () => {
 };
 
 const SidenavFooter = () => {
+
+    const { t } = useTranslation();
+
     const [{user}, dispatch] = useStateValue();
     const navigate = useNavigate();
     return (
@@ -66,7 +70,7 @@ const SidenavFooter = () => {
             className="flex items-center justify-center mt-auto px-3 gap-3  text-orange-50 cursor-pointer opacity-70 hover:opacity-100"
         >
             <AiFillLock className="font-bold text-xl text-orange-50"/>
-            <div className="">Выйти1</div>
+            <div className="">{t("columns.logout")}</div>
         </motion.div>
     );
 };

@@ -9,6 +9,7 @@ import {Roles} from "../../../const/roles";
 import {useNavigate} from "react-router-dom";
 import {logout, ToggleAdminMode} from "../../../utils/functions";
 import {CloseCircleOutlined, CloseOutlined} from "@ant-design/icons";
+import {userService} from "../../../services/userService";
 
 export interface FormSelectProps extends SelectProps {
     arrow_none?: 'active'
@@ -136,9 +137,11 @@ export const Profile: React.FC = () => {
 
     const {t} = useTranslation();
 
+    const user = userService.getLocalUserEmail()
+
     const navigate = useNavigate();
 
-    const [{lng, user, role}, dispatch] = useStateValue();
+    const [{role}, dispatch] = useStateValue();
     const ref = useRef<HTMLDivElement>(null);
 
     const [isComponentVisible, setIsComponentVisible] = useState<boolean>(false);
@@ -169,7 +172,7 @@ export const Profile: React.FC = () => {
             onClick={handleClickOpenDropdown}
         >
           <img
-              src={user.photoURL || Avatar}
+              src={Avatar}
               className="w-10 min-w-[40px] h-10 min-h-[40px] drop-shadow-2xl rounded-full cursor-pointer object-contain"
               alt="profile"
           />
@@ -193,7 +196,7 @@ export const Profile: React.FC = () => {
                   <div
                       className="px-10 py-0 flex items-center text-textColor"
                   >
-                    {user.email}
+                    {user}
                   </div>
             </span>}
                         {role === Roles.restaurant && <span className="username item">
@@ -210,7 +213,6 @@ export const Profile: React.FC = () => {
                         <span className="item"
                               style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
               <FormSelect
-                  // style={{ width: "100%", height: "30px" }}
                   onChange={(i) => {
                       handleChangeLanguage(i)
                   }}

@@ -1,5 +1,3 @@
-// import React from 'react'
-
 import {MdOutlineRestaurantMenu, MdShoppingBasket} from "react-icons/md";
 
 import {Link} from "react-router-dom";
@@ -12,6 +10,7 @@ import {cartApi} from "../../api/cartApi";
 import {Roles} from "../../const/roles";
 import {useTranslation} from "react-i18next";
 import {tokenService} from "../../services/tokenService";
+import {userService} from "../../services/userService";
 
 const MobileNav = ({
                        isOpen,
@@ -23,14 +22,16 @@ const MobileNav = ({
 
     const { t } = useTranslation();
 
-    const [{showContactForm, showCart, user, role}, dispatch] = useStateValue();
+    const user = userService.getLocalUserEmail()
+
+    const [{showContactForm, showCart, role}, dispatch] = useStateValue();
 
     const token = tokenService.getLocalAccessToken()
 
     const {data: cartData} = useQuery<ICartResponse[]>(
         ['cart'],
         () => cartApi.getCart(token), {
-            enabled: !!user
+            enabled: user.length > 0
         }
     );
     const handleToggleCart = () => {
@@ -63,7 +64,7 @@ const MobileNav = ({
                         <div
                             className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-cartNumBg flex items-center justify-center">
                             <p className="text-sm text-white font-semibold">
-                                {cartData.length}
+                                {cartData?.length}
                             </p>
                         </div>
                     )}
@@ -88,7 +89,7 @@ const MobileNav = ({
                 </Link>
                 <Link onClick={() => setIsOpen(!isOpen)} to={'/about'}
                       className="text-base text-textColor cursor-pointer hover:text-headingColor duration-100 transition-all ease-in-out px-10">
-                    О нас
+                    {t("columns.about")}
                 </Link>
                 <p onClick={handleToggleContact}
                    className="text-base text-textColor cursor-pointer hover:text-headingColor duration-100 transition-all ease-in-out px-10">
