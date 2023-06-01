@@ -1,6 +1,6 @@
 import "react-toastify/dist/ReactToastify.css";
 
-import {About, Admin, Home, Login, Menu, Services, Signup} from "./Pages";
+import {Admin, Home, Login, Menu, Services, Signup} from "./Pages";
 import {Cart, Footer, Header} from "./components";
 import {Route, Routes, useLocation} from "react-router-dom";
 import {calculateCartTotal,} from "./utils/functions";
@@ -18,23 +18,22 @@ import {IFoodItemContent} from "../types";
 import {Roles} from "./const/roles";
 import {customNotification} from "./utils/customNotification";
 import "./language/i18n"
+import {tokenService} from "./services/tokenService";
 
 function App() {
-    const [{showCart, showContactForm, token, foodItems, cartItems, adminMode, restaurant_id, role}, dispatch] =
+    const [{showCart, showContactForm, foodItems, cartItems, adminMode, restaurant_id, role}, dispatch] =
         useStateValue();
+
+    const token = tokenService.getLocalAccessToken()
 
     const location = useLocation()
 
     const [restaurantId, setRestaurantId] = useState('')
-    const [categoryId, setCategoryId] = useState(null)
-    const [limit, setLimit] = useState(100)
-    const [page, setPage] = useState(1)
-    const [title, setTitle] = useState('')
 
     const {data: restaurantMyData} = useQuery<IRestaurantMyResponse>(
         ['restaurantMy'],
         () => restaurantApi.restaurantMy(token), {
-            enabled: token.length > 0,
+            enabled: token?.length > 0,
             onSuccess: (data) => {
                 setRestaurantId(data?.id.toString())
                 dispatch({
@@ -55,13 +54,11 @@ function App() {
     }, [restaurantMyData?.id])
 
     const {data: productsData, error} = useQuery<IFoodItemContent>(
-        ['products', title, restaurantId, categoryId, page, limit],
+        ['products', restaurantId],
         () => productApi.getProducts({
-            title,
             restaurantId,
-            categoryId,
-            page,
-            limit
+            page: 1,
+            limit: 100
         }), {
             onSuccess: () => {
                 dispatch({

@@ -11,6 +11,7 @@ import {ICartResponse} from "../../types/cartTypes";
 import {cartApi} from "../../api/cartApi";
 import {Roles} from "../../const/roles";
 import {useTranslation} from "react-i18next";
+import {tokenService} from "../../services/tokenService";
 
 const MobileNav = ({
                        isOpen,
@@ -22,7 +23,9 @@ const MobileNav = ({
 
     const { t } = useTranslation();
 
-    const [{showContactForm, showCart, user, role, token}, dispatch] = useStateValue();
+    const [{showContactForm, showCart, user, role}, dispatch] = useStateValue();
+
+    const token = tokenService.getLocalAccessToken()
 
     const {data: cartData} = useQuery<ICartResponse[]>(
         ['cart'],

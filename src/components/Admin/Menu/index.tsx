@@ -4,11 +4,11 @@ import {IRestaurantMyResponse} from "../../../types/restaurantTypes";
 import {restaurantApi} from "../../../api/restaurantApi";
 import {ICategoriesResponse} from "../../../types/productTypes";
 import {SingleFoodItemCategory} from "../../FoodItemCategory";
-import {useStateValue} from "../../../context/StateProvider";
+import {tokenService} from "../../../services/tokenService";
 
 const CategoryList = () => {
 
-    const [{token}] = useStateValue();
+    const token = tokenService.getLocalAccessToken()
 
     const {data: restaurantMyData} = useQuery<IRestaurantMyResponse>(
         ['restaurantMy'],

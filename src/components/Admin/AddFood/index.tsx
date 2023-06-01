@@ -13,6 +13,7 @@ import {customNotification} from "../../../utils/customNotification";
 import {Loader} from "../../Loader";
 import {IRestaurantMyResponse} from "../../../types/restaurantTypes";
 import {restaurantApi} from "../../../api/restaurantApi";
+import {tokenService} from "../../../services/tokenService";
 
 const AddFood = () => {
     const [title, setTitle] = useState("");
@@ -27,7 +28,9 @@ const AddFood = () => {
 
     const queryClient = useQueryClient();
 
-    const [{restaurant_id, token}] = useStateValue();
+    const [{restaurant_id}] = useStateValue();
+
+    const token = tokenService.getLocalAccessToken()
 
     const {data: restaurantMyData} = useQuery<IRestaurantMyResponse>(
         ['restaurantMy'],

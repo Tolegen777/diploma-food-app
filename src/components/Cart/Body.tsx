@@ -5,10 +5,13 @@ import {useStateValue} from '../../context/StateProvider';
 import {useQuery} from "react-query";
 import {ICartResponse} from "../../types/cartTypes";
 import {cartApi} from "../../api/cartApi";
+import {tokenService} from "../../services/tokenService";
 
 const CartBody = ({action}: { action: any }) => {
 
-    const [{user, token}] = useStateValue();
+    const [{user}] = useStateValue();
+
+    const token = tokenService.getLocalAccessToken()
 
     let totalSum = 0
 

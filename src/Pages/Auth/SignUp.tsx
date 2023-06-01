@@ -14,6 +14,7 @@ import {Checkbox} from "antd";
 import {restaurantApi} from "../../api/restaurantApi";
 import {Roles} from "../../const/roles";
 import {useTranslation} from "react-i18next";
+import {tokenService} from "../../services/tokenService";
 
 // toast.configure()
 
@@ -22,11 +23,13 @@ const SignUp = () => {
     const { t } = useTranslation();
 
     const navigate = useNavigate();
-    const [{user, token}, dispatch] = useStateValue();
+    const [{user}, dispatch] = useStateValue();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [rest, setRest] = useState('');
     const [isRest, setIsRest] = useState(false);
+
+    const token = tokenService.getLocalAccessToken()
 
     const queryClient = useQueryClient();
 
@@ -43,10 +46,6 @@ const SignUp = () => {
     const {mutate: onSignUp, isLoading} = useMutation('signUp', authApi.signUpUser, {
         onSuccess: (data: IAuthResponse) => {
             dispatch({
-                type: "SET_TOKEN",
-                token: data.access_token,
-            });
-            dispatch({
                 type: "SET_USER",
                 user: {
                     displayName: null,
@@ -57,6 +56,9 @@ const SignUp = () => {
                     uid: email,
                 },
             });
+
+            tokenService.updateLocalTokenData(data?.access_token ?? '')
+
             if (isRest) {
                 onCreateRestaurant({
                     title: rest,
@@ -79,7 +81,6 @@ const SignUp = () => {
                     email: email,
                     password: password
                 })
-                // navigate("/");
 
             } else {
                 customNotification({type: 'error', message: 'Заполните все поля!'})

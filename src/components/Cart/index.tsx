@@ -10,11 +10,14 @@ import {useState} from "react";
 import {useQuery} from "react-query";
 import {ICartResponse} from "../../types/cartTypes";
 import {cartApi} from "../../api/cartApi";
+import {tokenService} from "../../services/tokenService";
 
 const Cart = () => {
     const [checkoutOpen, setCheckoutOpen] = useState(false);
 
-    const [{user, token}] = useStateValue();
+    const [{user}] = useStateValue();
+
+    const token = tokenService.getLocalAccessToken()
 
     const {data: cartData} = useQuery<ICartResponse[]>(
         ['cart'],

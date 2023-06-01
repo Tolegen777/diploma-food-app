@@ -4,13 +4,13 @@ import {MdAddTask} from "react-icons/md";
 import {useMutation, useQueryClient} from "react-query";
 import {orderApi} from "../../../api/orderApi";
 import {customNotification} from "../../../utils/customNotification";
-import {useStateValue} from "../../../context/StateProvider";
+import {tokenService} from "../../../services/tokenService";
 
 const ActionOrder = ({id}: { id: string | number }) => {
 
     const queryClient = useQueryClient();
 
-    const [{token}] = useStateValue();
+    const token = tokenService.getLocalAccessToken()
 
     const {mutate: onchangeOrder, error} = useMutation('orderChange', orderApi.changeOrder, {
         onSuccess: () => {

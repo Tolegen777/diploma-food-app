@@ -2,11 +2,11 @@ import CategoryCards from "./CategoryCards";
 import {useQuery} from "react-query";
 import {IOrderResponse} from "../../../types/orderTypes";
 import {orderApi} from "../../../api/orderApi";
-import {useStateValue} from "../../../context/StateProvider";
+import {tokenService} from "../../../services/tokenService";
 
 const OrdersComponent = () => {
 
-    const [{token}] = useStateValue();
+    const token = tokenService.getLocalAccessToken()
 
     const {data: orderData} = useQuery<IOrderResponse>(
         ['order'],

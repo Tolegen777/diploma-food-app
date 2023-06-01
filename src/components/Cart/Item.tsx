@@ -8,11 +8,12 @@ import {BASE_URL} from "../../api";
 import {useMutation, useQueryClient} from "react-query";
 import {cartApi} from "../../api/cartApi";
 import {customNotification} from "../../utils/customNotification";
-import {useStateValue} from "../../context/StateProvider";
+import {tokenService} from "../../services/tokenService";
 
 const CartItem = ({item}: { item: ICartResponse }) => {
     const {id, qty, product} = item;
-    const [{token}] = useStateValue();
+
+    const token = tokenService.getLocalAccessToken()
 
     const queryClient = useQueryClient()
 
