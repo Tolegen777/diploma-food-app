@@ -6,10 +6,11 @@ import {useQuery} from "react-query";
 import {productApi} from "../../api/productApi";
 import {IFoodItemContent} from "../../../types";
 import {useStateValue} from "../../context/StateProvider";
+import {userService} from "../../services/userService";
 
 const Right = () => {
 
-    const [{restaurant_id}] = useStateValue();
+    const restaurant_id = userService.getRestId()
 
     const {data: productsData} = useQuery<IFoodItemContent>(
         ['products'],

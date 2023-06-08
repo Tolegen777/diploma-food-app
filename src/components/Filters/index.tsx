@@ -5,12 +5,13 @@ import {ICategoriesResponse} from "../../types/productTypes";
 import {productApi} from "../../api/productApi";
 import {useStateValue} from "../../context/StateProvider";
 import {useTranslation} from "react-i18next";
+import {userService} from "../../services/userService";
 
 const Filters = ({filter, setFilter}: { filter: string, setFilter: any }) => {
 
     const { t } = useTranslation();
 
-    const [{restaurant_id}] = useStateValue()
+    const restaurant_id = userService.getRestId()
 
     const {data: categoriesData} = useQuery<ICategoriesResponse[]>(
         ['categories'],

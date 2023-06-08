@@ -8,6 +8,7 @@ import {useQuery} from "react-query";
 import {IFoodItemContent} from "../../../../types";
 import {productApi} from "../../../api/productApi";
 import {useTranslation} from "react-i18next";
+import {userService} from "../../../services/userService";
 
 const Menu = ({title}: { title?: string }) => {
 
@@ -17,7 +18,7 @@ const Menu = ({title}: { title?: string }) => {
 
     const [filter, setFilter] = useState<string>("");
 
-    const [{restaurant_id}] = useStateValue();
+    const restaurant_id = userService.getRestId()
 
     const {data: productsData} = useQuery<IFoodItemContent>(
         ['products', restaurant_id, filter],

@@ -6,6 +6,7 @@ import {contactApi} from "../../api/contactApi";
 import {ICommentBody} from "../../types/commentsTypes";
 import {useStateValue} from "../../context/StateProvider";
 import {useTranslation} from "react-i18next";
+import {userService} from "../../services/userService";
 
 const Form = () => {
 
@@ -16,7 +17,7 @@ const Form = () => {
     const [message, setMessage] = useState('')
     const [subject, setSubject] = useState('')
 
-    const [{restaurant_id}] = useStateValue();
+    const restaurant_id = userService.getRestId()
 
     const {mutate: onCreateComment} = useMutation('cartComment', contactApi.createContact, {
         onSuccess: () => {
