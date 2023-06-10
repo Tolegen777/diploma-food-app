@@ -3,6 +3,7 @@ import {Button, QRCode} from 'antd';
 import {useStateValue} from '../../../context/StateProvider';
 import {HOSTNAME} from '../../../api';
 import jsPDF from 'jspdf';
+import {userService} from "../../../services/userService";
 
 const downloadQRCode = () => {
     const canvas = document.getElementById('myqrcode')?.querySelector<HTMLCanvasElement>('canvas');
@@ -15,8 +16,10 @@ const downloadQRCode = () => {
 };
 
 const QRComponent: React.FC = () => {
-    const [{restaurant_id}] = useStateValue();
 
+    const restaurant_id = userService.getRestId()
+
+    console.log(restaurant_id, 'REST')
     const link = HOSTNAME + 'rest_id:' + restaurant_id;
 
     return (

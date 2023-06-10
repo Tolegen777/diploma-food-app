@@ -10,13 +10,13 @@ const CartHeader = () => {
 
     const { t } = useTranslation();
 
-    const [dispatch] = useStateValue();
+    const [{showCart}, dispatch] = useStateValue();
 
     const user = userService.getLocalUserEmail()
 
     return (
         <div className="w-full flex items-center bg-white justify-between px-4 py-2 cursor-pointer">
-            <motion.div whileTap={{scale: 0.8}} onClick={() => hideCart(dispatch)}>
+            <motion.div whileTap={{scale: 0.8}} onClick={() => hideCart(dispatch, showCart)}>
                 <MdOutlineKeyboardBackspace className="text-textColor text-2xl "/>
             </motion.div>
 
@@ -33,7 +33,7 @@ const CartHeader = () => {
                 >
                 </motion.p>
             ) : (
-                <Link to={`/login`} onClick={() => hideCart(dispatch)}>
+                <Link to={`/login`} onClick={() => hideCart(dispatch, showCart)}>
                     <motion.p
                         whileTap={{scale: 0.9}}
                         whileHover={{scale: 0.9}}

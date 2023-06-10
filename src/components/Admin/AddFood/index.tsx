@@ -14,8 +14,12 @@ import {Loader} from "../../Loader";
 import {IRestaurantMyResponse} from "../../../types/restaurantTypes";
 import {restaurantApi} from "../../../api/restaurantApi";
 import {tokenService} from "../../../services/tokenService";
+import {userService} from "../../../services/userService";
 
 const AddFood = () => {
+
+    const restaurant_id = userService.getRestId()
+
     const [title, setTitle] = useState("");
     const [calories, setCalories] = useState("");
     const [price, setPrice] = useState("");
@@ -28,7 +32,7 @@ const AddFood = () => {
 
     const queryClient = useQueryClient();
 
-    const [{restaurant_id}] = useStateValue();
+    const [] = useStateValue();
 
     const token = tokenService.getLocalAccessToken()
 

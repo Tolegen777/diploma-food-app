@@ -23,20 +23,15 @@ export const calculateCartTotal = (
 
 
 // Hide Cart
-export const hideCart = (dispatch: any) => {
+export const hideCart = (dispatch: any, showCard: boolean) => {
     dispatch({
         type: "TOGGLE_CART",
-        showCart: !true,
+        showCart: !showCard,
     });
 };
 
 // Hide Cart
-export const hideContactform = (dispatch: any) => {
-    dispatch({
-        type: "TOGGLE_CONTACT_FORM",
-        showContactForm: !true,
-    });
-};
+
 
 export const shuffleItems = (items: any) => {
     let currentIndex = items.length,

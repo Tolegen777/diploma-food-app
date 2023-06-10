@@ -10,6 +10,7 @@ import {productApi} from "../../../api/productApi";
 import {ICategoriesResponse} from "../../../types/productTypes";
 import {useStateValue} from "../../../context/StateProvider";
 import {useTranslation} from "react-i18next";
+import {userService} from "../../../services/userService";
 
 const Fruits = () => {
 
@@ -19,7 +20,7 @@ const Fruits = () => {
     const [categoryId, setCategoryId] = useState(1)
     const [categoryTitle, setCategoryTitle] = useState(t('columns.freshFruits'))
 
-    const [{restaurant_id}] = useStateValue();
+    const restaurant_id = userService.getRestId()
 
     const {data: categoriesData} = useQuery<ICategoriesResponse[]>(
         ['categories'],

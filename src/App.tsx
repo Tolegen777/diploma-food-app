@@ -19,23 +19,24 @@ import {Roles} from "./const/roles";
 import {customNotification} from "./utils/customNotification";
 import "./language/i18n"
 import {tokenService} from "./services/tokenService";
+import {userService} from "./services/userService";
 
 function App() {
-    const [{showCart, showContactForm, foodItems, cartItems, adminMode, restaurant_id, role}, dispatch] =
+    const [{showCart, showContactForm, foodItems, cartItems, adminMode, role}, dispatch] =
         useStateValue();
 
     const token = tokenService.getLocalAccessToken()
 
-    const location = useLocation()
+    const restaurant_id = userService.getRestId()
 
-    const [restaurantId, setRestaurantId] = useState('')
+    const location = useLocation()
 
     const {data: restaurantMyData} = useQuery<IRestaurantMyResponse>(
         ['restaurantMy'],
         () => restaurantApi.restaurantMy(token), {
             enabled: token?.length > 0,
             onSuccess: (data) => {
-                setRestaurantId(data?.id.toString())
+                userService.updateRestId(data?.id.toString())
                 dispatch({
                     type: "SET_ROLE",
                     role: Roles.restaurant,
@@ -46,17 +47,18 @@ function App() {
 
     useEffect(() => {
         if (restaurantMyData?.id) {
-            dispatch({
-                type: "SET_RESTAURANT_ID",
-                restaurant_id: restaurantMyData?.id,
-            });
+            // dispatch({
+            //     type: "SET_RESTAURANT_ID",
+            //     restaurant_id: restaurantMyData?.id,
+            // });
+            userService.updateRestId(restaurantMyData?.id)
         }
     }, [restaurantMyData?.id])
 
     const {data: productsData, error} = useQuery<IFoodItemContent>(
-        ['products', restaurantId],
+        ['products', restaurant_id],
         () => productApi.getProducts({
-            restaurantId,
+            restaurantId: restaurant_id,
             page: 1,
             limit: 100
         }), {
@@ -66,17 +68,18 @@ function App() {
                     foodItems: productsData?.data ?? [],
                 })
             },
-            enabled: restaurantId.length > 0 ? true : !!restaurant_id
+            enabled: !!restaurant_id
         }
     );
 
     useEffect(() => {
         if (location.pathname?.includes('rest_id:')) {
-            setRestaurantId(location.pathname.slice(9))
-            dispatch({
-                type: "SET_RESTAURANT_ID",
-                restaurant_id: location.pathname.slice(9),
-            });
+            // setRestaurantId(location.pathname.slice(9))
+            // dispatch({
+            //     type: "SET_RESTAURANT_ID",
+            //     restaurant_id: location.pathname.slice(9),
+            // });
+            userService.updateRestId(location.pathname.slice(9))
         }
     }, [location.pathname])
 
