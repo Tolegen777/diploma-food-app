@@ -2,6 +2,8 @@ import {IFoodItem} from "../../../types";
 import {motion} from "framer-motion";
 import {BASE_URL} from "../../api";
 import {useTranslation} from "react-i18next";
+import React from "react";
+import "./../InfoCard/infoCard.css"
 
 export const SingleFoodItemProduct = ({
                                           item,
@@ -14,6 +16,38 @@ export const SingleFoodItemProduct = ({
     const { t } = useTranslation();
 
     const {image, title, description, calorie, price} = item;
+
+    return <>
+        <li className="cards_item">
+            <div className="card">
+                <div className="card_image">
+                    <img src={BASE_URL + image }
+                         alt="food"
+                         onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+                             const target = e.target as HTMLImageElement;
+                             target.src = 'https://assets.codepen.io/652/photo-1468777675496-5782faaea55b.jpeg';
+                         }}
+                    />
+                    {/*<span className="card_price"><Action food={item} admin={admin}/></span>*/}
+
+                </div>
+                <div className="card_content">
+                    <h2 className="card_title">
+                        {title}
+                        <div style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
+                            <div className="card_price2">{price} <span className="text-sm text-red-600">{t("columns.tg")}</span></div>
+                        </div>
+
+                    </h2>
+                    <div className="card_text">
+                        <p>{calorie} {t("columns.calorie")}</p>
+                        <hr/>
+                        <p>{description}</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </>
 
     return (
         <motion.div

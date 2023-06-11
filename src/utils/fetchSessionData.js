@@ -15,5 +15,5 @@ export const fetchSessionUserMode = () => {
             ? JSON.parse(localStorage.getItem("adminMode"))
             : localStorage.clear();
 
-    return adminMode ? adminMode : false;
+    return adminMode === 'true' ? adminMode : 'false';
 }

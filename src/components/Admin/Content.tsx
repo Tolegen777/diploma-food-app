@@ -16,7 +16,7 @@ const Content = ({pageTitle, Element}: { pageTitle: string, Element: JSX.Element
                 {pageTitle}
 
                 {/* home button */}
-                <Link to="/" onClick={() => ToggleAdminMode(dispatch, false)}>
+                <Link to="/" onClick={() => ToggleAdminMode(dispatch, '')}>
                     <button
                         className=" flex items-center justify-center gap-3 text-orange-700 font-bold py-2 px-4 rounded-lg">
                         <FaShopify/>

@@ -8,6 +8,10 @@ export interface IOrderData {
     totalPrice: number
     status: string
     items: Item[]
+    order: {
+        place?: string
+    }
+
 }
 
 export interface Item {

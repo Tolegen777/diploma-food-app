@@ -44,7 +44,10 @@ const Container = ({scrollOffset, col, items, className}: {
                 !items && (!col ? (<Loader/>) : (<NotFound text="Fetching Food Items..."/>))
             }
             {
-                items && items.length === 1 && (<NotFound text={t('columns.noData')}/>)
+                items && items.length === 0 && (<NotFound text={t('columns.noData')}/>)
+            }
+            {
+               !items && (<NotFound text={t('columns.noData')}/>)
             }
         </motion.div>
     );

@@ -54,20 +54,12 @@ export const shuffleItems = (items: any) => {
 };
 
 export const logout = async (user: any, dispatch: any, navigate: any) => {
-    if (user) {
-        localStorage.setItem("adminMode", "undefined");
-        navigate("/");
-        window.location.reload()
-    } else {
-    }
+        localStorage.clear()
+        window.location.replace('/');
 };
 
-export const ToggleAdminMode = (dispatch: any, state: boolean) => {
-    dispatch({
-        type: "SET_ADMIN_MODE",
-        adminMode: state,
-    });
-    localStorage.setItem("adminMode", JSON.stringify(state));
+export const ToggleAdminMode = (dispatch: any, state: string) => {
+    localStorage.setItem("adminMode", state);
 };
 
 

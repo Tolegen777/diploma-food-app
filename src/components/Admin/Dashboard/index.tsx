@@ -15,8 +15,8 @@ const OrdersComponent = () => {
 
     return (
         <div className="w-full">
-            <div className="grid grid-cols-3 gap-4 p-2">
-                {orderData?.data?.map(item => <CategoryCards item={item}/>)}
+            <div style={{display: "flex", alignItems: "center", gap: "5px", flexWrap: "wrap"}}>
+                {orderData && orderData.data && orderData?.data?.map(item => <CategoryCards item={item}/>)}
             </div>
         </div>
     );

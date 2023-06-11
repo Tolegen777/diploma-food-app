@@ -1,4 +1,4 @@
-import "react-toastify/dist/ReactToastify.css";
+// import "react-toastify/dist/ReactToastify.css";
 
 import {Admin, Home, Login, Menu, Services, Signup} from "./Pages";
 import {Cart, Footer, Header} from "./components";
@@ -20,12 +20,15 @@ import {customNotification} from "./utils/customNotification";
 import "./language/i18n"
 import {tokenService} from "./services/tokenService";
 import {userService} from "./services/userService";
+import ImgComponent from "./components/ImgComponent/ImgComponent";
+import VideoComponent from "./components/VideoComponent/VideoComponent";
 
 function App() {
-    const [{showCart, showContactForm, foodItems, cartItems, adminMode, role}, dispatch] =
-        useStateValue();
+    const [{showCart, showContactForm, foodItems, cartItems, role}, dispatch] = useStateValue();
 
     const token = tokenService.getLocalAccessToken()
+
+    const adminMode = localStorage.getItem('adminMode') ?? ''
 
     const restaurant_id = userService.getRestId()
 
@@ -99,10 +102,10 @@ function App() {
                 {showCart && <Cart/>}
                 {showContactForm && <Contact/>}
                 {/* FIXME разок надо посмотреть что делает adminmode */}
-                {!(adminMode) && <Header/>}
+                {adminMode?.length === 0 && <Header/>}
                 <main
                     className={`${
-                        !(adminMode && role === Roles.restaurant) &&
+                        (adminMode?.length === 0 && role === Roles.restaurant) &&
                         "mt-16 md:mt-16 px-3 md:px-8 md:py-6 py-4"
                     } w-full h-auto`}
                     onClick={() => {
@@ -118,7 +121,7 @@ function App() {
                         <Route path="/services" element={<Services/>}/>
                     </Routes>
 
-                    {!(adminMode) && <Footer/>}
+                    {adminMode?.length === 0 && <Footer/>}
                 </main>
             </div>
         </AnimatePresence>

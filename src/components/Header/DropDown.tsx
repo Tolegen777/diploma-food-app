@@ -157,7 +157,7 @@ const DropDown = ({user}: { user: any; }) => {
                             <Link
                                 className="cursor-pointer px-10 py-2 flex items-center gap-3 hover:bg-slate-100 transition-all duration-100 ease-in-out text-base text-textColor"
                                 to={"/admin"}
-                                onClick={() => ToggleAdminMode(dispatch, true)}
+                                onClick={() => ToggleAdminMode(dispatch, 'true')}
                             >
                                 Панель управления
                                 <RiAdminLine/>

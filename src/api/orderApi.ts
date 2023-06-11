@@ -11,15 +11,16 @@ export const orderApi = {
         return response.data
     },
 
-    createOrder: async (token: string) => {
+    createOrder: async (data: {place: string, token: string}) => {
         const response = await axios.post(BASE_URL + 'order', {
             apartment: "",
             building: "",
             address: "",
-            phone: ""
+            phone: "",
+            place: data?.place ?? ''
         }, {
             headers: {
-                Authorization: `Bearer ${token}`
+                Authorization: `Bearer ${data?.token}`
             }
         });
         return response.data

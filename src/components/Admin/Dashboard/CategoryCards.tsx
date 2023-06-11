@@ -2,8 +2,45 @@ import {IOrderData} from "../../../types/orderTypes";
 import {motion} from "framer-motion";
 import {BASE_URL} from "../../../api";
 import ActionOrder from "./action";
+import React from "react";
+import {useTranslation} from "react-i18next";
+import "./../../InfoCard/infoCard.css"
 
 const CategoryCards = ({item}: { item: IOrderData }) => {
+
+    const { t } = useTranslation();
+
+    return <>
+        <li className="cards_item">
+            <div className="card">
+                <div className="card_image">
+                    <img src={BASE_URL + item.items[0]?.product.image}
+                         alt="food"
+                         onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+                             const target = e.target as HTMLImageElement;
+                             target.src = 'https://assets.codepen.io/652/photo-1468777675496-5782faaea55b.jpeg';
+                         }}
+                    />
+                    <span className="card_price"><ActionOrder id={item.id}/></span>
+
+                </div>
+                <div className="card_content">
+                    <h2 className="card_title">
+                        {item.items[0]?.product.title}
+                        <div style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
+                            <div className="card_price2">{item.totalPrice} <span className="text-sm text-red-600">{t("columns.tg")}</span></div>
+                        </div>
+
+                    </h2>
+                    <div className="card_text">
+                        <p>{item.status === 'CREATED' ? 'Новый заказ' : 'В обработке'}</p>
+                        <hr/>
+                        <p>{t('columns.placeNumber')}{item?.order?.place ?? ''}</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </>
 
     return (
         <div className="bg-gray-300 min-h-[9rem] p-10 rounded-lg">

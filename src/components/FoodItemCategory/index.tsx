@@ -2,6 +2,8 @@ import {motion} from "framer-motion";
 import ActionCategory from "./action";
 import {ICategoriesResponse} from "../../types/productTypes";
 import {BASE_URL} from "../../api";
+import React from "react";
+import "./../InfoCard/infoCard.css"
 
 export const SingleFoodItemCategory = ({
                                            item,
@@ -13,6 +15,29 @@ export const SingleFoodItemCategory = ({
     admin?: boolean
 }) => {
     const {title, icon} = item;
+
+    return <>
+        <li className="cards_item">
+            <div className="card">
+                <div className="card_image">
+                    <img src={BASE_URL + icon }
+                         alt="food"
+                         onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+                             const target = e.target as HTMLImageElement;
+                             target.src = 'https://assets.codepen.io/652/photo-1468777675496-5782faaea55b.jpeg';
+                         }}
+                    />
+                  <span className="card_price"><ActionCategory food={item} admin={admin}/></span>
+
+                </div>
+                <div className="card_content">
+                    <h2 className="card_title">
+                        {title}
+                    </h2>
+                </div>
+            </div>
+        </li>
+    </>
 
     return (
         <motion.div

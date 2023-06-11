@@ -1,5 +1,5 @@
 import "react-toastify/dist/ReactToastify.css";
-import {Cheff1} from "../../components/Assets";
+import {Logo} from "../../components/Assets";
 import {motion} from "framer-motion";
 
 
@@ -12,7 +12,7 @@ export const ImageBox = () => {
                         rotate: [0, -10, 10, -10, 0],
                     }
                 }
-                src={Cheff1}
+                src={Logo}
                 className="w-96 cursor-pointer"
                 alt="logo-login"
             />

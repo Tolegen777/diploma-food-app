@@ -3,7 +3,7 @@
     "restaurantPlatform": "Restaurant platform",
     "mainDescription": "The restaurant platform is a software designed specifically for managing a restaurant business. It allows restaurants to automate various processes such as menu management, orders, deliveries, finance, and other business operations.",
     "orderNow": "Order now",
-    "freshFruits": "Our fresh and healthy fruits",
+    "freshFruits": "The best",
     "noData": "So far no data!",
     "ourDishes": "Our dishes",
     "menu": "Menu",
@@ -44,7 +44,9 @@
     "delete": "Delete",
     "upload": "Upload",
     "secured": "Secured",
-    "sum": "Sum"
+    "sum": "Sum",
+    "enterPlace": "Enter number of table",
+    "placeNumber": "Number of table: "
 
 
   }

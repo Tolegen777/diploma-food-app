@@ -18,7 +18,7 @@ const Header = () => {
 
 
     return (
-        <header className="w-screen fixed z-50 bg-cardOverlay backdrop-blur-md md:p-3 md:px-4 lg:p-6 lg:px-16"
+        <header className="w-screen bg-cardOverlay backdrop-blur-md md:p-3 md:px-4 lg:p-6 lg:px-16"
                 style={{background: '#1F2122'}}>
             {/* Tablet and Desktop */}
             <div className="hidden md:flex w-full justify-between itesm-center" style={{background: '#1F2122'}}>
@@ -34,7 +34,7 @@ const Header = () => {
                     </motion.div>
                 </Link>
 
-                <Navigations/>
+                {/*<Navigations/>*/}
 
                 {user ? (
                     <div className={`group flex items-center gap-3 px-3 py-1 rounded-lg`}>

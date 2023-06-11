@@ -8,7 +8,7 @@ import {Avatar} from "../../Assets";
 import {Roles} from "../../../const/roles";
 import {useNavigate} from "react-router-dom";
 import {logout, ToggleAdminMode} from "../../../utils/functions";
-import {CloseCircleOutlined, CloseOutlined} from "@ant-design/icons";
+import {CloseCircleOutlined, CloseOutlined, UserOutlined} from "@ant-design/icons";
 import {userService} from "../../../services/userService";
 
 export interface FormSelectProps extends SelectProps {
@@ -130,8 +130,8 @@ export const HeaderWrapper = styled.div`
 
 export const Profile: React.FC = () => {
     const languages = [
-        {value: "ru", label: "Русский"},
         {value: "kk", label: "Қазақша"},
+        {value: "ru", label: "Русский"},
         {value: "en", label: "English"},
     ];
 
@@ -146,7 +146,7 @@ export const Profile: React.FC = () => {
 
     const [isComponentVisible, setIsComponentVisible] = useState<boolean>(false);
     const [selectedFilterOption, setSelectedFilterOption] = useState<string>(
-        'ru'
+        'kk'
     );
     // useOnClickOutside(ref, () => setIsComponentVisible(false));
 
@@ -171,11 +171,12 @@ export const Profile: React.FC = () => {
             className={`${isComponentVisible ? "clicked " : ''}user`}
             onClick={handleClickOpenDropdown}
         >
-          <img
-              src={Avatar}
-              className="w-10 min-w-[40px] h-10 min-h-[40px] drop-shadow-2xl rounded-full cursor-pointer object-contain"
-              alt="profile"
-          />
+          {/*<img*/}
+          {/*    src={Avatar}*/}
+          {/*    className="w-10 min-w-[40px] h-10 min-h-[40px] drop-shadow-2xl rounded-full cursor-pointer object-contain"*/}
+          {/*    alt="profile"*/}
+          {/*/>*/}
+            <UserOutlined style={{color: "#fff", fontSize: "30px", border: "1px solid #fff", padding: "5px", borderRadius: "4px"}} />
         </span>
                 {isComponentVisible && <div style={{
                     position: "absolute",
@@ -203,7 +204,7 @@ export const Profile: React.FC = () => {
                   <div
                       className="cursor-pointer px-6 py-0 flex items-center hover:bg-slate-100 transition-all duration-100 ease-in-out text-base text-textColor"
                       onClick={() => {
-                          ToggleAdminMode(dispatch, true)
+                          ToggleAdminMode(dispatch, 'true')
                           navigate('/admin')
                       }}
                   >

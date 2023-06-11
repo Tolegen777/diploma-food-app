@@ -29,8 +29,8 @@ const Filters = ({filter, setFilter}: { filter: string, setFilter: any }) => {
             className={`w-full py-10 flex items-center justify-start lg:justify-center  h-auto gap-4 md:gap-8  px-2  overflow-x-scroll scrollbar-hidden  scroll-smooth`}
         >
             <Button category={{id: 55555, title: t('columns.menu'), icon: ''}} filter={filter} setFilter={setFilter}/>
-            {
-                categoriesData?.map((category: ICategoriesResponse) => {
+            {categoriesData &&
+                [...categoriesData]?.map((category: ICategoriesResponse) => {
                     return <Button
                         key={category.id}
                         category={category}

@@ -13,14 +13,19 @@ import {ICartResponse} from "../../types/cartTypes";
 import {orderApi} from "../../api/orderApi";
 import {useNavigate} from "react-router-dom";
 import {useTranslation} from "react-i18next";
+import {tokenService} from "../../services/tokenService";
 
 const Body = ({action}: { action: any }) => {
 
     const { t } = useTranslation();
 
-    const [{paymentMethod, user, token}] = useStateValue();
+    const [{paymentMethod, user}] = useStateValue();
+
+    const token = tokenService.getLocalAccessToken()
 
     const [number, setNumber] = useState('')
+
+    const [place, setPlace] = useState('')
 
     const queryClient = useQueryClient()
 
@@ -58,6 +63,18 @@ const Body = ({action}: { action: any }) => {
                 {paymentMethod === "mobile_money" ?
                     <MomoForm number={number} setNumber={setNumber}/> :
                     <CardForm number={number} setNumber={setNumber}/>}
+                <div className="w-full p-1 px-2 rounded-lg flex flex-col">
+                    <div className="w-full flex flex-col mb-2">
+                        <input
+                            type="text"
+                            id="text"
+                            className="w-full px-3 py-2 mb-1 border-2 text-white border-gray-500 rounded-md focus:outline-none focus:border-orange-500 focus:text-orange-500 bg-cartItem transition-colors"
+                            placeholder={t("columns.enterPlace") ?? ''}
+                            autoComplete="off"
+                            onChange={(e) => setPlace(e.target.value)}
+                        />
+                    </div>
+                </div>
                 <div className="w-full flex items-center justify-center my-2">
                     <p className="text-gray-300">
                         {t("columns.sum")}:{" "}
@@ -68,7 +85,10 @@ const Body = ({action}: { action: any }) => {
 
                 <div className="w-full flex items-center justify-center mt-4">
                     <motion.button
-                        onClick={() => onCreateOrder(token)}
+                        onClick={() => onCreateOrder({
+                            token: token,
+                            place: place
+                        })}
                         whileTap={{scale: 0.95}}
                         className="flex items-center justify-center gap-2 w-[90%] p-2 rounded-full bg-gradient-to-tr from-orange-400 to-orange-600 hover:from-orange-600 hover:to-orange-400 transition-all duration-75 ease-in-out text-gray-50 text-lg my-2 hover:shadow-lg"
                     >
