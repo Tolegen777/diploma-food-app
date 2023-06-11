@@ -5,7 +5,7 @@ module.exports = {
       colors: {
         primary: "#f5f3f3",
         headingColor: "#2e2e2e",
-        cartNumBg: "#e80013",
+        cartNumBg: "#FA7F28",
         textColor: "#515151",
         cardOverlay: "rgba(256, 256, 256, 0.4)",
         btnOverlay: "rgba(255, 255, 255, 0.8)",

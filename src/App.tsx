@@ -8,7 +8,7 @@ import {calculateCartTotal,} from "./utils/functions";
 import {AnimatePresence} from "framer-motion";
 import Contact from "./components/Contact";
 import {ToastContainer} from "react-toastify";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import {useStateValue} from "./context/StateProvider";
 import {useQuery} from "react-query";
 import {IRestaurantMyResponse} from "./types/restaurantTypes";
@@ -20,8 +20,6 @@ import {customNotification} from "./utils/customNotification";
 import "./language/i18n"
 import {tokenService} from "./services/tokenService";
 import {userService} from "./services/userService";
-import ImgComponent from "./components/ImgComponent/ImgComponent";
-import VideoComponent from "./components/VideoComponent/VideoComponent";
 
 function App() {
     const [{showCart, showContactForm, foodItems, cartItems, role}, dispatch] = useStateValue();

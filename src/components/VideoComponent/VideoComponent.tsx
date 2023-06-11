@@ -10,7 +10,7 @@ const VideoComponent: React.FC<VideoComponentProps> = () => {
     };
 
     return (
-            <div style={{width: "100%", height: "80%", background: "green"}}>
+            <div style={{width: "100%", height: "80%"}}>
                 <iframe
                     className="fvideo-player"
                     src="https://www.youtube.com/embed/qVdPh2cBTN0"
