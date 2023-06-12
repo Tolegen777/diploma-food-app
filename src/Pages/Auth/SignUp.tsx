@@ -57,7 +57,7 @@ const SignUp = () => {
                 onCreateRestaurant({
                     title: rest,
                     categoryId: 0,
-                    token: token
+                    token: data?.access_token
                 })
             }
             navigate('/')
