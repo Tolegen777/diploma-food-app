@@ -13,7 +13,7 @@ function HomePage() {
 
     useEffect(() => {
         const handleResize = () => {
-            setIsMobile(window.innerWidth < 768); // Adjust the breakpoint as needed
+            setIsMobile(window.innerWidth < 1008); // Adjust the breakpoint as needed
         };
 
         // Initial check
@@ -28,6 +28,8 @@ function HomePage() {
         };
     }, []);
 
+    console.log(isMobile, 'ISIS')
+
     return (
         <>
             <div className="homepage" style={{marginBottom: "50px"}}>
@@ -37,10 +39,60 @@ function HomePage() {
                         <source src={bgMp4} type="video/mp4"/>
                         Your browser does not support the video tag.
                     </video>
-                    <div className="header__brand " id="tsparticles" style={{position: "absolute", top:0}}>
-                        <p className="header__brand__description">
-                            {isMobile ? t("columns.aboutInformationMobile") : t("columns.aboutInformation")}
-                        </p>
+                    <div className="header__brand " id="tsparticles" style={{position: "absolute", top: 0}}>
+                        {/*<p className="header__brand__description">*/}
+                        {/*    {isMobile ? t("columns.aboutInformationMobile") : t("columns.aboutInformation")}*/}
+                        {/*</p>*/}
+                        {!isMobile && <div
+                            style={{
+                                position: "absolute",
+                                top: 200,
+                                left: 50,
+                                width: "350px",
+                                fontSize: "18px",
+                                color: "#fff"
+                            }}>
+                            {t("columns.aboutInformation1")}
+                        </div>}
+
+                        {!isMobile && <div
+                            style={{
+                                position: "absolute",
+                                top: 200,
+                                left: 1050,
+                                width: "350px",
+                                fontSize: "18px",
+                                color: "#fff"
+                            }}>
+                            {t("columns.aboutInformation2")}
+                        </div>}
+
+
+                        {isMobile && <div
+                            style={{
+                                position: "absolute",
+                                top: 10,
+                                width: "400px",
+                                fontSize: "14px",
+                                color: "#fff",
+                                left: "10px",
+                                right: "10px"
+                            }}>
+                            {t("columns.aboutInformation11")}
+                        </div>}
+
+                        {isMobile && <div
+                            style={{
+                                position: "absolute",
+                                top: 640,
+                                width: "400px",
+                                fontSize: "14px",
+                                color: "#fff",
+                                left: "10px"
+                            }}>
+                            {t("columns.aboutInformation22")}
+                        </div>}
+
                     </div>
                 </div>
             </div>
