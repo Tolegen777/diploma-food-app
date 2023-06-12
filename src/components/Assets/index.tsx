@@ -1,6 +1,6 @@
 import AvatarI from "../../img/avatar.png";
 import Cheff1I from "../../img/chef1.png";
-import LogoI from "../../img/logo5.jpg";
+import LogoI from "../../img/logo4.jpg";
 import HeroBgI from "../../img/hero-bg.png";
 import EmptyCartI from "../../img/emptyCart.svg";
 import NotFoundI from "../../img/NotFound.svg";
