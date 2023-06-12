@@ -9,6 +9,7 @@ import {motion} from "framer-motion";
 import {useState} from "react";
 import {Profile} from "../Admin/Profile";
 import {userService} from "../../services/userService";
+import {Profile2} from "../Admin/Profile2";
 
 const Header = () => {
 
@@ -41,7 +42,10 @@ const Header = () => {
                         <Profile/>
                     </div>
                 ) : (
-                    <LoginAction text={"Логин"}/>
+                    // <LoginAction text={"Логин"}/>
+                    <div className={`group flex items-center gap-3 px-3 py-1 rounded-lg`}>
+                        <Profile2/>
+                    </div>
                 )}
             </div>
 
@@ -75,7 +79,17 @@ const Header = () => {
                                 </motion.div>
                             </div>
                         ) : (
-                            <LoginAction mobile />
+                            // <LoginAction mobile />
+                            <div
+                                className={`flex items-center gap-3 px-3 py-1 rounded-lg relative`}
+                            >
+                                <motion.div
+                                    whileHover={{scale: 1.1}}
+                                    className="group flex items-center justify-center"
+                                >
+                                    <Profile2/>
+                                </motion.div>
+                            </div>
                         )}
                     </div>
                 )}
