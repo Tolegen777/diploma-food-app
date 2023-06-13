@@ -32,7 +32,7 @@ const Home = () => {
         <div className='flex w-full h-auto flex-col items-center justify-center'>
             <ShowcaseBanner />
             <HomePage/>
-            <VideoIframe videoId={'ybwuiP6v7hk'} title={"Saffy"}/>
+            <VideoIframe videoId={'v5cT1gpfSTg'} title={"Saffy"}/>
             {(isMobile || role === Roles.restaurant) && <FruitsSection/>}
             {(isMobile || role === Roles.restaurant) && <MenuSection/>}
         </div>

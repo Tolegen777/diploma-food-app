@@ -28,8 +28,6 @@ function HomePage() {
         };
     }, []);
 
-    console.log(isMobile, 'ISIS')
-
     return (
         <>
             <div className="homepage" style={{marginBottom: "50px"}}>
